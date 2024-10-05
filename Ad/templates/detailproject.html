@@ -1,0 +1,325 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <a href="#" type="button" class="btn btn-danger text-white" >DELETE</a >
+            <a href="{% url 'newproject' %}" type="button" class="btn btn-info text-white" >EDIT</a >
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="#" type="button" class="btn btn-danger text-white btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" >DELETE</a >
+          <a href="{% url 'unew_proedit' data.id %}" type="button" class="btn btn-info text-white btn-lg" >EDIT</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="text-center mt-4">
+            <a href="" class="btn btn-info text-white">Project</a>
+            <a href="{% url 'project_welder' data.id %}" class="btn btn-outline-secondary">+ Welder</a>
+            <a href="{% url 'uploads' data.id %}" class="btn btn-outline-secondary">Uploads</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+
+            <div class="card shadow-sm border-0 rounded-3 mt-5">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Project Details</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Project Number</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.projectno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Project Name</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.projectname}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Owner</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.customer}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Client</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.client}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Main Contractor</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.maincont}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">sub Contractor</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.subcontractor}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Client Contract No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.cliconno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">UTOC Job No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.utocjobno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Start Date</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.startdate}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">End Date</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.enddate}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Fabric. Contractor</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.fabcont}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Final Acc-Client/ThirdParty </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.finalac}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Drawing Revision Prefix </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.drarev}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Weld summary Report Form No </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.weldsum}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Daily weld Record Form No </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.dailyrec}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Individual Record Form No </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.indrec}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Spool Release Form No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.spoolre}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Shop Address</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.shopadd}} </p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Field Address</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.fieldadd}}</p>
+                  </div>
+                </div>
+               
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Welder ID</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.weldid}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Project status</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.Projectclosed}}</p>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+
+            <div class="card shadow-sm border-0 rounded-3 mt-5">
+              <div class="card-header p-3 text-center">
+                <p class="m-0 fw-bold">Main Contractor Logo</p>
+              </div>
+              <div class="card-body text-center">
+                <img  src="{{ data.owner_logo.url }}" class="img-fluid" width="200" alt="" />
+              </div>
+            </div>
+            <div class="card shadow-sm border-0 rounded-3 mt-3">
+              <div class="card-header p-3 text-center">
+                <p class="m-0 fw-bold">Client Logo</p>
+              </div>
+              <div class="card-body text-center">
+                <img src="{{ data.client_logo.url }}" class="img-fluid" width="200" alt="" />
+              </div>
+            </div>
+            <div class="card shadow-sm border-0 rounded-3 mt-3">
+              <div class="card-header p-3 text-center">
+                <p class="m-0 fw-bold">TPI Logo</p>
+              </div>
+              <div class="card-body text-center">
+               {% if data.utoc_logo %} <img src="{{ data.utoc_logo.url }}" class="img-fluid" width="200" alt="" /> {% else %} <p>no logo found !!</p> {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  </section>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <div class="modal-body pt-0">
+          <div class="text-center">
+            <img src="{% static 'img/icons8-warning.gif' %}" width="100" alt="" />
+          </div>
+          <div class="">
+            <p class="m-0 text-center fs-5">Are you sure?</p>
+            <p class="m-0 text-center text-muted small"> Do you really want to delete these records? This process cannot be undone. </p>
+          </div>
+          <div class="d-flex justify-content-center pt-3">
+            <button type="button" class="btn btn-secondary text-white me-3" data-bs-dismiss="modal" > CANCEL </button>
+            <a href="{% url 'unew_projectdel' data.id %}" type="button" class="btn btn-danger text-white"> DELETE </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+</script>
+{% endblock body_js %}

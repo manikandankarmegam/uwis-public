@@ -1,0 +1,340 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='nde' %}
+{% include 'include/sidebar.html' with active='nde' %}
+<section class="home-section pt-lg-3 pt-1">
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">NDE Monitoring</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'nderequest' %}" type="button" class="btn btn-info text-white">+ REQUEST</a>
+         </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/nde_header.html' with active='nde_monitor' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">NDE Monitoring</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/nde_header.html' with active='nde_monitor' %} </div>
+    <div class="p-lg-4">
+      <div class="my-3 my-lg-0">
+        <div class="card shadow-sm rounded-3 border-0">
+          <div class="card-body">
+            <form method="get" action="">
+            <div class="row">
+              <div class="col-12 col-lg-1">
+                <p class="text-muted m-0">Location</p>
+                <select class="form-select " name="location" aria-label="Default select example">
+                  <option selected disabled>Select</option>
+                  {% for loc in locations %}
+                  <option {% if request.GET.location == loc.location   %} selected {% else %}  {% endif %}  value="{{loc.location}}">{{ loc.location }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1">
+                <p class="text-muted m-0">NDETYPE </p>
+                <select class="form-select " id="ndeType_id" name="nde_type" aria-label="Default select example" onchange="get_nde()">
+                  <option selected disabled>Select</option>
+                  <option {% if request.GET.nde_type == "RT"   %} selected {% else %} {% endif %} value="RT">RT</option>
+                  <option {% if request.GET.nde_type == "MTPT"   %} selected {% else %} {% endif %} value="MTPT">MT/PT</option>
+                  <option {% if request.GET.nde_type == "PMI"   %} selected {% else %} {% endif %} value="PMI">PMI</option>
+                  <!-- <option value="PWHT">PWHT</option>
+                  <option value="BHN">BHN</option>
+                  <option value="FERRITE">FERRITE</option> -->
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1">
+                <p class="text-muted m-0">NDE%</p>
+                <select class="form-select " id="nde_percen" name="nde_percentage" aria-label="Default select example">
+                  {% if request.GET.nde_percentage %}
+                  <option selected value="{{ request.GET.nde_percentage }}">{{ request.GET.nde_percentage }}</option>
+                  {% else %}
+                  <option selected disabled>Select</option>
+                  {% endif %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1 text-muted">
+                <p class="text-muted m-0">P-Class</p>
+                <select class="form-select " id="cate_id" name="pipe_class" aria-label="Default select example" >
+                  <option selected disabled>Select</option>
+                  {% for pipeClass in piping_list %}
+                  <option {% if request.GET.pipe_class == pipeClass.piping   %} selected {% else %}  {% endif %} value="{{pipeClass.piping}}">{{ pipeClass.piping }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2 text-muted">
+                <p class="text-muted m-0">Welder</p>
+                <select class="form-select " id="cate_id" name="welder" aria-label="Default select example" >
+                  <option selected disabled>Select</option>
+                  {% for welder in welder_list %}
+                  <option  {% if request.GET.welder == welder.id|stringformat:"s"   %} selected {% else %}  {% endif %} value="{{welder.id}}">{{ welder.welderid}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1 text-muted">
+                <p class="text-muted m-0">W-Type</p>
+                <select class="form-select " id="weld_id" name="weld_type" aria-label="Default select example">
+                  <option selected disabled>Select</option>
+                  {% for weldType in weld_type_list %}
+                  <option {% if request.GET.weld_type == weldType.type  %} selected {% else %}  {% endif %} value="{{weldType.type}}">{{ weldType.type}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1 text-muted">
+                <p class="text-muted m-0">RT Lot </p>
+                <select class="form-select " name="rtlot" aria-label="Default select example">
+                  <option selected disabled>Select</option>
+                  <option value="1">ALL</option>
+                  <option value="1">Lock</option>
+                  <option value="2">Unlock</option>
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1">
+                <p class="text-muted m-0">From</p>
+                <input class="form-control " value="{% if request.GET.start_date %}{{ request.GET.start_date }}{% endif %}" type="date" name="start_date" placeholder="Default input" aria-label="default input example" />
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-1">
+                <p class="text-muted m-0">To</p>
+                <input class="form-control " value="{% if request.GET.start_date %}{{ request.GET.end_date }}{% endif %}" type="date" name="end_date" placeholder="Default input" aria-label="default input example" />
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2 pt-lg-4 pt-0">
+                <button class="btn btn-info text-white w-100" type="submit">SEARCH</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+        <form action="" method="">
+          {% csrf_token %}
+          <div id="hide_slot" class="d-nsone">
+            
+            <hr class="border"> 
+            <div class="col-lg-6 mt-3">
+              <div class="card shadow-sm rounded-3 border-0  text-center">
+                <div class="card-body ">
+                  <p class="text-start fw-bold m-0 mb-3">Request here</p>
+                  <div class="row">
+                 <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                  <select class="form-select form-select-sm "  id="nde_cate" aria-label="Default select example" >
+                    <option selected disabled>Select</option>
+                    <option {% if request.GET.nde_type == "RT"   %} selected {% else %} {% endif %} value="RT">RT</option>
+                    <option {% if request.GET.nde_type == "MTPT"   %} selected {% else %} {% endif %} value="MTPT">MT/PT</option>
+                    <option {% if request.GET.nde_type == "PMI"   %} selected {% else %} {% endif %} value="PMI">PMI</option>
+                    <!-- <option value="PWHT">PWHT</option>
+                    <option value="BHN">BHN</option>
+                    <option value="FERRITE">FERRITE</option> -->
+                  </select>
+                 </div>
+                    <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                      <input class="form-control form-control-sm " type="text" id="reqid" name="" placeholder="Request No" aria-label="default input example" />
+                    </div>
+                    <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                      <input class="form-control form-control-sm " type="date" id="dateid" name="end_date" placeholder="Default input" aria-label="default input example" />
+                    </div>
+                    <div class="mt-3 mt-lg-0 col-12 col-lg-3  ">
+                      <button class="btn btn-outline-primary btn-sm  w-100" disabled id="reqSubmitId" type="submit" onclick="submitForm()">Request</button>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="card shadow-sm border-0 rounded-3 mt-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Welded list </p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="table-responsive datatabel_style pb-2">
+                      <table id="example" class="table m-0 nowrap" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th class=" text-muted">Req</th>
+                                <th class=" text-muted">Lot No</th>
+                                <th class=" text-muted">Pipe Class</th>
+                                <th class=" text-muted">Drawing Number</th>
+                                <th class=" text-muted">SHT No</th>
+                                <th class=" text-muted">Joint No</th>
+                                <th class=" text-muted">Welder 1</th>
+                                <th class=" text-muted">Welder 2</th>
+                                <th class=" text-muted">WPS</th>
+                                <th class=" text-muted">Size</th>
+                                <th class=" text-muted">THK</th>
+                                <th class=" text-muted">Rq No</th>
+                                <th class=" text-muted">Rq Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for nde in list %}
+                            <tr>
+                                <td class=" align-middle"> 
+                                    <div class="form-check"> 
+                                        <input class="form-check-input " name="spool" type="checkbox" onchange="selctedReq()" value="{{nde.id}}" id="flexCheckDefault"> 
+                                    </div> 
+                                </td>
+                                <td class=" align-middle">1</td>
+                                <td class=" align-middle">{{nde.piping}}</td>
+                                <td class=" align-middle">{{nde.drgno}}</td>
+                                <td class=" align-middle">{{nde.sheetno}}</td>
+                                <td class=" align-middle">{{nde.weldno}}</td>
+                                <td class=" align-middle">{{nde.welder1.welderid}}</td>
+                                <td class=" align-middle">{{nde.welder2.welderid}}</td>
+                                <td class=" align-middle">{{nde.wpsnum.wpsno}}</td>
+                                <td class=" align-middle">{{nde.size}}</td>
+                                <td class=" align-middle">{{nde.thk}}</td>
+                                <td class=" align-middle">{{nde.requestno}}</td>
+                                <td class=" align-middle">{{nde.date}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+
+
+
+
+
+  function get_nde() {
+    var ndeType = $('#ndeType_id').val();
+
+    $.ajax({
+        type: 'GET',
+        url: "/Qc/fetch-nde-details/?material=" + ndeType,
+        success: function (data) {
+
+          var ndePercentage = $('#nde_percen');
+          ndePercentage.empty()
+          percentage = data.products
+
+        for ( let i in percentage ){
+          nde_percenId = percentage[i].id;
+          nde_value = percentage[i].GradeNmae;
+          ndePercentage.append($('<Option>',{
+            value: nde_percenId,
+            text: nde_value
+          }));
+        }
+    
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching grades:", error);
+        }
+    });
+}
+
+
+const selctedReq = () => {
+  let checkboxes = document.querySelectorAll('input[name="spool"]:checked');
+  let selectedValues = [];
+  checkboxes.forEach((checkbox) => {
+    selectedValues.push(checkbox.value);
+  });
+  
+  let buttonDisabe = document.getElementById("reqSubmitId")
+  if(selectedValues.length  >= 1  ){
+    buttonDisabe.removeAttribute("disabled")
+
+  }
+  else{
+    buttonDisabe.setAttribute('disabled', true);
+  }
+
+  
+}
+
+function submitForm() {
+    let checkboxes = document.querySelectorAll('input[name="spool"]:checked');
+    let selectedValues = [];
+    checkboxes.forEach((checkbox) => {
+        selectedValues.push(checkbox.value);
+    });
+    
+    sendAjaxRequest(selectedValues);
+}
+
+
+
+function sendAjaxRequest(selectedValues) {
+
+    var ndeType = $('#nde_cate').val();
+    var dateId = $('#dateid').val();
+    var reqId = $('#reqid').val();
+    let data = {
+        'cate': ndeType,
+        'date': dateId,
+        'req': reqId,
+        'selected_spools': selectedValues
+    };
+
+    fetch('/Qc/underequestnoreq/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()  
+        },
+        body: JSON.stringify(data)  
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.assign(window.location.protocol + "//" + window.location.host + "/Qc/underequest/");
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function getCsrfToken() {
+    let name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endblock body_js %}
+
+

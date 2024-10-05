@@ -1,0 +1,216 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='nde' %}
+{% include 'include/sidebar.html' with active='nde' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">NDE Status</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/nde_header.html' with active='nde_status' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">NDE Status</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/nde_header.html' with active='nde_status' %} </div>
+    <div class="p-lg-4">
+      <div class="my-3 my-lg-0">
+        <div class="card shadow-sm rounded-3 border-0">
+          <div class="card-body">
+            <form method="get" action="">
+            <div class="row">
+              <div class="col-12 col-lg-2">
+                <p class="text-muted m-0">Location</p>
+                <select class="form-select " name="location" aria-label="Default select example">
+                  <option selected disabled>Select</option>
+                  {% for loc in locations %}
+                  <option {% if request.GET.location == loc.location   %} selected {% else %}  {% endif %}  value="{{loc.location}}">{{ loc.location }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2">
+                <p class="text-muted m-0">NDETYPE </p>
+                <select class="form-select " id="ndeType_id" name="nde_type" aria-label="Default select example" onchange="get_nde()">
+                  <option selected disabled>Select</option>
+                  <option {% if request.GET.nde_type == "RT"   %} selected {% else %} {% endif %} value="RT">RT</option>
+                  <option {% if request.GET.nde_type == "MTPT"   %} selected {% else %} {% endif %} value="MTPT">MT/PT</option>
+                  <option {% if request.GET.nde_type == "PMI"   %} selected {% else %} {% endif %} value="PMI">PMI</option>
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2">
+                <p class="text-muted m-0">NDE%</p>
+                <select class="form-select " id="nde_percen" name="nde_value" aria-label="Default select example">
+                  {% if request.GET.nde_percentage %}
+                  <option selected value="{{ request.GET.nde_percentage }}">{{ request.GET.nde_percentage }}</option>
+                  {% else %}
+                  <option selected disabled>Select</option>
+                  {% endif %}
+                </select>
+              </div>
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2 text-muted">
+                <p class="text-muted m-0">Category</p>
+                <select class="form-select " id="cate_id" name="category" aria-label="Default select example" >
+                  <option selected disabled>Select</option>
+                  <option value="pipeClass" >pipe Class</option>
+                  <option value="Welder" >Welder</option>
+                </select>
+              </div>  
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2 text-muted">
+                <p class="text-muted m-0">W-Type </p>
+                <select class="form-select " id="weld_id" name="weld_type" aria-label="Default select example">
+                  <option selected disabled>Select</option>
+                  {% for weldType in weld_type_list %}
+                  <option {% if request.GET.weld_type == weldType.type  %} selected {% else %}  {% endif %} value="{{weldType.type}}">{{ weldType.type}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <!-- <div class="mt-3 mt-lg-0 col-12 col-lg-2 pt-lg-4 pt-0">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <button class="btn btn-info text-white w-100" type="submit">FIND</button>
+                  </div>
+                  <div class="col-lg-4 my-auto ">
+                    
+                   <a href="" class="text-dark" onclick="window.onload() ">  <i class="bi bi-arrow-clockwise fs-5" ></i> </a>
+                  </div>
+                </div>
+              </div> -->
+             
+              <div class="mt-3 mt-lg-0 col-12 col-lg-2 pt-lg-4 pt-0">
+                <button class="btn btn-info text-white w-100" type="submit">FIND</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+        <div class="card shadow-sm border-0 rounded-3 mt-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="table-responsive datatabel_style pb-2 ">
+                  <table id="example" class="table m-0 nowrap" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th class=" text-muted text-center ">{% if request.GET.category == "Welder" %}welder{% else %}Pipe class{% endif %}</th>
+                        <th class=" text-muted text-center ">Total Joints</th>
+                        <th class=" text-muted text-center ">Req Joints</th>
+                        <th class=" text-muted text-center ">Total Welded</th>
+                        <th class=" text-muted text-center ">% Req Joints</th>
+                        <th class=" text-muted text-center ">RT Done</th>
+                        <th class=" text-muted text-center ">Bal RT Taken</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for status in report %}
+                      <tr>
+                        <th class="text-center border-0">{% if status.piping_class %}{{status.piping_class}}{% else %}{{status.welder.welderid}}{% endif %}</th>
+                        <td class="text-center">{{status.total_joints}}</td>
+                        <td class="text-center">{{status.req_joints}} </td>
+                        <td class="text-center">{{status.total_welded_joints}}</td>
+                        <td class="text-center">{{status.req_weld_joints}}</td>
+                        <td class="text-center">{{status.rt_taken}}</td>
+                        <td class="text-center">{{status.balance_rt}}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  // $(document).ready(function () {
+  //   var tabel = $("#example").DataTable({
+  //     buttons: [""],
+
+  //     aLengthMenu: [
+  //       [25, 50, 100, 200, -1],
+  //       [25, 50, 100, 200, "All"],
+  //     ],
+  //     iDisplayLength: -1,
+  //   });
+
+  //   tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  // });
+
+//   $(document).ready(function() {
+//     $('#example').DataTable({
+//       "dom": '<"top"i>rt<"bottom"lp><"clear">',
+//         "paging": false,  
+//         "searching": false,  
+//         "info": false  
+//     });
+    
+// });
+
+
+  function get_nde() {
+    var ndeType = $('#ndeType_id').val();
+
+    $.ajax({
+        type: 'GET',
+        url: "/Qc/fetch-nde-details/?material=" + ndeType,
+        success: function (data) {
+
+          var ndePercentage = $('#nde_percen');
+          ndePercentage.empty()
+          percentage = data.products
+
+        for ( let i in percentage ){
+          nde_percenId = percentage[i].id;
+          nde_value = percentage[i].GradeNmae;
+          ndePercentage.append($('<Option>',{
+            value: nde_percenId,
+            text: nde_value
+          }));
+        }
+    
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching grades:", error);
+        }
+    });
+}
+
+
+</script>
+{% endblock body_js %}

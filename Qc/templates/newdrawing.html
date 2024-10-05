@@ -1,0 +1,546 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <!-- <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >+ DRAWING</a > -->
+            <!-- <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a > -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='home' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Update Project Drawing</h1>
+          <p class="small text-white m-0"> CRISP EXISTING SITE | FC-1PD-0553W </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <!-- <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >+ DRAWING</a > -->
+          <!-- <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a > -->
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-6 ">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header">
+                  <p class="fw-bold m-0">Add Project Drawing</p>
+                  <p class="small text-muted m-0"> Fill the weld location information </p>
+                </div>
+                <div class="card-body p-lg-5">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">ISO NUMBER</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="iso_no" value="SP-0553-52-C1-FO-944011-01"  type="text" placeholder=" " aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">Drawing Rev Prefix</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="WeldDescrption" value="prefix_no"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">HOLD</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="hold">
+                            <option value="">NONE</option>
+                              <option value="">Client Hold</option>
+                            </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">Sub Project No</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="sub_proj_no" value=""   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PC No</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="pc_no" value=""   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PIPE CLASS</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="pipe_class" value="G1A-1"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">AREA</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="area" value="C1"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">LINE NUMBER</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="line_no" value=" 3/4 -FO-944011-G1A-1-PP50MM "   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">SERVICE</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="service" value="FO"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PID No</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="pid_no" value="NA"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">T PRESS</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="t_press" value="29.4"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">T MEDIA</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="t_media" value="W"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">MOM</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="mom" value="N"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">ACCEPT. STD</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="acc_std" value="ASME B31.3"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">MATL.</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="matl" value="CS"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">NDE REQT %</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="nde_rq">
+                            <option value="">0</option>
+                            <option value="">5</option>
+                              <option value="">10</option>
+                            </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PWHT REQT </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="pwht_rq">
+                            <option value="">0</option>
+                            <option value="">5</option>
+                              <option value="">10</option>
+                            </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">BHN REQT</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="bhn_rq">
+                            <option value="">0</option>
+                            <option value="">5</option>
+                              <option value="">10</option>
+                            </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">FERRITE REQT</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="ferrite_rq">
+                            <option value="">0</option>
+                            <option value="">5</option>
+                              <option value="">10</option>
+                            </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">MT/PT REQT</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="mtpt_rq">
+                            <option value="">0</option>
+                            <option value="">5</option>
+                              <option value="">10</option>
+                            </select>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PMI REQT</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-select" name="pmi_rq">
+                            <option value="">0</option>
+                            <option value="">5</option>
+                              <option value="">10</option>
+                            </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">INSULATION</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="insulation" value="PP50"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PAINT SYS</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="paint_sys" value="S1/S4/S3"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">OPT TEMP</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="opt_temp" value=""   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+
+                  
+
+                
+           
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6">
+          
+              <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header">
+                  <p class="fw-bold m-0">Add Item Details</p>
+                  <p class="small text-muted m-0"> Fill the weld location information </p>
+                </div>
+                <div class="card-body p-lg-5">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">ITEM NO</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="item_no" value=""  type="text" placeholder=" " aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">CONTRACT NO</p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="contractor_no" value="1-PD-0353"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">UNIT NO</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control" name="unit_no" value="1-PD-0353"   type="text" placeholder="" aria-label="default input example" />
+
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PLATE </p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="plate" value=""   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">LENGTH </p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="length" value=""   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">THK </p>
+                    </div>
+                    <div class="col-lg-8">
+                      <input class="form-control" name="thk" value="G1A-1"   type="text" placeholder="" aria-label="default input example" />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">WELD CONDITION</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="weld_condation" >
+                            <input type="radio" class="btn-check" name="weld_condation" id="yes_weld_condation"  checked>
+                            <label class="btn btn-outline-primary" for="yes_weld_condation">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="weld_condation" id="no_weld_condation" >
+                            <label class="btn btn-outline-primary" for="no_weld_condation">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">GROUND </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="ground" >
+                            <input type="radio" class="btn-check" name="ground" id="yes_ground" checked >
+                            <label class="btn btn-outline-primary" for="yes_ground">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="ground" id="no_ground" >
+                            <label class="btn btn-outline-primary" for="no_ground">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">WELDED </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="welded" >
+                            <input type="radio" class="btn-check" name="welded" id="yes_welded"  checked>
+                            <label class="btn btn-outline-primary" for="yes_welded">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="welded" id="no_welded" >
+                            <label class="btn btn-outline-primary" for="no_welded">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">HEAT TREATMENT</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="heat_treat" >
+                            <input type="radio" class="btn-check" name="heat_treat" id="yes_heat_treat"  checked>
+                            <label class="btn btn-outline-primary" for="yes_heat_treat">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="heat_treat" id="no_heat_treat" >
+                            <label class="btn btn-outline-primary" for="no_heat_treat">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">PRE </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="pre" >
+                            <input type="radio" class="btn-check" name="pre" id="yes_pre"  checked>
+                            <label class="btn btn-outline-primary" for="yes_pre">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="pre" id="no_pre" >
+                            <label class="btn btn-outline-primary" for="no_pre">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">POST </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="post" >
+                            <input type="radio" class="btn-check" name="post" id="yes_post"  checked>
+                            <label class="btn btn-outline-primary" for="yes_post">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="post" id="no_post" >
+                            <label class="btn btn-outline-primary" for="no_post">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">RULE EQUIPMENT</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="rule_eq" >
+                            <input type="radio" class="btn-check" name="rule_eq" id="yes_rule_eq"  checked>
+                            <label class="btn btn-outline-primary" for="yes_rule_eq">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="rule_eq" id="no_rule_eq" >
+                            <label class="btn btn-outline-primary" for="no_rule_eq">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">MAGNIFYING GLASS</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="magnifying_glass" >
+                            <input type="radio" class="btn-check" name="magnifying_glass" id="yes_magnifying_glass"  checked>
+                            <label class="btn btn-outline-primary" for="yes_magnifying_glass">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="magnifying_glass" id="no_magnifying_glass" >
+                            <label class="btn btn-outline-primary" for="no_magnifying_glass">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">WELDING GUAGE</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="welding_gauge" >
+                            <input type="radio" class="btn-check" name="welding_gauge" id="yes_welding_gauge"  checked>
+                            <label class="btn btn-outline-primary" for="yes_welding_gauge">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="welding_gauge" id="no_welding_gauge" >
+                            <label class="btn btn-outline-primary" for="no_welding_gauge">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">FINAL SURFACE REQD</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="final_surf" >
+                            <input type="radio" class="btn-check" name="final_surf" id="yes_final_surf"  checked>
+                            <label class="btn btn-outline-primary" for="yes_final_surf">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="final_surf" id="no_final_surf" >
+                            <label class="btn btn-outline-primary" for="no_final_surf">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4">
+                      <p class="m-0 text-muted">OTHERS </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="btn-group" role="others" >
+                            <input type="radio" class="btn-check" name="others" id="yes_others"  checked>
+                            <label class="btn btn-outline-primary" for="yes_others">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="others" id="no_others" >
+                            <label class="btn btn-outline-primary" for="no_others">NO</label>
+                          </div>
+                    </div>
+                  </div>
+            
+
+                  
+
+                
+               
+                </div>
+                <div class="card-footer p-3 bg-white">
+                    <div class="row ">
+                        <div class="col-12">
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'weldlocation' %}" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+                            <button  class="btn btn-info text-white" type="submit"> SUBMIT </button>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+              </div>
+          </div>
+          <!-- <div class="col-lg-12 mt-3">
+            <div class="card border-0 rounded-3 shadow-sm ">
+                <div class="card-body">
+           
+                </div>
+            </div>
+          </div> -->
+          
+
+   
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+
+</script>
+{% endblock body_js %}

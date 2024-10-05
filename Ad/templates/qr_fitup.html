@@ -1,0 +1,198 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='qr_scanner' %}
+{% include 'include/sidebar.html' with active='qr_scanner' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <a href="" type="button" class="btn btn-success text-white">SCAN <i class="bi bi-qr-code-scan"></i></a>
+            <a href="{% url 'qr_scanner' %}" type="button" class="btn btn-info text-white">HOME </a>
+          </div>
+        </div> 
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="" type="button" class="btn btn-success text-white btn-lg">SCAN <i class="bi bi-qr-code-scan"></i></a>
+          <a href="{% url 'qr_scanner' %}" type="button" class="btn btn-info text-white btn-lg">HOME </a>
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div> 
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3 col-12">
+                  <p class="m-0 mb-2 text-muted">Weld Rec Id</p>
+                  <div class="d-flex justify-content-between">
+                    <input type="text" class="form-control" placeholder="Enter Enter Weld Rec Id" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                    <button class="btn btn-info ms-2 text-white" type="button" id="button-addon2" onclick="find_open()" > FIND </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="hide_search" class="mt-3">
+          <div class="row">
+              <div class="col-lg-12">
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <div class="card shadow-sm border-0 rounded-3">
+                      <div class="card-header">
+                          <div class="d-flex justify-content-between">
+                              <div>
+                                  <p class="text-primary fw-bold m-0">Name: SRC</p>
+                                  <p class="text-muted m-0 small">DWG No: 0771-52-500-GSu-76946_01</p>
+
+                              </div>
+                              <div>
+                                  <button class="btn btn-info text-white">DRAWING</button>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div class="card-body">
+                          <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="text-muted fw-bold">Id: <span class=" text-primary">76</span> </td>
+                                  <td class="text-muted fw-bold">SHT No: <span class=" text-primary">1</span> </td>
+                                  <td class="text-muted fw-bold">SPL No: <span class=" text-primary">1</span> </td>
+                                  <td class="text-muted fw-bold">WLD No: <span class=" text-primary">T4</span></td>
+                                </tr>
+                                <tr>
+                                  <td class="text-muted fw-bold">Loc: <span class=" text-primary">FW</span> </td>
+                                  <td class="text-muted fw-bold">PIPE Size: <span class=" text-primary">1</span> </td>
+                                  <td class="text-muted fw-bold">THK: <span class=" text-primary">2.77</span> </td>
+                                  <td class="text-muted fw-bold">WLD Type: <span class=" text-primary">FW</span> </td>
+                                </tr>
+                                <tr>
+                                  <td class="text-muted fw-bold">Material: <span class=" text-primary">Stainless Steel</span> </td>
+                                  <td class="text-muted fw-bold">Grade: <span class=" text-primary">SS304L</span> </td>
+                                  <td class="text-muted fw-bold">Pipe Size</td>
+                                  <td class="text-muted fw-bold"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            
+                            
+
+                            <div class="row mt-5">
+                              <div class="col-4">
+                                  <label for="fitup" class="form-label ">Fitup Date</label>
+                                  <input type="date" class="form-control" id="fitup" name="fitup_date" required>
+                              </div>
+                              <div class="col-4">
+                                  <label for="wps" class="form-label ">WPS Num</label>
+                                  <input type="text" class="form-control" id="wps" name="wps_no" required>
+                              </div>
+                              <div class="col-4">
+                                <label for="Inspection" class="form-label ">Fitup Ins. Date</label>
+                                <input type="date" class="form-control" id="Inspection" name="fitup_ins" required>
+                            </div>
+
+                            
+                            </div>
+                            <div class="row mt-3">
+                              <div class="col-4">
+                                  <label for="material_a" class="form-label ">Material A</label>
+                                  <input type="text" class="form-control" id="material_a" name="material_a" required>
+                              </div>
+                              <div class="col-4">
+                                  <label for="heat_a" class="form-label ">Heat A</label>
+                                  <input type="text" class="form-control" id="heat_a" name="heat_a" required>
+                              </div>
+                              <div class="col-4">
+                                  <label for="cert_a" class="form-label ">Certficate A</label>
+                                  <input type="text" class="form-control" id="cert_a" name="cert_a" required>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                              <div class="col-4">
+                                <label for="material_b" class="form-label ">Material B</label>
+                                <input type="text" class="form-control" id="material_b" name="material_b" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="heat_b" class="form-label ">Heat B</label>
+                                <input type="text" class="form-control" id="heat_b" name="heat_b" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="cert_b" class="form-label ">Certficate B</label>
+                                <input type="text" class="form-control" id="cert_b" name="cert_b" required>
+                            </div>
+                            </div>
+                            <div class="row mt-3">
+                            
+                              <div class="col-4">
+                                <label for="acc_rej" class="form-label ">Acc/Rej</label>
+                                <select class="form-select" id="acc_rej" name="acc_rej" required>
+                                  <option selected  value="accept">Accepted</option>
+                                  <option value="reject">Rejected</option>
+                                </select>
+                              </div>
+                          </div>
+                          <div class="row mt-3">
+                            
+                            <div class="d-flex justify-content-end ">
+                              <a href="" class="btn btn-outline-secondary me-3">CANCEL</a>
+                              <button type="submit" class="btn btn-info text-white"> UPDATE </button>
+                            </div>
+                        </div>
+
+                          </div>
+
+
+              </div>
+              </form>
+           
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+
+</script>
+{% endblock body_js %}

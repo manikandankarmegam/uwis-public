@@ -1,0 +1,236 @@
+{% load static %}
+
+<div class="sidebar close bg-white shadow-sm d-none d-lg-block">
+    <div class="logo-details">
+      <i class=''></i>
+      <span class="logo_name">UWIS</span>
+    </div>
+    <ul class="nav-links">
+      <!-- {% if user_role == 'Fitter' %}
+      <a  href="{% url 'fiter_list' %}">
+        <li class="border border-light headhov {% if active == 'fiter_list' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'fiter_list' %}">
+            <i class='bi bi-tools fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Fitter </span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Fitter</a></li>
+          </ul>
+        </li>
+      </a>
+      {% else %} -->
+      
+      <a  href="{% url 'dashboard' %}">
+        <li class="border border-light headhov {% if active == 'my_projects' %} sidebar_head_lg {% endif %}">
+          <a href="">
+            <i class='bi bi-list-task fs-5' ></i>
+            <span class="link_name fw-bold text-primary">My Projects</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">My Projects</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'dashboard' %}">
+        <li class="border border-light headhov {% if active == 'dash_board' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'dashboard' %}">
+            <i class='bi bi-speedometer fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Dashboard</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Dashboard</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'admin' %}">
+        <li class="border border-light headhov {% if active == 'admin' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'admin' %}">
+            <i class='bi bi-gear-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Admin</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Admin</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'sheetweldhistory' %}">
+        <li class="border border-light headhov {% if active == 'weld_history' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'sheetweldhistory' %}">
+            <i class='bi bi-fire fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Weld History</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Weld History</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'ndemonitor' %}">
+        <li class="border border-light headhov {% if active == 'nde' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'ndemonitor' %}">
+            <i class='bi bi-person-fill-check fs-5' ></i>
+            <span class="link_name fw-bold text-primary">NDE</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">NDE</a></li>
+          </ul>
+        </li>
+      </a>
+      
+      <a  href="{% url 'welderperformance' %}">
+        <li class="border border-light headhov {% if active == 'WelderPerfom' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'welderperformance' %}">
+            <i class='bi bi-ui-radios-grid fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Welder Perfom</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Welder Perfom</a></li>
+          </ul>
+        </li>
+      </a>
+
+      <a  href="{% url 'spool' %}">
+        <li class="border border-light headhov {% if active == 'spool' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'spool' %}">
+            <i class='bi bi-funnel-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Spool Management</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Spool Management</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'rfirequest' %}">
+        <li class="border border-light headhov {% if active == 'rfi_create' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'rfirequest' %}">
+            <i class='bi bi-question-circle-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">RFI</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">RFI</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'isosheet' %}">
+        <li class="border border-light headhov {% if active == 'iso_sheet' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'isosheet' %}">
+            <i class='bi bi bi-box fs-5' ></i>
+            <span class="link_name fw-bold text-primary">ISO pack</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">ISO pack</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'painting' %}">
+        <li class="border border-light headhov {% if active == 'painting' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'painting' %}">
+            <i class='bi bi-palette-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Painting</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Painting</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'ncr' %}">
+        <li class="border border-light headhov {% if active == 'ncr' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'ncr' %}">
+            <i class='bi bi-clipboard-check-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">NCR | QR</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">NCR | QR</a></li>
+          </ul>
+        </li>
+      </a>
+
+      <a  href="{% url 'tfascanner_dashboard' %}">
+        <li class="border border-light headhov {% if active == 'tfa_dash' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'tfascanner_dashboard' %}">
+            <i class='bi bi-speedometer2 fs-5' ></i>
+            <span class="link_name fw-bold text-primary">TFA Dashboard </span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">TFA Dashboard</a></li>
+          </ul>
+        </li>
+      </a>
+
+
+      <a  href="{% url 'fiter_list' %}">
+        <li class="border border-light headhov {% if active == 'fiter_list' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'fiter_list' %}">
+            <i class='bi bi-tools fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Fitter </span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Fitter</a></li>
+          </ul>
+        </li>
+      </a>
+      
+      
+      <a  href="{% url 'qc_list' %}">
+        <li class="border border-light headhov {% if active == 'qc' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'qc_list' %}">
+            <i class='bi bi-person-check-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">QC Check</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Qc</a></li>
+          </ul>
+        </li>
+      </a>
+
+      <a  href="{% url 'tfascanner' %}">
+        <li class="border border-light headhov {% if active == 'tfa_flange' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'tfascanner' %}">
+            <i class='bi bi-tags-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">TFA</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">TFA</a></li>
+          </ul>
+        </li>
+      </a>
+
+
+      <a  href="{% url 'qr_scanner' %}">
+        <li class="border border-light headhov {% if active == 'qr_scanner' %} sidebar_head_lg {% endif %}">
+          <a href="{% url 'qr_scanner' %}">
+            <i class='bi bi-qr-code fs-5' ></i>
+            <span class="link_name fw-bold text-primary">QR Scanner</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">QR Scanner</a></li>
+          </ul>
+        </li>
+      </a>
+
+      <a  href="{% url 'aboutus' %}">
+        <li class="border border-light headhov ">
+          <a href="{% url 'aboutus' %}">
+            <i class='bi bi-buildings-fill fs-5' ></i>
+            <span class="link_name fw-bold text-primary">About us</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">About us</a></li>
+          </ul>
+        </li>
+      </a>
+      <a  href="{% url 'logout_view'  %}">
+        <li class="border border-light headhov ">
+          <a href="{% url 'logout_view'  %}">
+            <i class='bi bi-box-arrow-right fs-5' ></i>
+            <span class="link_name fw-bold text-primary">Logout</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li class="small"><a class="link_name fw-bold text-primary" href="">Logout</a></li>
+          </ul>
+        </li>
+      </a>
+      {% endif %}
+    
+     
+  </ul>
+  </div>

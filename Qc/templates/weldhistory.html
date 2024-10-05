@@ -1,0 +1,442 @@
+{% extends 'include/main.html' %}
+{% load static %}
+{% block body_content %}
+<style>
+  .no-wrap {
+    width: 100%;
+  }
+
+  .no-wrap th,
+  .no-wrap td {
+    white-space: nowrap;
+    text-align: center;
+    /* Centers text in each cell */
+  }
+
+  .table td,
+  .table th {
+    vertical-align: middle;
+    /* Ensures content is vertically centered */
+  }
+</style>
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<section class="home-section pt-lg-3 pt-1">
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC </p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white">+ RECORD</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+    <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='home' } </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1">
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> FC-1PD-0553W </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white btn-lg">+ RECORD</a>
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90">
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/weldhistory_header.html' with active='Records' %} </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-4 col-12">
+                  <p class="m-0 mb-2 text-muted">Add New Record</p>
+                  <form method="post" action="{% url 'addnorec' drg sh rev %}">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control " id="" name="addsheet"  />
+                      <button class="btn btn-outline-info" type="submit" id="">Add</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-3">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">ISO details </p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted">ISO Number</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-dark">{{drg}}</p>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted">Sheet Number</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-dark">{{sh}}</p>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted">Revision Number</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-dark">{{rev}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 mt-3">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Weld joint details </p>
+            </div>
+            <div class="card-body p-2">
+              <div class="table-responsive">
+                <table class="table table-sm table-striped no-wrap">
+                  <tbody>
+                    {% for i in data %}
+                    <form method="post" action="{% url 'updateweldhistory' i.id %}">
+                      {% csrf_token %}
+                      <tr id="detail_iso_{{forloop.counter}}" class="d-nsone">
+                        <td colspan="17">
+                          <div class="row py-2">
+                            <div class="col-lg-1">
+                              <label for="weld_no" class="form-label small">Weld Num </label>
+                              <input type="text" class="form-control form-control-sm" name="weldnum"
+                                value="{{i.weldno|default:''}}" id="weld_no">
+                            </div>
+                            <div class="col-lg-2">
+                              <label for="spool_no" class="form-label small">SpoolNo </label>
+                              <input type="text" class="form-control form-control-sm" name="spoolno"
+                                value="{{i.spoolno|default:''}}" id="spool_no">
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="spool_no" class="form-label small">WPS no </label>
+                              <select class="form-select form-select-sm" onchange="changeWPS({{forloop.counter}})" name="wpsnum" id="wps_{{forloop.counter}}">
+                                {% for j in wpsno %}
+                                <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.wpsnum.id|stringformat:"s" %}selected="true"{% endif %}>{{j.wpsno}}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="location" class="form-label small">Location </label>
+                              <input type="text" class="form-control form-control-sm" name="location"
+                                value="{{i.location|default:''}}" id="spool_no">
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="spool_no" class="form-label small">Fitup Date </label>
+                              <input type="date" class="form-control form-control-sm" name="fitup"
+                                value="{{i.fitupdate|date:'Y-m-d'}}" id="spool_no">
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="rt_repair" class="form-label small"> Welder 1   </label>
+                              
+                              <select class="form-select form-select-sm" name="welder1" id="welder_1_{{forloop.counter}}">
+                                {% if  i.wpsnum.wpsno %}
+                                {% for j in welder_list %}
+                                {% if i.wpsnum.wpsno in j.wps %}
+                                <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.welder1.id|stringformat:"s" %}selected="true"{% endif %}>{{j.welderid}} </option>
+                                {% endif %}
+                                {% endfor %}
+                                {% else %} 
+                                {% for j in welder_list %}
+                                {% if wpsno.0.wpsno in j.wps %}
+                                <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.welder1.id|stringformat:"s" %}selected="true"{% endif %}>{{j.welderid}} </option>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                              </select>
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="rt_repair" class="form-label small"> Welder 2 </label>
+
+                              <select class="form-select form-select-sm" name="welder2" id="welder_2_{{forloop.counter}}">
+                                {% if  i.wpsnum.wpsno %}
+                                {% for j in welder_list %}
+                                {% if i.wpsnum.wpsno in j.wps %}
+                                <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.welder2.id|stringformat:"s" %}selected="true"{% endif %}>{{j.welderid}} </option>
+                                {% endif %}
+                                {% endfor %}
+                                {% else %} 
+                                {% for j in welder_list %}
+                                {% if wpsno.0.wpsno in j.wps %}
+                                <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.welder2.id|stringformat:"s" %}selected="true"{% endif %}>{{j.welderid}} </option>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                              </select>
+
+
+
+                              <!-- <select class="form-select form-select-sm" name="welder2" id="welder_2_{{forloop.counter}}">
+                                {% for j in welder_list %}
+                                {% if i.wpsnum.wpsno in j.wps %}
+                                <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.welder2.id|stringformat:"s" %}selected="true"{% endif %}>{{j.welderid}}</option>
+                                {% endif %}
+                                {% endfor %}
+                              </select> -->
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="spool_no" class="form-label small">Weld Date </label>
+                              <input type="date" class="form-control form-control-sm" name="start"
+                                value="{{i.start|date:'Y-m-d'}}" id="">
+                            </div>
+                            <div class="col-lg-1">
+                              <label for="spool_no" class="form-label small">Visual date </label>
+                              <input type="date" class="form-control form-control-sm" name="end"
+                                value="{{i.end|date:'Y-m-d'}}" id="">
+                            </div>
+                            <div class="col-lg-2 pt-4">
+                              <button class="btn btn-info btn-sm text-white w-50" type="submit"> UPDATE </button>
+                              <button class="btn btn-outline-secondary btn-sm w-50"
+                                onclick="more_update({{ forloop.counter }})" type="button"> MORE </button>
+                            </div>
+                          </div>
+                          <div id="more_iso_{{forloop.counter}}" class="d-none">
+                            <hr class="border">
+                            <div class="row pb-3">
+                              <div class="col-lg-1">
+                                <label for="part_1" class="form-label small"> Part 1 </label>
+                                <select class="form-select form-select-sm" onchange="getPart({{forloop.counter}}, 'A')" name="partnoA" id="partno_A{{forloop.counter}}">
+                                  {% for partno in part_no_list %}
+                                  <option {% if partno.part_id == i.partnoA %}selected="true"{% endif %} value="{{partno.part_id}}">{{partno.part_id}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="part_a" class="form-label small"> Material A </label>
+                                <input type="text" class="form-control form-control-sm" value="{{i.mat_A|default:''}}" id="mat_A{{forloop.counter}}" name="mat_A">
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="heat_a" class="form-label small"> Heat A </label>
+                                <input type="text" class="form-control form-control-sm" value="{{i.heat_A|default:''}}" id="heat_A{{forloop.counter}}" name="heat_A">
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="cert_a" class="form-label small"> Cert A </label>
+                                <input type="text" class="form-control form-control-sm" id="cert_A{{forloop.counter}}" value="{{i.cert_A|default:''}}" name="cert_A{{forloop.counter}}">
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="part_2" class="form-label small"> Part 2 </label>
+                                <select class="form-select form-select-sm" onchange="getPart({{forloop.counter}}, 'B' )" name="partnoB" id="partno_B{{forloop.counter}}">
+                                  {% for partno in part_no_list %}
+                                  <option {% if partno.part_id == i.partnoB %}selected="true"{% endif %} value="{{partno.part_id}}">{{partno.part_id}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="part_b" class="form-label small"> Material B </label>
+                                <input type="text" class="form-control form-control-sm" id="mat_B{{forloop.counter}}" value="{{i.mat_B|default:''}}" name="mat_B">
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="heat_b" class="form-label small"> Heat B </label>
+                                <input type="text" class="form-control form-control-sm" id="heat_B{{forloop.counter}}" value="{{i.heat_B|default:''}}" name="heat_B">
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="cert_b" class="form-label small"> Cert B </label>
+                                <input type="text" class="form-control form-control-sm" id="cert_B{{forloop.counter}}" value="{{i.cert_B|default:''}}" name="cert_B">
+                              </div>
+                            </div>
+                            <hr class="border">
+                            <div class="row">
+                              <div class="col-lg-2">
+                                <label for="material" class="form-label small"> Material </label>
+                                <select class="form-select form-select-sm" name="material" id="Material_id_{{forloop.counter}}"
+                                  onchange="get_grade({{forloop.counter}})">
+                                  {% for j in mat %}
+                                  <option value="{{j.id}}" {% if j.id|stringformat:"s" == i.material|stringformat:"s" %}selected="true"{% endif %}>{{j.materials}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="grade" class="form-label small"> Grade </label>
+                                <select class="form-select form-select-sm" name="grade" id="grade_id_{{forloop.counter}}">
+                                  {% for key, grades_list in grade_choices.items %}
+                                  {% if key|stringformat:"s" == i.id|stringformat:"s" %}
+                                  {% for grade in grades_list %}
+                                  <option value="{{grade.id}}" {% if grade.id|stringformat:"s" == i.grade.id|stringformat:"s" %}selected="true"{% endif %}>{{grade.GradeNmae}}</option>
+                                  {% endfor %}
+                                  {% endif %}
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="pipe_size" class="form-label small"> Pipe Size </label>
+                                <input type="text" class="form-control form-control-sm" name="pipesize"
+                                  value="{{i.size|default:''}}" id="pipe_size">
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="pipe_thk" class="form-label small"> Pipe THK </label>
+                                <input type="text" class="form-control form-control-sm" name="thickness"
+                                  value="{{i.thk|default:''}}" id="pipe_thk">
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="weld_type" class="form-label small"> Weld Type </label>
+                                <input type="text" class="form-control form-control-sm" name="weldtype"
+                                  value="{{i.type|default:''}}" id="nde_rq">
+                              </div>
+                              <div class="col-lg-2">
+                                <label for="nde_rq" class="form-label small">RT Reqt </label>
+                                <input type="text" class="form-control form-control-sm" name="ndereqt" value="{{i.rt}}"
+                                  id="nde_rq">
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="mtpt_rq" class="form-label small">MTPT Reqt </label>
+                                <input type="text" class="form-control form-control-sm" name="mtpt" value="{{i.mtpt}}"
+                                  id="mtpt_rq">
+                              </div>
+                              <div class="col-lg-1">
+                                <label for="rt_repair" class="form-label small"> RT REPAIR? </label>
+                                <select class="form-select form-select-sm" name="rtrepair" value="{{i.rtrepair}}"
+                                  id="rt_repair">
+                                  <option value="Yes" {% if i.rtrepair == "Yes" %}selected="true"{% endif %}>Yes</option>
+                                  <option value="No" {% if i.rtrepair == "No" %}selected="true"{% endif %}>No</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </form>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock body_content %}
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+
+  function edit_iso(count) {
+    $("#detail_iso_" + count).toggleClass("d-none")
+  }
+
+  function more_update(count) {
+    $("#more_iso_" + count).toggleClass("d-none")
+  }
+
+
+  function getPart(row,type){
+    
+
+    var partno = $('#partno_'+type+row).val();
+      $.ajax({
+        type: 'GET',
+        url: "/Ad/part-number-detail-fetch/?partno=" + partno,
+        success: function (data) {
+          console.log(data);
+          $("#mat_"+type+row).val(data.results.material)
+          $("#heat_"+type+row).val(data.results.heat_no)
+          $("#cert_"+type+row).val(data.results.certificate_no)
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching welders:", error);
+      }
+    });
+
+
+  }
+
+  function changeWPS(row){
+      var wpsId = $('#wps_'+row).val();
+      $.ajax({
+        type: 'GET',
+        url: "/Qc/fetch-welder/?wpsId=" + wpsId,
+        success: function (data) {
+          var welder1Select = $('#welder_1_'+row);
+          welder1Select.empty()
+          var welders = data.welders
+
+          for (let i in welders) {
+            welder_id = welders[i].id;
+            welder_value = welders[i].welderid;
+            welder1Select.append($('<Option>', {
+              value: welder_id,
+              text: welder_value
+            }));
+          }
+          var welder2Select = $('#welder_2_'+row);
+          welder2Select.empty()
+          for (let i in welders) {
+            welder_id = welders[i].id;
+            welder_value = welders[i].welderid;
+            welder2Select.append($('<Option>', {
+              value: welder_id,
+              text: welder_value
+            }));
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching welders:", error);
+      }
+    });
+    }
+  function get_grade(row) {
+    var materialId = $('#Material_id_'+row).val();
+
+    $.ajax({
+      type: 'GET',
+      url: "/Qc/fetch-weld-grade/?material=" + materialId,
+      success: function (data) {
+        
+        var gradesSelect = $('#grade_id_'+row);
+        gradesSelect.empty()
+        gardes = data.products
+
+        for (let i in gardes) {
+          grade_id = gardes[i].id;
+          grade_value = gardes[i].GradeNmae;
+          gradesSelect.append($('<Option>', {
+            value: grade_id,
+            text: grade_value
+          }));
+        }
+
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching grades:", error);
+      }
+    });
+  }
+
+</script>
+{% endblock body_js %}

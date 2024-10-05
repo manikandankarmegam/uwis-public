@@ -1,0 +1,95 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Projects</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'newproject' %}" type="button" class="btn btn-info text-white" >+ Project</a >
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Projects</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'newproject' %}" type="button" class="btn btn-info text-white btn-lg" >+ Project</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+      <div class="p-lg-4">
+        <div class="row my-3 my-lg-0">
+          <div class="col-lg-12">
+     
+            <div class="text-center">
+              <button class="btn btn-outline-secondary">ALL</button>
+              <button class="btn btn-info text-white">Active</button>
+              <button class="btn btn-outline-secondary">Deleted</button>
+            </div>
+            <div class="card shadow-sm border-0 rounded-3 mt-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Project Details</p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="example" class="table m-0 nowrap" style="width: 100%" >
+                    <thead>
+                      <tr>
+                        <th class="text-center text-muted">Project Num</th>
+                        <th class="text-center text-muted">Name</th>
+                        <th class="text-center text-muted">Date</th>
+                        <th class="text-center text-muted">Contractor</th>
+                        <th class="text-center text-muted">Customer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for user in data %}
+                      <tr>
+                        <td class="text-center align-middle "> <a class="text-decoration-none  text-info" href="{% url 'detailproject' user.id %}" >{{user.projectno}}</a > </td>
+                        <td class="text-center align-middle">{{user.projectname}}</td>
+                        <td class="text-center align-middle">{{user.startdate}}</td>
+                        <td class="text-center align-middle">{{user.maincont}}</td>
+                        <td class="text-center align-middle">{{user.customer}}</td>
+               
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

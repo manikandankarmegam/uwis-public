@@ -1,0 +1,190 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0">
+    {% include 'include/admin_header.html' with active='createproject' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block">
+      {% include 'include/admin_header.html' with active='createproject' %}
+    </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="text-center mt-4">
+            <a href="{% url 'detailproject' proId %}" class="btn btn-outline-secondary" >Project</a >
+            <a href="{% url 'project_welder' proId %}" class="btn btn-outline-secondary" >+ Welder</a >
+            <a href="{% url 'uploads' proId %}" class="btn btn-info text-white" >Uploads</a >
+          </div>
+          <div class="row mt-5">
+            <div class="col-lg-4 mb-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img src="{% static 'img/pipe.png' %}" alt="..." />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="m-0 text-primary fw-bold fs-5"> Spoolgen Data </p>
+                      <p class="m-0 text-muted small"> Click here to Upload Project </p>
+                      <div class="pt-3"> 
+                        <a href="{% url 'upload_spoolgen' proId %}" class="btn btn-outline-info" >UPLOAD FILE <i class="bi bi-chevron-right"></i ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img src="{% static 'img/planning-strategy.png' %}" alt="..." />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="m-0 text-primary fw-bold fs-5"> Manage Drawings </p>
+                      <p class="m-0 text-muted small"> Click here to Upload Project </p>
+                      <div class="pt-3">
+                        <a href="#" class="btn btn-outline-info" >UPLOAD FILE <i class="bi bi-chevron-right"></i ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img src="{% static 'img/scan-doc.png' %}" alt="..." />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="m-0 text-primary fw-bold fs-5"> Scanned Documents </p>
+                      <p class="m-0 text-muted small"> Click here to Upload Project </p>
+                      <div class="pt-3">
+                        <a href="#" class="btn btn-outline-info" >UPLOAD FILE <i class="bi bi-chevron-right"></i ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img src="{% static 'img/settings.png' %}" alt="..." />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="m-0 text-primary fw-bold fs-5">Material</p>
+                      <p class="m-0 text-muted small"> Click here to Upload Project </p>
+                      <div class="pt-3">
+                        <a href="{% url 'uploads_material' proId %}" class="btn btn-outline-info" >UPLOAD FILE <i class="bi bi-chevron-right"></i ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img src="{% static 'img/pipe-mat.png' %}" alt="..." />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="m-0 text-primary fw-bold fs-5"> Welding Joints </p>
+                      <p class="m-0 text-muted small"> Click here to Upload Project </p>
+                      <div class="pt-3">
+                        <a href="#" class="btn btn-outline-info">UPLOAD FILE <i class="bi bi-chevron-right"></i ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img src="{% static 'img/checklist.png' %}" alt="..." />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="m-0 text-primary fw-bold fs-5">TFA Flange</p>
+                      <p class="m-0 text-muted small"> Click here to Upload Project </p>
+                      <div class="pt-3">
+                        <a href="{% url 'tfa_upload' proId %}" class="btn btn-outline-info" >UPLOAD FILE <i class="bi bi-chevron-right"></i ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+      aLengthMenu: [
+        [25, 50, 100, 200, -1],
+        [25, 50, 100, 200, "All"],
+      ],
+      iDisplayLength: -1,
+    });
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+    $("#example_info , #example_paginate").hide();
+  });
+</script>
+{% endblock body_js %}

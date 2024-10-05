@@ -1,0 +1,342 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %}
+{% include 'include/header.html' with active='dash_board' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<style>
+  thead,
+  tbody,
+  tfoot,
+  tr,
+  td,
+  th {
+    border-style: dashed !important;
+  }
+</style>
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Dashboard</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Dashboard</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-8">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header">
+              <p class="m-0 text-primary fw-bold fs-5">Welder Status</p>
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>UTOC</th>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <th>Steel Weld</th>
+                    <td>25</td>
+                  </tr>
+                  <tr>
+                    <th>Addecel</th>
+                    <td>25</td>
+                  </tr>
+                  <tr class="bg-light">
+                    <th>Total</th>
+                    <td>100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-3 mt-lg-0">
+          <div class="card shadow-sm border-0 rounded-3 h-100">
+            <div class="card-header">
+              <p class="m-0 text-primary fw-bold fs-5">RFI Status</p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="my-auto">
+                    <p class="text-info fw-bold fw-bold m-0">Field</p>
+                    <p class="display-1 text-dark fw-bold m-0">150</p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="my-auto">
+                    <p class="text-info fw-bold fw-bold m-0">Shop</p>
+                    <p class="display-1 text-dark fw-bold m-0">200</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 mt-3">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header">
+              <p class="m-0 text-primary fw-bold fs-5">Drawing Status</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" class="text-center text-primary" style="vertical-align: middle" > Material </th>
+                      <th colspan="2" class="text-center text-primary">Shop</th>
+                      <th colspan="2" class="text-center text-primary"> Field </th>
+                      <th colspan="2" class="text-center text-primary"> Total </th>
+                    </tr>
+                    <tr>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="text-center">CSS</th>
+                      <td class="text-center text-muted">2146</td>
+                      <td class="text-center text-muted">1075</td>
+                      <td class="text-center text-muted">567</td>
+                      <td class="text-center text-muted">650</td>
+                      <td class="text-center text-muted">1789</td>
+                      <td class="text-center text-muted">6543</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">SS304L</th>
+                      <td class="text-center text-muted">3213</td>
+                      <td class="text-center text-muted">6543</td>
+                      <td class="text-center text-muted">4567</td>
+                      <td class="text-center text-muted">5667</td>
+                      <td class="text-center text-muted">4566</td>
+                      <td class="text-center text-muted">4567</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">SS316L</th>
+                      <td class="text-center text-muted">500</td>
+                      <td class="text-center text-muted">2341</td>
+                      <td class="text-center text-muted">5432</td>
+                      <td class="text-center text-muted">2314</td>
+                      <td class="text-center text-muted">3212</td>
+                      <td class="text-center text-muted">2341</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">Dublex</th>
+                      <td class="text-center text-muted">1111</td>
+                      <td class="text-center text-muted">345</td>
+                      <td class="text-center text-muted">7532</td>
+                      <td class="text-center text-muted">3455</td>
+                      <td class="text-center text-muted">4324</td>
+                      <td class="text-center text-muted">1634</td>
+                    </tr>
+                    <tr class="bg-light">
+                      <th class="text-center">Total</th>
+                      <td class="text-center text-muted">10012</td>
+                      <td class="text-center text-muted">21555</td>
+                      <td class="text-center text-muted">8000</td>
+                      <td class="text-center text-muted">32152</td>
+                      <td class="text-center text-muted">76421</td>
+                      <td class="text-center text-muted">65433</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-3">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header">
+              <p class="m-0 text-primary fw-bold fs-5"> Progress Shop <span class="text-warning">(Steel Weld)</span> </p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" class="text-center text-primary" style="vertical-align: middle" > Material </th>
+                      <th colspan="2" class="text-center text-primary">Shop</th>
+                      <th colspan="2" class="text-center text-primary"> Field </th>
+                      <th colspan="2" class="text-center text-primary"> Total </th>
+                    </tr>
+                    <tr>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="text-center">CSS</th>
+                      <td class="text-center text-muted">2146</td>
+                      <td class="text-center text-muted">1075</td>
+                      <td class="text-center text-muted">567</td>
+                      <td class="text-center text-muted">650</td>
+                      <td class="text-center text-muted">1789</td>
+                      <td class="text-center text-muted">6543</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">SS304L</th>
+                      <td class="text-center text-muted">3213</td>
+                      <td class="text-center text-muted">6543</td>
+                      <td class="text-center text-muted">4567</td>
+                      <td class="text-center text-muted">5667</td>
+                      <td class="text-center text-muted">4566</td>
+                      <td class="text-center text-muted">4567</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">SS316L</th>
+                      <td class="text-center text-muted">500</td>
+                      <td class="text-center text-muted">2341</td>
+                      <td class="text-center text-muted">5432</td>
+                      <td class="text-center text-muted">2314</td>
+                      <td class="text-center text-muted">3212</td>
+                      <td class="text-center text-muted">2341</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">Dublex</th>
+                      <td class="text-center text-muted">1111</td>
+                      <td class="text-center text-muted">345</td>
+                      <td class="text-center text-muted">7532</td>
+                      <td class="text-center text-muted">3455</td>
+                      <td class="text-center text-muted">4324</td>
+                      <td class="text-center text-muted">1634</td>
+                    </tr>
+                    <tr class="bg-light">
+                      <th class="text-center">Total</th>
+                      <td class="text-center text-muted">10012</td>
+                      <td class="text-center text-muted">21555</td>
+                      <td class="text-center text-muted">8000</td>
+                      <td class="text-center text-muted">32152</td>
+                      <td class="text-center text-muted">76421</td>
+                      <td class="text-center text-muted">65433</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-3">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header">
+              <p class="m-0 text-primary fw-bold fs-5"> Progress Shop <span class="text-warning">(Addecel) </span> </p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" class="text-center text-primary" style="vertical-align: middle" > Material </th>
+                      <th colspan="2" class="text-center text-primary">Shop</th>
+                      <th colspan="2" class="text-center text-primary"> Field </th>
+                      <th colspan="2" class="text-center text-primary"> Total </th>
+                    </tr>
+                    <tr>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                      <th class="text-center">JTS</th>
+                      <th class="text-center">DB</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="text-center">CSS</th>
+                      <td class="text-center text-muted">2146</td>
+                      <td class="text-center text-muted">1075</td>
+                      <td class="text-center text-muted">567</td>
+                      <td class="text-center text-muted">650</td>
+                      <td class="text-center text-muted">1789</td>
+                      <td class="text-center text-muted">6543</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">SS304L</th>
+                      <td class="text-center text-muted">3213</td>
+                      <td class="text-center text-muted">6543</td>
+                      <td class="text-center text-muted">4567</td>
+                      <td class="text-center text-muted">5667</td>
+                      <td class="text-center text-muted">4566</td>
+                      <td class="text-center text-muted">4567</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">SS316L</th>
+                      <td class="text-center text-muted">500</td>
+                      <td class="text-center text-muted">2341</td>
+                      <td class="text-center text-muted">5432</td>
+                      <td class="text-center text-muted">2314</td>
+                      <td class="text-center text-muted">3212</td>
+                      <td class="text-center text-muted">2341</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">Dublex</th>
+                      <td class="text-center text-muted">1111</td>
+                      <td class="text-center text-muted">345</td>
+                      <td class="text-center text-muted">7532</td>
+                      <td class="text-center text-muted">3455</td>
+                      <td class="text-center text-muted">4324</td>
+                      <td class="text-center text-muted">1634</td>
+                    </tr>
+                    <tr class="bg-light">
+                      <th class="text-center">Total</th>
+                      <td class="text-center text-muted">10012</td>
+                      <td class="text-center text-muted">21555</td>
+                      <td class="text-center text-muted">8000</td>
+                      <td class="text-center text-muted">32152</td>
+                      <td class="text-center text-muted">76421</td>
+                      <td class="text-center text-muted">65433</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %}

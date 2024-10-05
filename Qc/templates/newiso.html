@@ -1,0 +1,557 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC </p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white">+ RECORD</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='home' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> FC-1PD-0553W </p>
+        </div>
+     
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+
+          <div class="col-lg-6 mt-3">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Create ISO</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">ISO NUMBER</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.drgno %}{{data.drgno}}{% else %}{% endif %}"  name="isonumber" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <!-- <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">DRG PREFIX NO</p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.drgprefix %}{{data.drgprefix}}{% else %}{% endif %}" name="drg" type="text" placeholder=""  />
+                    </div>
+                  </div> -->
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">HOLD</p>
+                  </div>
+                  <div class="col-lg-9">
+                   
+                    <select class="form-select " name="hold" id="rt_repair">
+                        <option {% if data.hold == 'NONE' %}  selected { % else %} {% endif %} value="NONE">NONE</option>
+                        <option {% if data.hold == 'Client Hold' %}  selected { % else %} {% endif %}  value="Client Hold">Client Hold</option>
+                        <option {% if data.hold == 'IR Hold' %}  selected { % else %} {% endif %}  value="IR Hold">IR Hold</option>
+                        <option {% if data.hold == 'Pipe Class Break' %}  selected { % else %} {% endif %}  value="Pipe Class Break">Pipe Class Break</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Sub Project No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.subproject %}{{data.subproject}}{% else %}{% endif %}" name="subproject" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">PC No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.pcno %}{{data.pcno}}{% else %}{% endif %}" name="pcnop" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">PIPE CLASS</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.piping %}{{data.piping}}{% else %}{% endif %}" name="pipeclass" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">AREA</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.area %}{{data.area}}{% else %}{% endif %}" name="area" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">LINE NUMBER</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.lineno %}{{data.lineno}}{% else %}{% endif %}" name="lineno" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">SERVICE</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.service %}{{data.service}}{% else %}{% endif %}" name="service" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">PID No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.pidno %}{{data.pidno}}{% else %}{% endif %}" name="pidno" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <label for="inputPassword4" class="form-label text-muted">T PRESS</label>
+                    </div>
+                    <div class="col-lg-9">
+                   <input class="form-control" value="{% if data.tpress %}{{data.tpress}}{% else %}{% endif %}" name="tpress" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <label for="inputPassword4" class="form-label text-muted">T MEDIA</label>
+                    </div>
+                    <div class="col-lg-9">
+                   <input class="form-control" value="{% if data.tmedia %}{{data.tmedia}}{% else %}{% endif %}" name="tmedia" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <label for="inputPassword4" class="form-label text-muted">MOM</label>
+                    </div>
+                    <div class="col-lg-9">
+                   <input class="form-control" value="{% if data.mom %}{{data.mom}}{% else %}{% endif %}" name="mom" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <label for="inputPassword4" class="form-label text-muted">ACCEPT. STD</label>
+                    </div>
+                    <div class="col-lg-9">
+                   <input class="form-control" value="{% if data.acceptance %}{{data.acceptance}}{% else %}{% endif %}" name="accept" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <label for="inputPassword4" class="form-label text-muted">MATL</label>
+                    </div>
+                    <div class="col-lg-9">
+                   <input class="form-control" value="{% if data.material %}{{data.material}}{% else %}{% endif %}" name="matl" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                 
+                </div>
+                </div>
+        </div>
+        <div class="col-lg-6 mt-3">
+          <div class="card shadow-sm border-0 rounded-3 h-100">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Create NDE & ISO detail</p>
+            </div>
+            <div class="card-body">
+        
+           
+         
+            <div class="row ">
+              <div class="col-lg-3">
+                <label for="inputPassword4" class="form-label text-muted">RT REQT</label>
+              </div>
+              <div class="col-lg-9">
+                <select class="form-select " name="rt" id="rt_repair">
+                  <option selected disabled value="">Choose...</option>
+                  <option {% if data.rt == '0' %}  selected { % else %} {% endif %} value="0">0</option>
+                  <option {% if data.rt == '5' %}  selected { % else %} {% endif %} value="5">5</option>
+                  <option {% if data.rt == '10' %}  selected { % else %} {% endif %} value="10">10</option>
+                  <option {% if data.rt == '100' %}  selected { % else %} {% endif %} value="100">100</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-lg-3">
+                  <label for="inputPassword4" class="form-label text-muted">PWHT REQT</label>
+                </div>
+                <div class="col-lg-9">
+                 <select class="form-select " name="pwht" id="rt_repair">
+                  <option selected disabled value="">Choose...</option>
+                  <option {% if data.pwht == '0' %}  selected { % else %} {% endif %} value="0">0</option>
+                  <option {% if data.pwht == '5' %}  selected { % else %} {% endif %} value="5">5</option>
+                  <option {% if data.pwht == '10' %}  selected { % else %} {% endif %} value="10">10</option>
+                  <option {% if data.pwht == '100' %}  selected { % else %} {% endif %} value="100">100</option>
+                </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <label for="inputPassword4" class="form-label text-muted">BHN REQT</label>
+                </div>
+                <div class="col-lg-9">
+                 <select class="form-select " name="bhn" id="rt_repair">
+                  <option selected disabled value="">Choose...</option>
+                  <option {% if data.bhn == '0' %}  selected { % else %} {% endif %} value="0">0</option>
+                  <option {% if data.bhn == '5' %}  selected { % else %} {% endif %} value="5">5</option>
+                  <option {% if data.bhn == '10' %}  selected { % else %} {% endif %} value="10">10</option>
+                  <option {% if data.bhn == '100' %}  selected { % else %} {% endif %} value="100">100</option>
+                </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <label for="inputPassword4" class="form-label text-muted">FERRITE REQT</label>
+                </div>
+                <div class="col-lg-9">
+                 <select class="form-select " name="ferraite" id="rt_repair">
+                  <option selected disabled value="">Choose...</option>
+                  <option {% if data.ferraite == '0' %}  selected { % else %} {% endif %} value="0">0</option>
+                  <option {% if data.ferraite == '5' %}  selected { % else %} {% endif %} value="5">5</option>
+                  <option {% if data.ferraite == '10' %}  selected { % else %} {% endif %} value="10">10</option>
+                  <option {% if data.ferraite == '100' %}  selected { % else %} {% endif %} value="100">100</option>
+                </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <label for="inputPassword4" class="form-label text-muted">MT/PT REQT</label>
+                </div>
+                <div class="col-lg-9">
+                 <select class="form-select " name="mtpt" id="rt_repair">
+                  <option selected disabled value="">Choose...</option>
+                  <option {% if data.mtpt == '0' %}  selected { % else %} {% endif %} value="0">0</option>
+                  <option {% if data.mtpt == '5' %}  selected { % else %} {% endif %} value="5">5</option>
+                  <option {% if data.mtpt == '10' %}  selected { % else %} {% endif %} value="10">10</option>
+                  <option {% if data.mtpt == '100' %}  selected { % else %} {% endif %} value="100">100</option>
+                </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <label for="inputPassword4" class="form-label text-muted">PMI REQT</label>
+                </div>
+                <div class="col-lg-9">
+                 <select class="form-select " name="pmi" id="rt_repair">
+                  <option selected disabled value="">Choose...</option>
+                  <option {% if data.pmi == '0' %}  selected { % else %} {% endif %} value="0">0</option>
+                  <option {% if data.pmi == '5' %}  selected { % else %} {% endif %} value="5">5</option>
+                  <option {% if data.pmi == '10' %}  selected { % else %} {% endif %} value="10">10</option>
+                  <option {% if data.pmi == '100' %}  selected { % else %} {% endif %} value="100">100</option>
+                </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <label for="inputPassword4" class="form-label text-muted">INSULATION</label>
+                </div>
+                <div class="col-lg-9">
+                    <input class="form-control" value="{% if data.insulation %}{{data.insulation}}{% else %}{% endif %}" name="insulation" type="text" placeholder=""  />
+
+                </div>
+              </div>
+            <div class="row mt-3">
+              <div class="col-lg-3">
+                <p class="m-0 text-muted">PAINT SYS</p>
+              </div>
+              <div class="col-lg-9">
+                <input class="form-control" value="{% if data.paint %}{{data.paint}}{% else %}{% endif %}" name="paint" type="text" placeholder=""  />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-lg-3">
+                <p class="m-0 text-muted">OPT TEMP</p>
+              </div>
+              <div class="col-lg-9">
+                <input class="form-control" value="{% if data.opttemp %}{{data.opttemp}}{% else %}{% endif %}" name="opttemp" type="text" placeholder=""  />
+              </div>
+            </div>
+            
+                <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">ITEM NO</p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.itemno %}{{data.itemno}}{% else %}{% endif %}" name="itemno" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">CONTRACT NO</p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.contractno %}{{data.contractno}}{% else %}{% endif %}" name="contractno" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">UNIT NO</p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.unit %}{{data.unit}}{% else %}{% endif %}" name="unitno" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">Sheet No</p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.sheetno %}{{data.sheetno}}{% else %}{% endif %}" name="sheetno" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">Rev NO</p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.rev %}{{data.rev}}{% else %}{% endif %}" name="revno" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <!-- <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">PLATE </p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.plate %}{{data.plate}}{% else %}{% endif %}" name="plate" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">LENGTH </p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.length %}{{data.length}}{% else %}{% endif %}" name="length" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">THK </p>
+                    </div>
+                    <div class="col-lg-9">
+                      <input class="form-control" value="{% if data.thk %}{{data.thk}}{% else %}{% endif %}" name="thk" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <hr class="border">
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">WELD CONDITION</p>
+                    </div>
+                    <div class="col-lg-9">
+                   
+                        <div class="btn-group" role="weldcondition" >
+                        <input type="radio" class="btn-check" name="weldcondition" id="yes_weld_condition" value="yes"  {% if data.weldcondition == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_weld_condition">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="weldcondition" id="no_weld_condition" value="no" {% if data.weldcondition == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_weld_condition">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">GROUND </p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="ground" >
+                        <input type="radio" class="btn-check" name="ground" id="yes_ground" value="yes"  {% if data.ground == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_ground">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="ground" id="no_ground" value="no" {% if data.ground == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_ground">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">WELDED </p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="welded" >
+                        <input type="radio" class="btn-check" name="welded" id="yes_welded" value="yes"  {% if data.welded == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_welded">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="welded" id="no_welded" value="no" {% if data.welded == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_welded">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">HEAT TREATMENT</p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="treatment" >
+                        <input type="radio" class="btn-check" name="treatment" id="yes_heat_treat" value="yes"  {% if data.treatment == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_heat_treat">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="treatment" id="no_heat_treat" value="no" {% if data.treatment == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_heat_treat">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">PRE </p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="pre" >
+                        <input type="radio" class="btn-check" name="pre" id="yes_pre" value="yes"  {% if data.pre == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_pre">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="pre" id="no_pre" value="no" {% if data.pre == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_pre">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">POST </p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="post" >
+                        <input type="radio" class="btn-check" name="post" id="yes_post" value="yes"  {% if data.post == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_post">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="post" id="no_post" value="no" {% if data.post == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_post">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">RULE EQUIPMENT</p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="rule" >
+                        <input type="radio" class="btn-check" name="rule" id="yes_rule_eq" value="yes"  {% if data.rule == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_rule_eq">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="rule" id="no_rule_eq" value="no" {% if data.rule == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_rule_eq">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">WELDING GUAGE</p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="weldgauge" >
+                        <input type="radio" class="btn-check" name="weldgauge" id="yes_weld_guage" value="yes"  {% if data.welding == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_weld_guage">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="weldgauge" id="no_weld_guage" value="no" {% if data.welding == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_weld_guage">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">MAGNIFYING GLASS</p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="magnify" >
+                        <input type="radio" class="btn-check" name="magnify" id="yes_magnifying_glass" value="yes"  {% if data.magnifying == 'yes' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="yes_magnifying_glass">YES</label>
+                      
+                        <input type="radio" class="btn-check" name="magnify" id="no_magnifying_glass" value="no" {% if data.magnifying == 'no' %} checked {% else %} {% endif %}>
+                        <label class="btn btn-outline-primary" for="no_magnifying_glass">NO</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted">OTHERS </p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="others" >
+                            <input type="radio" class="btn-check" name="others" id="yes_others" value="yes"  {% if data.others == 'yes' %} checked {% else %} {% endif %}>
+                            <label class="btn btn-outline-primary" for="yes_others">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="others" id="no_others" value="no" {% if data.others == 'no' %} checked {% else %} {% endif %}>
+                            <label class="btn btn-outline-primary" for="no_others">NO</label>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-3 my-auto">
+                      <p class="m-0 text-muted">FINAL SURFACE REQD</p>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="btn-group" role="finalsurface" >
+                            <input type="radio" class="btn-check" name="finalsurface" id="yes_final_surf" value="yes"  {% if data.weldcondition == 'yes' %} checked {% else %} {% endif %}>
+                            <label class="btn btn-outline-primary" for="yes_final_surf">YES</label>
+                          
+                            <input type="radio" class="btn-check" name="finalsurface" id="no_final_surf" value="no" {% if data.weldcondition == 'no' %} checked {% else %} {% endif %}>
+                            <label class="btn btn-outline-primary" for="no_final_surf">NO</label>
+                          </div>
+                    </div>
+                  </div> -->
+              </div>
+              </div>
+      </div>
+      <div class="col-12 mt-3">
+        <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-body">
+
+        <div class="d-grid gap-2 d-md-flex justify-content-center">
+          <a href="" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+          <!-- <a href="/Ad/uweldprocess/" class="btn btn-info text-white" type="submit"> SUBMIT </a> -->
+          <button type="submit" class="btn btn-info text-white"> SUBMIT </button>
+        </div>
+      </div>
+      </div>
+      </div>
+ 
+</div>
+      </form>
+  </div>
+  </section>
+
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+  
+
+</script>
+{% endblock body_js %}

@@ -1,0 +1,336 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<style>
+  .pointer{
+    cursor: pointer;
+  }
+</style>
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+          <a href="{% url 'iso' %}" type="button" class="btn btn-info text-white" >+ ISO</a >
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+        <a href="{% url 'iso' %}" type="button" class="btn btn-info text-white btn-lg" >+ ISO</a >
+          </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <div class="row">
+                  <div class="col-lg-4 col-12">
+                      <p class="m-0 mb-2 text-muted">Drawing ISO number</p>
+
+                      <form method="get" id="search_form" action="">
+
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control search-input" id="search-input" name="search_term" />
+                          <button class="btn btn-outline-info" type="submit" id="button-addon2">FIND</button>
+                        </div>
+                        <ul class="list-group" id="search-results"></ul>
+                        </form>
+
+                      <div id="suggestions"></div> 
+                  </div>
+              </div>
+            
+
+           
+            <div id="hide_text" class="d-flex justify-content-between ">
+              {% if drg_id %}
+              <div>
+                
+                <a href="/Qc/unew_isoedit/{{drg_id}}" class="text-decoration-none fw-bold">  <p class="m-0 text-primary  fw-bold fs-5"> 
+                    {{ search_term }}  </p> </a>  
+              </div>
+              {% endif %}
+                <div>
+                  {% if search_term %}
+                  <a href="{% url 'addsheet' search_term %}" class="btn btn-info text-white ">+ Sheet </a>
+                  {% endif %}
+                </div>
+
+              </div>
+
+
+          </div>
+
+        
+
+    
+          
+          {% for iso in data %}
+              <span class="d-none " id="{{ loop.index }}">{{ iso }}</span>
+          {% endfor %}
+
+            </div>
+          </div>
+          <!-- {{drgno_counts}} -->
+          {% for item in drgno_counts %}
+          <div class="row">
+
+            <div class="col-lg-12 mt-3">
+              <div class="card border-0 rounded-3 card_zoom">
+              
+                
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                          <!-- <img src="{% static 'img/utoc_callender.png' %}" alt="..." /> -->
+                          <!-- <button type="button" class="btn btn-info btn-sm text-white "> <i class="bi bi-arrows-expand"></i></button> -->
+  
+                          <form action="{% url 'unew_isodel'  %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="sheet_no" value="{{item.sheetno}}" >
+                            <input type="hidden" name="rev" value="{{item.rev}}" >
+                            <input type="hidden" name="drgno" value="{{item.drgno}}" >
+                            <input type="hidden" name="delete_type" value="iso_sheet" >
+                            <button type="submit" class="btn btn-danger btn-sm text-white " {% if drgno_counts|length == 1 %}disabled{% endif %}> <i class="bi bi-trash3"></i></button>
+                          </form>
+  
+  
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                         
+                                  
+                                  <p class="m-0 fw-bold"><a href="{% url 'weldhistory' drg=item.drgno sh=item.sheetno rev=item.rev %}" class="text-decoration-none">
+                                    {{ item.sheetno }} Sheet | {{item.rev|default:"0"}} Rev | {{ item.record_count }} Joints
+                                  </a>   </p> 
+                                  </div>
+                                </div>
+                                <div>
+  
+                                  <a href="{% url 'addrev' item.drgno item.sheetno %}" class="btn-sm btn btn-info text-white ">+ REV </a> 
+                                  <a href="{% url 'removerev' item.drgno item.sheetno %}" class="btn-sm btn btn-danger text-white ">- REV </a> 
+                                  <a href="{% url 'addtext' item.drgno item.sheetno %}" class="btn-sm btn btn-info text-white ">+ TEXT </a> 
+                                  <a href="{% url 'removetext' item.drgno item.sheetno %}" class="btn-sm btn btn-danger text-white ">- TEXT </a>
+                                  <a href="" class="btn-sm btn btn-outline-primary  " data-bs-toggle="modal" data-bs-target="#exampleModalfitup_{{item.sheetno}}"><i class="bi bi-cloud-arrow-down"></i>  FIT-UP & VISUAL </a>
+                                  <a href="" class="btn-sm btn btn-outline-primary  " data-bs-toggle="modal" data-bs-target="#exampleweldsum_{{item.sheetno}}"><i class="bi bi-cloud-arrow-down"></i> WELD SUMMARY </a>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                         
+                          
+                        </div>
+                      </div>
+          </div>
+          {% endfor %}
+           
+        </div>
+  
+        <div id="hide_search" class="d-none">
+          {% for i in data %}
+          <div class="col-lg-12 mt-3">
+            <div class="card border-0 rounded-3 card_zoom">
+            
+              <a href="{% url 'weldhistory' %}" class="text-decoration-none">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <img src="{% static 'img/utoc_callender.png' %}" alt="..." />
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <p class="m-0 fw-bold"> 1 Sheet | 2 Rev | 19 joints</p>
+                      </div>
+                    </div>
+                    <i class="bi bi-chevron-right my-auto"></i>
+                  </div>
+                </div>
+              </a>
+           
+     
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+
+
+<!-- Modal -->
+{% for item in drgno_counts %}+
+<div class="modal fade" id="exampleModalfitup_{{item.sheetno}}" tabindex="-1" aria-labelledby="exampleModalfitupLabel__{{item.sheetno}}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class=" pt-3 border-0 pb-0">
+        <p class="text-primary fw-bold m-0 text-center fs-5 ">Print Fitup & Visual </p>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <form action="{% url 'weldhistory_form_download' %}"  method="get">
+      <div class="modal-body pt-0">
+        <div class="text-center py-3">
+          <i class="bi bi-printer display-3 fw-bold text-danger"></i>
+        </div>
+        <div class="">
+          <label for="" class="form-label  mb-2">Select the Fitup & Visual  </label>
+          <select class="form-select"  name="fitup_type" aria-label="Default select example">
+            <option selected value="">ALL</option>
+            {% for loc in location %}
+            <option  value="{{loc.location}}">{{loc.location}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="d-flex justify-content-center pt-3">
+          <input hidden type="text" name="drgno" value="{{item.drgno}}">
+        <input hidden type="text" name="sheetno" value="{{item.sheetno}}">
+        <input hidden type="text" name="rev" value="{{item.rev}}">
+          <button type="button" class="btn btn-secondary text-white me-3 w-100" data-bs-dismiss="modal"> CANCEL </button>
+          <button type="submit" class="btn btn-primary text-white w-100"> PRINT </button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for item in drgno_counts %}
+<div class="modal fade" id="exampleweldsum_{{item.sheetno}}" tabindex="-1" aria-labelledby="exampleweldsum_{{item.sheetno}}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class=" pt-3 border-0 pb-0">
+        <p class="text-primary fw-bold m-0 text-center fs-5 ">Print weld summary </p>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <form action="{% url 'weldsummary_form_download' %}"  method="get">
+      <div class="modal-body pt-0">
+        <div class="text-center py-3">
+          <i class="bi bi-printer display-3 fw-bold text-danger"></i>
+        </div>
+        <div class="">
+          <label for="" class="form-label  mb-2">Select the weld summary  </label>
+          <select class="form-select"  name="fitup_type" aria-label="Default select example">
+            <option selected value="">ALL</option>
+            {% for loc in location %}
+            <option  value="{{loc.location}}">{{loc.location}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="d-flex justify-content-center pt-3">
+          <input hidden type="text" name="drgno" value="{{item.drgno}}">
+        <input hidden type="text" name="sheetno" value="{{item.sheetno}}">
+        <input hidden type="text" name="rev" value="{{item.rev}}">
+          <button type="button" class="btn btn-secondary text-white me-3 w-100" data-bs-dismiss="modal"> CANCEL </button>
+          <button type="submit" class="btn btn-primary text-white w-100"> PRINT </button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+  function find_open() {
+    $("#hide_search").removeClass("d-none");
+    $("#hide_text").removeClass("d-none");
+  }
+  
+
+
+
+  $(document).ready(function() {
+      $('#search_form').on('submit', function(event) {
+        var searchInput = $('.form-control.search-input').val().trim();
+        if (searchInput === "") {
+          alert("No value");
+          event.preventDefault(); 
+        }
+      });
+    });
+
+
+
+  $(document).ready(function(){
+    $('#search-input').keyup(function(){
+        var query = $(this).val();
+       if(query.length === 3){
+
+         $.ajax({
+             url: "{% url 'search' %}",
+             type: 'GET',
+             data: {
+                 'query': query
+             },
+             success: function(data){
+               console.log("Received data:", data);
+             if (Array.isArray(data.results)) {
+                 $('#search-results').empty(); 
+                 data.results.forEach(function(result) {
+                     var listItem = $('<li>').text(result.drgno).addClass("list-group-item pointer");
+                     $('#search-results').append(listItem);
+                     listItem.click(function() {
+                         $('#search-input').val($(this).text());
+                         $('#search-results').empty();
+                         document.getElementById('search_form').submit();
+  
+                     });
+                 });
+             } else {
+                 console.error("Results array not found in data:", data);
+             }
+         },
+         error: function(xhr, status, error) {
+             console.error("Error:", error);
+         }
+         });
+       }
+   });
+        
+      
+        
+
+});
+</script>
+{% endblock body_js %}

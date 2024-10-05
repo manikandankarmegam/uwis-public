@@ -1,0 +1,323 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <div class="container-fluid px-lg-5">
+    <div class="mx-auto">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0 bg-white p-1 py-2 rounded-circle ms-2">
+          <a href="{% url 'project' %}">
+            <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />
+          </a>
+        </div>
+        <div class="flex-grow-1 ms-2">
+          <p class="text-white fw-bold m-0">UTOC Engineering Pte Ltd</p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="d-flex ms-auto d-none d-lg-block">
+      <div class="dropdown">
+        <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" >
+          <img src="{% static 'img/utoc_userprofile_icon.svg' %}" class="cursor-poiner rounded-circle" alt="Assist" style="width: 35px; height: 35px" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end pt-4 px-2 rounded-3" style="min-width: 250px" >
+          <div class="d-flex align-items-center px-2">
+            <div class="flex-grow-1 ms-3">
+              <h5 class="small fw-bold text-primary m-0">Hello QC Inspector</h5>
+              <p class="d-inline-block m-0 text-truncate text-muted small mt-1" style="max-width: 150px" > +65 81234445 </p>
+            </div>
+          </div>
+          <hr class="text-muted mb-1" />
+          <div class="my-2">
+            <li> <a class="dropdown-item small text-muted px-2" href="#" >My Profile</a > </li>
+            <li> <a class="dropdown-item small text-muted px-2" href="#" >My Account</a > </li>
+          </div>
+          <hr class="text-muted my-1" />
+          <div class="my-2">
+            <li> <a class="dropdown-item small text-muted px-2" href="#">Logout</a> </li>
+          </div>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row all_mrgin_top pt-3">
+    <div class="col-lg-12 px-0" style="background-color: #3256a1">
+      <div class="container">
+        <div class="position-relative d-lg-none">
+          <div class="py-3" style="z-index: 1">
+            <div class="">
+              <div>
+                <p class="m-0 text-white fw-bold fs-5">Projects</p>
+              </div>
+              <div class="mt-2">
+                <a href="" type="button" class="btn btn-info text-white" >ADMIN</a >
+              </div>
+            </div>
+          </div>
+          <div class="position-absolute bottom-0 end-0">
+            <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+          </div>
+        </div>
+        <div class="p-4 d-none d-lg-block overflow-hidden">
+          <div class="position-relative">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h1 class="text-white fw-bold m-0">Projects</h1>
+                <p class="small text-white m-0"> Here you can see your assigned projects </p>
+              </div>
+              <div class="my-auto" style="z-index: 1">
+                <a href="" type="button" class="btn btn-info text-white btn-lg" >ADMIN</a >
+              </div>
+            </div>
+            <div class="position-absolute top-100 start-100 translate-middle left_90" >
+              <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container py-4">
+  <div class="row">
+    {% for project in data %}
+    <div class="col-lg-4 mb-3">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">Project no : {{project.projectno}}</p>
+                <p class="m-0 fs-5 text-info fw-bold">{{project.projectname}}</p>
+                <!-- <p class="m-0 text-muted small">Piping | Structure</p> -->
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">start date</p>
+              <p class="text-dark small mt-2 m-0">{{project.startdate}}</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">End date</p>
+              <p class="text-dark small mt-2 m-0">{{project.enddate}}</p>
+            </div>
+          </div>
+          <div class="card-footer bg-white ">
+            <input type="text" hidden value="{{project.projectno}}" name="project_id">
+            <button class="btn btn-info w-100 text-white" type="submit">ENTER</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% endfor %}
+    {% comment %}
+    <!-- <div class="col-lg-4 mb-3">
+      <a href="{% url 'mainproject' project.projectno %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">1-PD-0603-040</p>
+                <p class="m-0 fs-5 text-info fw-bold">SYMPHONY PROJECT</p>
+                <p class="m-0 text-muted small">Piping</p>
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Drawings</p>
+              <p class="text-dark small mt-2 m-0">100</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Welders</p>
+              <p class="text-dark small mt-2 m-0">50</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Date</p>
+              <p class="text-dark small mt-2 m-0">21/08/2023</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <a href="{% url 'mainproject' %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">UE-CCD-19004 6</p>
+                <p class="m-0 fs-5 text-info fw-bold"> ETHYLENE CORRIDOR PIPELINE </p>
+                <p class="m-0 text-muted small">Piping | Structure</p>
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Drawings</p>
+              <p class="text-dark small mt-2 m-0">100</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Welders</p>
+              <p class="text-dark small mt-2 m-0">50</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Date</p>
+              <p class="text-dark small mt-2 m-0">21/08/2023</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <a href="{% url 'mainproject' %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">FC-1PD-0553W/047</p>
+                <p class="m-0 fs-5 text-info fw-bold"> PHASE 2C RESTART FOR CRISP </p>
+                <p class="m-0 text-muted small">Structure</p>
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Drawings</p>
+              <p class="text-dark small mt-2 m-0">100</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Welders</p>
+              <p class="text-dark small mt-2 m-0">50</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Date</p>
+              <p class="text-dark small mt-2 m-0">21/08/2023</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <a href="{% url 'mainproject' %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">UE-EVO-21003</p>
+                <p class="m-0 fs-5 text-info fw-bold">EVONIK-Simex Project 2</p>
+                <p class="m-0 text-muted small">Piping | Structure</p>
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Drawings</p>
+              <p class="text-dark small mt-2 m-0">100</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Welders</p>
+              <p class="text-dark small mt-2 m-0">50</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Date</p>
+              <p class="text-dark small mt-2 m-0">21/08/2023</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <a href="{% url 'mainproject' %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">UE-EM-38000</p>
+                <p class="m-0 fs-5 text-info fw-bold"> FURNACE FEF-01 RECOIL WORKS </p>
+                <p class="m-0 text-muted small">Piping | Structure</p>
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Drawings</p>
+              <p class="text-dark small mt-2 m-0">100</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Welders</p>
+              <p class="text-dark small mt-2 m-0">50</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Date</p>
+              <p class="text-dark small mt-2 m-0">21/08/2023</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <a href="{% url 'mainproject' %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0 rounded-3 card_zoom">
+          <div class="card-body">
+            <div class="d-flex justify-content-between pb-2">
+              <div>
+                <p class="m-0 small">1-PD-0553</p>
+                <p class="m-0 fs-5 text-info fw-bold">CRISP EXISTING SITE</p>
+                <p class="m-0 text-muted small">Piping | Structure</p>
+              </div>
+              <div class="my-auto">
+                <i data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="bi bi-chevron-right fs-5 text-info" ></i>
+              </div>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Drawings</p>
+              <p class="text-dark small mt-2 m-0">100</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Welders</p>
+              <p class="text-dark small mt-2 m-0">50</p>
+            </div>
+            <div class="border_seprator mt-2"></div>
+            <div class="d-flex justify-content-between">
+              <p class="text-muted small mt-2 m-0">Date</p>
+              <p class="text-dark small mt-2 m-0">21/08/2023</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div> -->
+    {% endcomment %}
+  </div>
+</div>
+
+{% endblock body_content %}

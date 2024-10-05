@@ -1,0 +1,154 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='painting' %}
+{% include 'include/sidebar.html' with active='painting' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Painting</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-none px-0">
+    {% include 'include/ncrqrheader.html' with active='ncr' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Painting</h1>
+          <p class=" text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none">
+      {% include 'include/ncrqrheader.html' with active='painting' %}
+    </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3 mt-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Painting list </p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="table-responsive datatabel_style pb-2">
+                    <table id="example" class="table m-0 nowrap" style="width: 100%" >
+                      <thead>
+                        <tr>
+                          <th class=" text-center text-muted text-nowrap">ISO No</th>
+                          <th class=" text-center text-muted text-nowrap">Spool No </th>
+                          <th class=" text-center text-muted text-nowrap">Rev No</th>
+                          <th class=" text-center text-muted text-nowrap">Insulation Release </th>
+                          <th class=" text-center text-muted text-nowrap">RAL Number </th>
+                          <th class=" text-center text-muted text-nowrap">DO Number </th>
+                          <th class=" text-center text-muted text-nowrap">DO Date </th>
+                          <th class=" text-center text-muted text-nowrap">Blasting Date </th>
+                          <th class=" text-center text-muted text-nowrap">Primer Inspection Date </th>
+                          <th class=" text-center text-muted text-nowrap">Mid Coat Inspection Date </th>
+                          <th class=" text-center text-muted text-nowrap">Final Coat Inspection Date </th>
+                          <th class=" text-center text-muted text-nowrap">I/C Report Number </th>
+                          <th class=" text-center text-muted text-nowrap">M-RUN</th>
+                          <th class=" text-center text-muted text-nowrap">Test Condition </th>
+                          <th class=" text-center text-muted text-nowrap">Report number </th>
+                          <th class=" text-center text-muted text-nowrap">Painting Date </th>
+                          <th class=" text-center text-muted text-nowrap">Update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for painting in data %}
+                            <tr>
+                                <td class=" text-center text-nowrap">{{painting.drgno}}</td>
+                                <td class=" text-center text-nowrap">{{painting.spoolno}}</td>
+                                <td class=" text-center text-nowrap">{{painting.rev}}</td>
+                                <form action="" method="post">
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="insulation_release" value="{{painting.spoolpaintingprocess.insulation_release|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="ral_number" value="{{painting.spoolpaintingprocess.ral_number|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="do_number" value="{{painting.spoolpaintingprocess.do_number|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="do_date" value="{{painting.spoolpaintingprocess.do_date|date:'Y-m-d'}}" type="date" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="blasting_date" value="{{painting.spoolpaintingprocess.blasting_date|date:'Y-m-d'}}" type="date" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="primer_inspection_date" value="{{painting.spoolpaintingprocess.primer_inspection_date|date:'Y-m-d'}}" type="date" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="midcoat_inspection_date" value="{{painting.spoolpaintingprocess.midcoat_inspection_date|date:'Y-m-d'}}" type="date" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="finalcoat_inspection_date" value="{{painting.spoolpaintingprocess.finalcoat_inspection_date|date:'Y-m-d'}}" type="date" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="ic_report_number" value="{{painting.spoolpaintingprocess.ic_report_number|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="m_run" value="{{painting.spoolpaintingprocess.m_run|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="test_condition" value="{{painting.spoolpaintingprocess.test_condition|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="report_number" value="{{painting.spoolpaintingprocess.report_number|default:''}}" type="text" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    <input class="form-control form-control-sm" name="painting_date" value="{{painting.spoolpaintingprocess.painting_date|date:'Y-m-d'}}" type="date" />
+                                </td>
+                                <td class=" text-center text-nowrap">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="drgno" value="{{painting.drgno}}">
+                                    <input type="hidden" name="spoolno" value="{{painting.spoolno}}">
+                                    <button type="submit" class="btn btn-primary text-white btn-sm">UPDATE</button>
+                                </td>
+                        </form>
+                        {% endfor %}
+                    </tbody>
+                    
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+ 
+{% endblock body_js %}

@@ -1,0 +1,123 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='tfa_flange' %}
+{% include 'include/sidebar.html' with active='tfa_flange' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'tfa_photos_create' %}" type="button" class="btn btn-info text-white" >+ Photos</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0">
+    {% include 'include/tfa_header.html' with active='photo' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+            <a href="{% url 'tfa_photos_create' %}" type="button" class="btn btn-info text-white btn-lg" >+ Photos</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block">
+      {% include 'include/tfa_header.html' with active='photo' %}
+    </div>
+    <div class="p-lg-4 my-3 my-lg-0">
+        <div class="row">
+            <div class="col-12 mx-auto mt-3">
+              <p class="text-primary m-0 fw-bold fs-3 ">Tighten Passes </p>
+              <div class="row mt-3">
+                <div class="col-lg-2 col-6 mb-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{{tfa_photos.flange_face_image.url}}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{{tfa_photos.gasket_image.url}}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{{tfa_photos.assembled_image.url}}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{{tfa_photos.check_image.url}}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{{tfa_verify.final_qc_image.url}}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

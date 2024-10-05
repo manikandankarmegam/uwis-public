@@ -1,0 +1,10 @@
+{% load static %}
+<div class="card border-0 rounded-bottom rounded-3  shadow-sm text-nowrap">
+    <div class="card-body d-flex overflow-auto">
+        <a href="{% url 'ndemonitor' %}" class="{% if active == 'nde_monitor' %} admin_header {% endif %} text-muted text-decoration-none">NDE Monitoring </a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'nderequest' %}" class="{% if active == 'nde_request' %} admin_header {% endif %} text-muted text-decoration-none">NDE Req / Rep</a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'ndestatus' %}" class="{% if active == 'nde_status' %} admin_header {% endif %} text-muted text-decoration-none">NDE Status</a>
+    </div>
+  </div>

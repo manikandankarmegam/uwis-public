@@ -1,0 +1,65 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='my_projects' %}
+{% include 'include/sidebar.html' with active='my_projects' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">{{project.projectname}}</p>
+          </div>
+          <div class="mt-2">
+            <select class="bg-info text-white border-0 form-select form-select-lg" aria-label="Default select example" >
+              <option selected>Piping</option>
+              <option value="1">Structure</option>
+              <option value="2">Mechanical</option>
+            </select>
+            <a href="" type="button" class="btn btn-info text-white mt-2" >ADMIN</a >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">{{project.projectname}}</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <!-- <select class="me-1 bg-info text-white border-0 form-select form-select-lg" aria-label="Default select example" >
+            <option selected>Piping</option>
+            <option value="1">Structure</option>
+            <option value="2">Mechanical</option>
+          </select> -->
+          <a href="{% url 'uprojectlist' %}" type="button" class="btn btn-warning btn-lg text-white" ><i class="bi bi-house-door-fill"></i></a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="my-3 my-lg-0">
+        <!-- <h1 class="text-primary mt-5 fw-bold text-center display-1 my-auto">UTOC FLANGE MANGEMENT SYSTEM</h1> -->
+   
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

@@ -1,0 +1,83 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Upload Materials</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='materials' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Upload Materials</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='materials' %} </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-12 mx-auto">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header">
+                <p class="fw-bold m-0">tfa upload</p>
+                <p class="small text-muted m-0"> Fill the weld type information </p>
+              </div>
+              <div class="card-body p-lg-5">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">tfa upload</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" name="upload_tfa" value="" type="file" placeholder="" aria-label="default input example" />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <a href="{% url 'materials' %}" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+                      <button type="submit" class="btn btn-info text-white" > DONE </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %}

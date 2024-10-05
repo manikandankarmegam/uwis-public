@@ -1,0 +1,225 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Create MIR</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Create MIR</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+
+    <div class="p-lg-4  my-3 my-lg-0">
+      <div class="row">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header">
+              <p class="fw-bold m-0">Create MIR</p>
+              <p class="small text-muted m-0"> Fill the profile KYC information </p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-lg-3">
+                  <p class="text-muted m-0">Location</p>
+                  <select class="form-select text-muted" name="dropdown1" aria-label="Default select example">
+                    <option disabled selected="" >Select</option>
+                    <option >SHOP</option>
+                    <option >FIELD</option>
+                  </select>
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                  <p class="text-muted m-0">Category</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">MOM</option>
+                    <option value="PMI">NON MOM</option>
+                  </select>
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                  <p class="text-muted m-0">MIR No</p>
+                  <input class="form-control text-muted" type="text" name="start_date" placeholder="" aria-label="default input example">
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                  <p class="text-muted m-0">To</p>
+                  <input class="form-control text-muted" type="date" name="end_date" placeholder="Default input" aria-label="default input example">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <p class="fw-bold m-0">MIR Update</p>
+                  <p class="small text-muted m-0"> Fill the profile KYC information </p>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-info text-white ">+ ADD</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Part ID </p>
+                  <input class="form-control text-muted" type="text" disabled name="start_date" placeholder="" value="{{forloop.counter}}" aria-label="default input example">
+
+                </div>
+                <div class="col-12 col-lg-2">
+                  <p class="text-muted m-0">Item</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">45°ELBOW</option>
+                    <option value="PMI">45°ELBOW #3000</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <p class="text-muted m-0">Material</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">CS</option>
+                    <option value="PMI">SS</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Grade</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">A106Gr.B</option>
+                    <option value="PMI">A105N</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Type</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">SW</option>
+                    <option value="PMI">BW</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Size 1</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">10</option>
+                    <option value="PMI">40</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">SCH</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">0.125</option>
+                    <option value="PMI">10</option>
+                  </select>
+                </div>
+
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">THK</p>
+                  <input class="form-control text-muted" type="text" name="start_date" placeholder="" disabled value="9.27" aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Size 2</p>
+                  <select class="form-select text-muted" id="Material_id" name="dropdown2" aria-label="Default select example" onchange="get_grade()">
+                    <option selected="" disabled="">Select</option>
+                    <option value="RT">NA</option>
+                    <option value="PMI">NA</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">THK</p>
+                  <input class="form-control text-muted" type="text" name="start_date" disabled value="9.27" placeholder="" aria-label="default input example">
+                </div>
+              
+              </div>
+              <div class="row mt-3">
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">QTY </p>
+                  <input class="form-control text-muted" type="text"  name="start_date" placeholder=""  aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Length </p>
+                  <input class="form-control text-muted" type="text"  name="start_date" placeholder=""  aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-2">
+                  <p class="text-muted m-0">Heat No </p>
+                  <input class="form-control text-muted" type="text"  name="start_date" placeholder=""  aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-3">
+                  <p class="text-muted m-0">Certificate No </p>
+                  <input class="form-control text-muted" type="text"  name="start_date" placeholder=""  aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-3">
+                  <p class="text-muted m-0">MFR/Orgin </p>
+                  <input class="form-control text-muted" type="text"  name="start_date" placeholder=""  aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-1">
+                  <p class="text-muted m-0">Cal QTY </p>
+                  <input class="form-control text-muted" type="text"  name="start_date" placeholder=""  aria-label="default input example">
+                </div>
+                <div class="col-12 col-lg-1 my-auto mt-4 ">
+                  <button class="btn btn-danger text-white w-100" ><i class="bi bi-trash3-fill"></i></button>
+                </div>
+              </div>
+            </div>
+            {% if not  forloop.last %}
+            <hr class="border m-0 my-2">
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-outline-secondary me-md-2" type="button">CANCEL</button>
+                <button class="btn btn-info text-white" type="button">UPDATE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %}

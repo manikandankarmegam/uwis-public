@@ -1,0 +1,182 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='nde' %}
+{% include 'include/sidebar.html' with active='nde' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">NDE Request</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'nderequest' %}" class="btn btn-info text-white">REQUEST</a>
+            <a href="{% url 'ndereport' %}" class="btn btn-secondary text-white  ">REPORT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/nde_header.html' with active='nde_request' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">NDE Request</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'nderequest' %}" class="btn btn-info text-white btn-lg">REQUEST</a>
+          <a href="{% url 'ndereport' %}" class="btn btn-secondary text-white   btn-lg">REPORT</a>
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/nde_header.html' with active='nde_request' %} </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <!-- <div class="text-center">
+          <a href="{% url 'nderequest' %}" class="btn btn-info text-white">REQUEST</a>
+          <a href="{% url 'ndereport' %}" class="btn btn-outline-secondary  ">REPORT</a>
+        </div> -->
+
+        <div class="col-12 col-lg-6  mx-auto">
+          <div class="card shadow-sm border-0 rounded-3">
+       
+            <div class="card-body">
+              <form method="get" action="">
+              <div class="row">
+                <div class="mt-3 mt-lg-0 col-12 col-lg-5">
+                  <p class="text-muted m-0">NDE type</p>
+                  <select class="form-select " id="Material_id" name="ndt" aria-label="Default select example" onchange="get_grade()">
+                    <option selected disabled>Select</option>
+                    <option value="RT">RT</option>
+                    <option value="MTPT">MT/PT</option>
+                    <option value="PMI">PMI</option>
+                  </select>
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-5">
+                  <p class="text-muted m-0">Req No</p>
+                  <select class="form-select " id="grade_id" name="rqs" aria-label="Default select example">
+                    <option selected disabled>Select</option>
+                  </select>
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-2 pt-lg-4 pt-0">
+                  <button class="btn btn-info text-white w-100" type="submit">FIND</button>
+                </div>
+              </div>   
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-sm border-0 rounded-3 mt-3 ">
+        <div class="card-header bg-white p-3">
+          <p class="m-0 fw-bold fs-5 ">Requested list </p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="table-responsive datatabel_style pb-2">
+                <table  class="table  m-0 nowrap" style="width: 100%">
+                  <thead>
+                    <tr>
+                        <th class="text-muted text-center">RQS.NO</th>
+                        <th class="text-muted text-center">NDE Type</th>
+                        <th class="text-muted text-center">Request By</th>
+                        <th class="text-muted text-center">Date</th>
+                        <th class="text-muted text-center">Actions</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for i in list %}
+                    <tr>
+                        <td class=" align-middle text-center">{{i.requestno}}</td>
+                        <td class=" align-middle text-center">{{i.ndttypes}}</td>
+                        <td class=" align-middle text-center">Santhosh</td>
+                        <td class=" align-middle text-center">{{i.date}}</td>
+                        <td class="text-center align-middle"> 
+                          <a href="" class="text-decoration-none text-danger me-3 " ><i class="bi bi-file-pdf-fill"></i> PDF</a> 
+                          <a href="" class="text-decoration-none  text-success "data-bs-toggle="modal" data-bs-target="#exampleModal_{{wps.id}}" > <i class="bi bi-file-earmark-spreadsheet-fill"></i> EXCEL</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  //   $(document).ready(function () {
+  //   var tabel = $("#example").DataTable({
+  //     buttons: [""],
+      
+  //     aLengthMenu: [
+  //       [25, 50, 100, 200, -1],
+  //       [25, 50, 100, 200, "All"]
+  //   ],
+  //   iDisplayLength: -1
+  //   });
+  //   tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  // });
+
+//   $(document).ready(function() {
+//     $('#example').DataTable({
+//       "dom": '<"top"i>rt<"bottom"lp><"clear">',
+//         "paging": false,  
+//         "searching": false,  
+//         "info": false  
+//     });
+    
+// });
+
+  function get_grade() {
+    var materialId = $('#Material_id').val();
+
+    $.ajax({
+        type: 'GET',
+        url: "/Qc/fetch-ndereq-details/?material=" + materialId,
+        success: function (data) {
+
+          var gradesSelect = $('#grade_id');
+          gradesSelect.empty()
+          gardes = data.products
+
+        for ( let i in gardes ){
+          grade_id = gardes[i].id;
+          grade_value = gardes[i].GradeNmae;
+          gradesSelect.append($('<Option>',{
+            value: grade_id,
+            text: grade_value
+          }));
+        }
+    
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching grades:", error);
+        }
+    });
+}
+
+</script>
+{% endblock body_js %}

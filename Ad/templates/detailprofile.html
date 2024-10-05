@@ -1,0 +1,133 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Detail Profile</p>
+          </div>
+          <div class="mt-2">
+            <a href="#" type="button" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">DELETE</a>
+            <a href="{% url 'newprofile' %}" type="button" class="btn btn-info text-white">EDIT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='profile' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Detail Profile</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="#" type="button" class="btn btn-danger text-white btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">DELETE</a>
+          {% if data.user.role == 'Qc' %}
+          <a href="{% url 'unew_profileqcedit' data.id %}" type="button" class="btn btn-info text-white btn-lg">EDIT</a>
+          {% elif data.user.role == 'Admin' %}
+          <a href="{% url 'unew_profileadedit' data.id %}" type="button" class="btn btn-info text-white btn-lg">EDIT</a>
+          {% elif data.user.role == 'Client' %}
+          <a href="{% url 'unew_profileclientedit' data.id %}" type="button" class="btn btn-info text-white btn-lg">EDIT</a>
+          {% endif %}
+          
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='profile' %} </div>
+    <div class="p-lg-4">
+        
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card rounded-3 border-0 shadow-sm">
+            <div class="card-header bg-white">
+              <p class="fw-bold m-0">Profile Overview</p>
+              <p class="text-muted m-0 small">Your profile Details</p>
+            </div>
+            <div class="card-body p-lg-4">
+              <div class="row">
+                <div class="">
+                  <img src="{% static 'img/utoc_dummyprofile.svg' %}" width="100" height="100" alt="" />
+                  <div class="d-flex justify-content-between col-lg-6">
+                    <div>
+                      <p class="m-0 mt-3 text-muted">User Id</p>
+                      <p class="m-0 mt-3 text-muted">User Name</p>
+                      <p class="m-0 mt-3 text-muted">User DOB</p>
+                      <p class="m-0 mt-3 text-muted">User gender</p>
+                      <p class="m-0 mt-3 text-muted">User Role</p>
+                      <p class="m-0 mt-3 text-muted">User Project</p>
+                    </div>
+                    <div>
+                      <p class="m-0 mt-3 text-start"> {{data.userid}}</p>
+                      <p class="m-0 mt-3 text-start">{{data.name}}</p>
+                      <p class="m-0 mt-3 text-start">{{data.DOB}}</p>
+                      <p class="m-0 mt-3 text-start">{{data.gender}}</p>
+                      <p class="m-0 mt-3 text-start">{{data.user.role}}</p>
+                      <p class="m-0 mt-3 text-start">
+                        {% for project in tagged_projects %}
+                       {{forloop.counter}}.{{ project.projectname }} {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow-sm border-0 rounded-3 mt-3">
+            <div class="card-body">
+              <p class="fw-bold m-0">Email</p>
+              <p class="text-muted small m-0">{{data.email}}</p>
+            </div>
+          </div>
+          <div class="card shadow-sm border-0 rounded-3 mt-3">
+            <div class="card-body">
+              <p class="fw-bold m-0">Mobile Number</p>
+              <p class="text-muted small m-0">{{data.number}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <div class="modal-body pt-0">
+          <div class="text-center">
+            <img src="{% static 'img/icons8-warning.gif' %}" width="100" alt="" />
+          </div>
+          <div class="">
+            <p class="m-0 text-center fs-5">Are you sure?</p>
+            <p class="m-0 text-center text-muted small"> Do you really want to delete these <span class="text-danger">{{ data.name }}</span> ? This process cannot be undone. </p>
+          </div>
+          <div class="d-flex justify-content-center pt-3">
+            <button type="button" class="btn btn-secondary text-white me-3 w-100" data-bs-dismiss="modal" > CANCEL </button>
+            <a href="{% url 'unew_profileclientdel' data.id %}" class="btn btn-danger text-white w-100"> DELETE </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body_content %}

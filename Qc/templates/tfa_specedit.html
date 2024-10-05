@@ -1,0 +1,282 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='tfa_flange' %}
+{% include 'include/sidebar.html' with active='tfa_flange' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'tfa_specedit' tfa.id %}" type="button" class="btn btn-info text-white" >Edit</a >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0">
+    {% include 'include/tfa_header.html' with active='spec' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'tfa_specedit' tfa.id %}" type="button" class="btn btn-info text-white btn-lg" >Edit</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block">
+      {% include 'include/tfa_header.html' with active='spec' %}
+    </div>
+    <div class="p-lg-4">
+      <form action="" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <div class="row my-3 my-lg-0">
+          <div class="col-12 mx-auto mb-3">
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Project Details</p>
+                <p class="small text-muted m-0"> Collect Project | Form | Address details </p>
+              </div>
+         
+              <div class="card-body p-lg-5">
+                <div class="row">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Temporary Tag </p>
+                    <input class="form-control" value="{{tfa.permanent_joint_id|default:''}}" type="text" name="permanent_joint_id"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Flange Size</p>
+                    <input class="form-control" value="{{tfa.flange_size|default:''}}" type="text" name="flange_size"  />
+                  </div>
+                  <!-- <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Dissimilar Flange</p>
+                    <input class="form-control" value="Select" type="text" name="Owner"  />
+                  </div> -->
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Tightening Method</p>
+                    <input class="form-control" value="{{tfa.tightening_method|default:''}}" type="text" name="tightening_method"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Flange Description </p>
+                    <input class="form-control" value="{{tfa.flange_description|default:''}}" type="text" name="flange_description"  />
+                  </div>
+
+                </div>
+
+                <!-- <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Standard Flange </p>
+                    <input class="form-control" value="Select" type="text" name="projectnum"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Flange A</p>
+                    <input class="form-control" value="" type="text" name="projectname"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Flange B</p>
+                    <input class="form-control" value="" type="text" name="Owner"  />
+                  </div>
+                
+                </div> -->
+
+                <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Flange Type </p>
+                    <input class="form-control" value="{{tfa.standard|default:''}}" type="text" name="standard"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Flange Material</p>
+                    <input class="form-control" value="{{tfa.flange_material|default:''}}" type="text" name="flange_material"  />
+                  </div>
+                </div>
+                
+                
+                
+     
+               
+               
+           
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Piping Details</p>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Piping Class </p>
+                    <input class="form-control" value="{{tfa.pipe_specification|default:''}}" type="text" name="pipe_specification"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Rating</p>
+                    <input class="form-control" value="{{tfa.flange_rating|default:''}}" type="text" name="flange_rating"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Fluid</p>
+                    <input class="form-control" value="{{tfa.fluid|default:''}}" type="text" name="fluid"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Critical Service </p>
+                    <input class="form-control" value="{{tfa.critical_service|default:''}}" type="text" name="critical_service"  />
+                  </div>
+                </div>
+
+                <!-- <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Construction Class </p>
+                    <input class="form-control" value="S0736" type="text" name="projectnum"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Cryo Service </p>
+                    <input class="form-control" value="No" type="text" name="projectname"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Cleaning Solution </p>
+                    <input class="form-control" value="" type="text" name="projectname"  />
+                  </div>
+                </div> -->
+               
+
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Bolts</p>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Number of Bolts </p>
+                    <input class="form-control" value="{{tfa.no_of_bolts|default:''}}" type="text" name="no_of_bolts"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Bolt Stud Size </p>
+                    <input class="form-control" value="{{tfa.bolt_diameter|default:''}}" type="text" name="bolt_diameter"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Bolt Material </p>
+                    <input class="form-control" value="{{tfa.bolt_material|default:''}}" type="text" name="bolt_material"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Nut Material </p>
+                    <input class="form-control" value="{{tfa.nut_material|default:''}}" type="text" name="nut_material"  />
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Target Value </p>
+                    <input class="form-control" value="{{tfa.required_torque|default:''}}" type="text" name="required_torque"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Bolt Length </p>
+                    <input class="form-control" value="{{tfa.bolt_length|default:''}}" type="text" name="bolt_length"  />
+                  </div>
+
+               
+                  <!-- <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Bolt Description </p>
+                    <input class="form-control" value="" type="text" name="projectname"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Stud And Nut Coating </p>
+                    <input class="form-control" value="" type="text" name="projectname"  />
+                  </div> -->
+                </div>
+
+                
+                <!-- <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Target Residual Bolt Preload </p>
+                    <input class="form-control" value="2124.0" type="text" name="projectnum"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Effective Length </p>
+                    <input class="form-control" value="No" type="text" name="projectname"  />
+                  </div>
+            
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Grip Length</p>
+                    <input class="form-control" value="" type="text" name="projectname"  />
+                  </div>
+                </div> -->
+                <!-- <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Load Factor </p>
+                    <input class="form-control" value="" type="text" name="projectnum"  />
+                  </div>
+                  
+             
+                </div> -->
+
+               
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Gasket</p>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Gasket Type </p>
+                    <input class="form-control" value="{{tfa.gasket_material|default:''}}" type="text" name="gasket_material"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Lubricant </p>
+                    <input class="form-control" value="{{tfa.lubricant|default:''}}" type="text" name="lubricant"  />
+                  </div>
+                </div>
+
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Locations</p>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Location </p>
+                    <input class="form-control" value="{{tfa.location|default:''}}" type="text" name="location"  />
+                  </div>
+                  <div class="col-lg-3 col-12 mt-3 mt-lg-0">
+                    <p class="m-0 text-muted">Area </p>
+                    <input class="form-control" value="{{tfa.area|default:''}}" type="text" name="area"  />
+                  </div>
+                </div>
+
+              
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                      <a href="{% url 'createproject' %}" class="btn btn-outline-secondary" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="button"> CANCEL </a>
+                      <button class="btn btn-info text-white" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="submit"> CREATE </button>
+                    </div>
+                  </div>
+                </div>
+     
+             
+              
+              
+              </div>
+            </div>
+    
+              
+               
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

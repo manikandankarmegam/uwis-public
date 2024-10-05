@@ -1,0 +1,801 @@
+{% extends 'include/main.html' %}
+{% load static %}
+{% block body_content %}
+<style>
+    .pgbkbefore {
+        page-break-before: always;
+    }
+
+    .pgbkafter {
+        page-break-after: always;
+    }
+
+    .rec {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+    }
+
+    .rptTitle {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .rptTick {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .rptSubTitle {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    #rptTable {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border: 1px solid #000000;
+    }
+
+    #topleftcorner {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-left-width: 1px;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-top-color: #000000;
+        border-left-color: #000000;
+    }
+
+    #topmid {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-left-width: 1px;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-top-color: #000000;
+        border-left-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    #toprightcorner {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    #midleftcorner {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+    }
+
+    #midmid {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+    }
+
+    #midrightcorner {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    #botleftcorner {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+    }
+
+    #botmid {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+    }
+
+    #botrightcorner {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    .rpt12px {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+
+    .rpt13px {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .rpt10px {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .rpt10pxNormal {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+    }
+
+    .rpt105pxNormal {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10.5px;
+        text-transform: uppercase;
+    }
+
+    .rpt11pxNormal {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+
+    .rpt12pxNormal {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .rpt12pxColor {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-color: #111111;
+    }
+
+    .rpt12pxNormallower {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
+
+    #hdrleft {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-left-width: 1px;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-top-color: #000000;
+        border-left-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+    }
+
+    #hdrmid {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-left-width: 1px;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-top-color: #000000;
+        border-left-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    #hdrright {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    #dataleft {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #000000;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+    }
+
+    #datamid {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+        border-bottom-color: #000000;
+        border-left-color: #000000;
+    }
+
+    #dataright {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+    }
+
+    #rightborder {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #000000;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+    }
+
+    #topbottom {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #000000;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+    }
+
+    #top {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #000000;
+    }
+
+    .rpt8px {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .rpt8pxNormal {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8px;
+    }
+
+    .fontcolor {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        font-color: #000000;
+        text-transform: uppercase;
+
+    }
+
+    .bt {
+        border-top: 1px solid #ddd
+    }
+
+    .ttn {
+        text-transform: none !important
+    }
+</style>
+
+<div>
+    <table width="1300" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="29">
+                <table width="100%" border="0" cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td width="15%" height="60" valign="middle" id="midleftcorner">
+                            <div align="center" class="rptTitle">
+                                <img src="{{data.0.ProId.owner_logo.url}}" alt="" name="mcfid" id="mcfid" />
+                            </div>
+                        </td>
+                        <td width="100%" height="60" valign="middle" id="topmid">
+                            <div align="center" class="rptTitle"><u style="font-size:1.4em">WELD/JOINT INSPECTION
+                                    SUMMARY SHEET (SHOP/FIELD)</u></div>
+                            <div style="float:left">
+                                <table style="margin:0px auto;width:600px; font-size:15px; padding-top:10px">
+                                    <tr>
+                                        <td style="width:100px">
+                                            PROJECT
+                                        </td>
+                                        <td> : {{data.0.ProId.projectname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> PROJECT NO</td>
+                                        <td> : {{data.0.ProId.projectno}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CLIENT</td>
+                                        <td> : {{data.0.ProId.client}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td width="15%" height="60" valign="middle" id="toprightcorner">
+                            <div align="center" class="rpt12px">
+                                <img name="clfid" src="{{data.0.ProId.client_logo.url}}" alt="" id="clfid" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="25">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td colspan="2" height="20" width="20%" valign="middle" id="midleftcorner">
+                            <div align="center" class="rpt12px">PWHT REQ'MT</div>
+                        </td>
+                        <td height="20" width="10%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">PIPING CLASS</div>
+                        </td>
+                        <td height="20" width="13%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">ACCEPTANCE STD</div>
+                        </td>
+                        <td height="20" width="4%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">MATL.</div>
+                        </td>
+                        <td height="20" width="4%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">AREA</div>
+                        </td>
+                        <td height="20" width="16%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">LINE NO.</div>
+                        </td>
+                        <td height="20" width="16%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">ISO/DRG. NO.</div>
+                        </td>
+                        <td height="20" width="5%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">SHT. NO.</div>
+                        </td>
+                        <td height="20" width="4%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12px">REV.</div>
+                        </td>
+                        <td height="20" width="9%" valign="middle" id="midrightcorner">
+                            <div align="center" class="rpt12px">PAGE NO.</div>
+                        </td>
+                    </tr>
+                    {% for fitup in data|slice:1 %}
+
+                    <tr>
+                        <td height="35" width="20%" valign="middle" id="midleftcorner" colspan="2">
+                            <div align="center" class="rpt12pxNormal">
+                                NA </div>
+                        </td>
+                        <td height="35" width="10%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.pwht}}</div>
+                        </td>
+                        <td height="35" width="13%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.piping}}</div>
+                        </td>
+                        <td height="35" width="4%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.acceptance}}</div>
+                        </td>
+                        <td height="35" width="4%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.material}}</div>
+                        </td>
+                        <td height="35" width="16%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.lineno}}</div>
+                        </td>
+                        <td height="35" width="16%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal"><a
+                                    href="selDrw.php?prjid=80&amp;drwid=57812">{{fitup.drgno}}</a></div>
+                        </td>
+                        <td height="35" width="5%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.sheetno}}</div>
+                        </td>
+                        <td height="35" width="4%" valign="middle" id="midmid">
+                            <div align="center" class="rpt12pxNormal">{{fitup.rev}}</div>
+                        </td>
+                        <td height="35" width="9%" valign="middle" id="midrightcorner">
+                            <div align="center" class="rpt12pxNormal">1 OF 1</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="25">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td height="1.5" width="100" id="midrightcorner"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </tr>
+        <tr>
+            <td height="21" colspan="8" bgcolor="#CCCCCC" id="midrightcorner">
+                <div align="center" class="rpt12px">WELDING</div>
+            </td>
+            <td height="21" colspan="13" bgcolor="#CCCCCC" id="midrightcorner">
+                <div align="center" class="rpt12px">NDE REPORTS </div>
+            </td>
+            <td height="21" colspan="4" bgcolor="#CCCCCC" id="midrightcorner">
+                <div align="center" class="rpt12px">MATERIAL TRACEABILITY </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="midleftcorner" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">WELD No.</div>
+            </td>
+            <td id="midmid" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">SPL NO.</div>
+            </td>
+            <td id="midmid" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">WELDER No.</div>
+            </td>
+            <td id="midmid" rowspan="2" width="50" height="25">
+                <div align="center" class="rpt12px">WPS No.</div>
+            </td>
+            <td id="midmid" rowspan="2" width="50" height="25">
+                <div align="center" class="rpt12px">DATE WELDED</div>
+            </td>
+            <td id="midmid" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">SIZE (ins)</div>
+            </td>
+            <td id="midmid" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">THK (mm)</div>
+            </td>
+            <td id="midrightcorner" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">WELD TYPE</div>
+            </td>
+            <td id="midmid" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">NDE%</div>
+            </td>
+            <td id="midmid" rowspan="2" width="30" height="25">
+                <div align="center" class="rpt12px">MTPT%</div>
+            </td>
+            <td id="midmid" rowspan="2" width="40" height="25">
+                <div align="center" class="rpt12px">prht rpt</div>
+            </td>
+            <td id="midmid" rowspan="2" width="50" height="25">
+                <div align="center" class="rpt12px">Fit/Vis rpt
+            </td>
+            <td id="midmid" colspan="2" height="25" width="40">
+                <div align="center" class="rpt12px">Initial RT</div>
+            </td>
+            <td id="midmid" rowspan="2" width="40" height="25">
+                <div align="center" class="rpt12px">pt/mt rpt</div>
+            </td>
+            <td id="midmid" colspan="2" height="25" width="40">
+                <div align="center" class="rpt12px">Initial PAUT</div>
+            </td>
+            <td id="midmid" rowspan="2" width="40" height="25">
+                <div align="center" class="rpt12px">pwht rpt</div>
+            </td>
+            <td id="midmid" rowspan="2" width="40" height="25">
+                <div align="center" class="rpt12px">ht rpt</div>
+            </td>
+            <td id="midmid" rowspan="2" width="40" height="25">
+                <div align="center" class="rpt12px">pmi rpt</div>
+            </td>
+            <td id="midrightcorner" rowspan="2" width="40" height="25">
+                <div align="center" class="rpt12px">ferrite check</div>
+            </td>
+            <td id="midmid" width="85" rowspan="2" height="25">
+                <div align="center" class="rpt12px">Item Desc</div>
+            </td>
+            <td id="midmid" width="85" rowspan="2" height="25">
+                <div align="center" class="rpt12px">Matl Spec</div>
+            </td>
+            <td id="midmid" rowspan="2" width="60" height="25">
+                <div align="center" class="rpt12px">heat no.</div>
+            </td>
+            <td id="midrightcorner" rowspan="2" width="70" height="25">
+                <div align="center" class="rpt12px">cert no.</div>
+            </td>
+        </tr>
+        <tr>
+            <td height="20" id="midmid" width="50" height="25">
+                <div align="center" class="rpt10px">ACC</div>
+            </td>
+            <td height="20" id="midmid" width="50" height="25">
+                <div align="center" class="rpt10px">REJ</div>
+            </td>
+            <td height="20" id="midmid" width="50" height="25">
+                <div align="center" class="rpt10px">ACC</div>
+            </td>
+            <td height="20" id="midmid" width="50" height="25">
+                <div align="center" class="rpt10px">REJ</div>
+            </td>
+        </tr>
+        <!-- Start looping of welding records -->
+        {% for fitup in data %}
+
+        <tr>
+            <td height="25" width="30" id="midleftcorner">
+                <div align="center" class="rpt11pxNormal"> {{fitup.weldno}}&nbsp; </div>
+            </td>
+            <td height="25" width="30" id="midmid">
+                <div align="center" class="rpt11pxNormal">{{fitup.spoolno}}</div>
+            </td>
+            <td height="25" width="30" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.welder1.welderid}} /{{fitup.welder2.welderid}} </div>
+            </td>
+            <td height="25" width="50" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.wpsnum.wpsno}} </div>
+            </td>
+            <td height="25" width="50" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.start}} </div>
+            </td>
+            <td height="25" width="30" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.size}} </div>
+            </td>
+            <td width="30" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.thk}} </div>
+            </td>
+            <td height="25" width="30" id="midrightcorner">
+                <div align="center" class="rpt11pxNormal">{{fitup.type}}</div>
+            </td>
+            <td width="30" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal">{{fitup.rt}} </div>
+            </td>
+            <td width="30" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal">{{fitup.mtpt}} </div>
+            </td>
+            <td width="40" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal">- </div>
+            </td>
+            <td width="50 height=" 25" id="midmid">
+                <div align="center" class="rpt11pxNormal"> - </div>
+            </td>
+            <td height="25" width="50" id="midmid">
+                <div align="center" class="rpt11pxNormal">{{fitup.rtrepair}}</div>
+            </td>
+            <td height="25" width="50" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.rtrepair}} </div>
+            </td>
+            <td height="25" width="40" id="midmid">
+                <div align="center" class="rpt11pxNormal"> {{fitup.weldno}} </div>
+            </td>
+            <td height="25" width="50" id="midmid">
+                <div align="center" class="rpt11pxNormal"> - </div>
+            </td>
+            <td height="25" width="50" id="midmid">
+                <div align="center" class="rpt11pxNormal"> - </div>
+            </td>
+            <td width="40" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal"> - </div>
+            </td>
+            <td width="40" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal"> - </div>
+            </td>
+            <td width="40" height="25" id="midmid">
+                <div align="center" class="rpt11pxNormal"> - </div>
+            </td>
+            <td width="40" height="25" id="midrightcorner" <div align="center" class="rpt11pxNormal"> -
+</div>
+</td>
+<td width="60" height="25" id="midmid">
+    <div align="center" class="rpt11pxNormal">
+        <div> {{fitup.partnoA}}</div>
+        <div class="bt"> {{fitup.partnoB}} </div>
+    </div>
+</td>
+<td width="60" height="25" id="midmid">
+    <div align="center" class="rpt11pxNormal">
+        <div> {{fitup.mat_A}} </div>
+        <div class="bt"> {{fitup.mat_B}} </div>
+    </div>
+</td>
+<td height="25" width="70" id="midmid">
+    <div align="center" class="rpt11pxNormal">
+        <div> {{fitup.heat_A}} </div>
+        <div class="bt"> {{fitup.heat_B}} </div>
+    </div>
+</td>
+<td width="100" height="25" id="midrightcorner">
+    <div align="center" class="rpt11pxNormal">
+        <div> {{fitup.cert_A}} </div>
+        <div class="bt"> {{fitup.cert_B}} </div>
+    </div>
+</td>
+</tr>
+{% endfor %}
+<tr>
+    <td colspan="29">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="30" width="100" id="midrightcorner"></td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td height="50" colspan="29" id="midrightcorner" STYLE="vertical-align:top">
+        <div class="rpt12px">REMARKS:</div>
+    </td>
+</tr>
+<tr>
+    <td colspan="7" height="30" bgcolor="#CCCCCC" id="midleftcorner">
+        <div align="center" class="rpt12px">COMPLETED BY</div>
+    </td>
+    <td colspan="7.2" height="30" bgcolor="#CCCCCC" id="midmid">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td colspan="7.2" height="30" bgcolor="#CCCCCC" id="midmid">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td colspan="7.2" height="30" bgcolor="#CCCCCC" id="midrightcorner">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+</tr>
+<tr>
+    <td height="30" colspan="7" id="midleftcorner">
+        <div align="center" class="rpt12px">COMPANY</div>
+    </td>
+    <td height="30" colspan="7.2" id="midmid">
+        <div align="center" class="rpt12px">UTOC QA/QC</div>
+    </td>
+    <td height="30" colspan="7.2" id="midmid">
+        <div align="center" class="rpt12px ttn">NESTE </div>
+    </td>
+    <td height="30" colspan="7.2" id="midrightcorner">
+        <div align="center" class="rpt12px">MOM/3rd party</div>
+    </td>
+</tr>
+<tr>
+    <td height="30" colspan="7" id="midleftcorner">
+        <div align="center" class="rpt12px">SIGNATURE</div>
+    </td>
+    <td height="30" colspan="7.2" id="midmid">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td height="30" colspan="7.2" id="midmid">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td height="30" colspan="7.2" id="midrightcorner">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+</tr>
+<tr>
+    <td height="30" colspan="7" id="midleftcorner">
+        <div align="center" class="rpt12px">NAME</div>
+    </td>
+    <td height="30" colspan="7.2" id="midmid">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td height="30" colspan="7.2" id="midmid">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td height="30" colspan="7.2" id="midrightcorner">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+</tr>
+<tr>
+    <td height="30" colspan="7" id="botleftcorner">
+        <div align="center" class="rpt12px">DATE</div>
+    </td>
+    <td height="30" colspan="7.2" id="botleftcorner">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td height="30" colspan="7.2" id="botleftcorner">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+    <td height="30" colspan="7.2" id="botrightcorner">
+        <div align="center" class="rpt12px">&nbsp;</div>
+    </td>
+</tr>
+</table>
+<table width="1300" align="center">
+    <tr>
+        <td style='font-size:11px'>UE-F-015</td>
+    </tr>
+</table>
+</div>
+
+
+{% endblock body_content %}
+{% block body_js %}
+<script>
+    // $(document).ready(function () {
+    //   var tabel = $("#example").DataTable({
+    //     buttons: [""],
+    //   });
+
+    //   tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+    // });
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "dom": '<"top"i>rt<"bottom"lp><"clear">',
+            "paging": false,
+            "searching": false,
+            "info": false
+        });
+
+    });
+</script>
+{% endblock body_js %}

@@ -1,0 +1,112 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Weld PROCESS</p>
+          </div>
+          <div class="mt-2"> <a href="{% url 'newweldprocess' %}" type="button" class="btn btn-info text-white">+ WELD PROCESS</a> </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='weldprocess' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Weld PROCESS</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'newweldprocess' %}" type="button" class="btn btn-info text-white btn-lg">+ WELD PROCESS</a>
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='weldprocess' %} </div>
+    <div class="p-lg-4">
+  
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12 col-12">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Welding process list</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table id="example" class="table m-0  nowrap" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center text-muted">S.NO</th>
+                      <th class="text-center text-muted">Name</th>
+                      <th class="text-center text-muted">Description</th>
+                      <th class="text-center text-muted">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for wprocess in data %}
+                    <tr>
+                      <td class="text-center align-middle">{{forloop.counter}}</td>
+                      <td class="text-center align-middle">{{wprocess.weldProcess}}</td>
+                      <td class="text-center align-middle">{{wprocess.weldProcessDesc}}</td>
+                      <td class="text-center align-middle"> 
+                        <a href="{% url 'unew_weldeditprocess' wprocess.id %}" class="text-decoration-none text-info me-3 " >EDIT</a> 
+                        <a href="" class="text-decoration-none  text-danger "data-bs-toggle="modal" data-bs-target="#exampleModal_{{wprocess.id}}" >DELETE</a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+  {% for wprocess in data %}
+<div class="modal fade" id="exampleModal_{{wprocess.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+      </div>
+      <div class="modal-body pt-0">
+        <div class="text-center">
+          <img src="{% static 'img/icons8-warning.gif' %}" width="100" alt="" />
+        </div>
+        <div class="">
+          <p class="m-0 text-center fs-5">Are you sure?</p>
+          <p class="m-0 text-center text-muted small"> Do you really want to delete these <span class="text-danger">{{ wprocess.weldProcess }}</span> ? This process cannot be undone. </p>
+        </div>
+        <div class="d-flex justify-content-center pt-3">
+          <button type="button" class="btn btn-secondary text-white me-3 w-100" data-bs-dismiss="modal" > CANCEL </button>
+          <a href="{% url 'unew_welddelprocess' wprocess.id %}" class="btn btn-danger text-white w-100"> DELETE </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

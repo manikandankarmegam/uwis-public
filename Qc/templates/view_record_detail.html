@@ -1,0 +1,566 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+<style>
+  .no-wrap {
+        width: 100%; 
+    }
+    .no-wrap th, .no-wrap td {
+        white-space: nowrap;
+        text-align: center; /* Centers text in each cell */
+    }
+
+  .table td, .table th {
+        vertical-align: middle; /* Ensures content is vertically centered */
+    }
+</style>
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC </p>
+          </div>
+          <div class="mt-2">
+            <!-- <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white">+ RECORD</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> FC-1PD-0553W </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <!-- <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white btn-lg">+ RECORD</a> -->
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-8 ">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-header">
+                <p class="fw-bold m-0">CRISP EXISTING SITE</p>
+                    <p class="small text-muted m-0"> FC-1PD-0553W </p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">ISO Number</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-dark">2543245345366</p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Sheet Number</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-dark">3</p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Revision Number</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-dark">2A</p>
+                  </div>
+                </div>
+                </div>
+                </div>
+                </div>
+        <div class="col-lg-6 mt-3">
+
+            <div class="card shadow-sm border-0 rounded-3 ">
+              <div class="card-header p-3">
+                <p class="fw-bold m-0">Detail Project</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Location</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">FW1</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Weld Number</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">FW1</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Wld NumText</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">-</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">SPOOL NUM</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">-</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">ISO No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">F-PAC-077</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">ISO PACK DATE</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">20-08-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Test Pack No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">PS-015-P-065</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Test Pack Date</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">20-08-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Pipe Size</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">12</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Pipe THK</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">10.31</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Material</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">Carbon Steel </p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Grade</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">CS</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> WPS Number </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">p1-009B</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Welder 1 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">WEL2307919</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Welder 2 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">WEL2307919</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Weld Date </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">27-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> Weld Type </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">BW</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Fitup Date</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Tiein number</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">345</p>
+                  </div>
+                </div>
+               
+              
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mt-3">
+
+            <div class="card shadow-sm border-0 rounded-3 ">
+              <div class="card-header p-3">
+                <p class="fw-bold m-0">Edit NDE Details</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">Visual Inspection Date</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">27-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">RT</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">333</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">RT DATE</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">IS RT REPAIR </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">NO</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">Films Accept </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">2</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">Films Reject </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">4</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">Weld Length</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">Repair Length </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">PT RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">  1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">MT RPT</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">PWHT RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">PRHT RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> UT RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> BHN RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> PMI RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> FERRITE RPT  </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> PAUT RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> PAUT STS </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">Intial</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> UTG RPT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">1017.05 | PQS |  08-07-2023</p>
+                  </div>
+                </div>
+                
+              
+              </div>
+            </div>
+          </div>
+          <p class="text-primary fw-bold fs-5 mt-3 m-0">Material Traceability Information & Piping Fitup Report Details</p>
+          <div class="col-lg-6 mt-3">
+
+            <div class="card shadow-sm border-0 rounded-3 ">
+              <div class="card-header p-3">
+                <p class="fw-bold m-0">Material A</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Material Description 1	 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">PIPE</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Item Number 1</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">CS-PIPE-9208046-C000003243-6/10-PEC FABRICATED 2019 PHASE 2A-4</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Heat Number 1	  </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">9208046</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Mill Certificate No. 1	 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">C000003243-6/10</p>
+                  </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="col-lg-6 mt-3">
+
+                    <div class="card shadow-sm border-0 rounded-3 ">
+                        <div class="card-header p-3">
+                          <p class="fw-bold m-0">Material B</p>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <p class="small text-muted m-0">Material Description 2 </p>
+                            </div>
+                            <div class="col-lg-9">
+                              <p class="small m-0">PIPE</p>
+                            </div>
+                          </div>
+                          <div class="border_seprator my-2"></div>
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <p class="small text-muted m-0">Item Number 1</p>
+                            </div>
+                            <div class="col-lg-9">
+                              <p class="small m-0">CS-PIPE-9208046-C000003243-6/10-PEC FABRICATED 2019 PHASE 2A-4</p>
+                            </div>
+                          </div>
+                          <div class="border_seprator my-2"></div>
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <p class="small text-muted m-0">Heat Number 2  </p>
+                            </div>
+                            <div class="col-lg-9">
+                              <p class="small m-0">9208046</p>
+                            </div>
+                          </div>
+                          <div class="border_seprator my-2"></div>
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <p class="small text-muted m-0">Mill Certificate No. 2 </p>
+                            </div>
+                            <div class="col-lg-9">
+                              <p class="small m-0">C000003243-6/10</p>
+                            </div>
+                          </div>
+                          </div>
+                          </div>
+                        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+  
+ 
+</script>
+{% endblock body_js %}

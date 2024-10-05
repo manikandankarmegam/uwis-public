@@ -1,0 +1,157 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Create MIR</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'uploadmaterialslist' project_id %}" type="button" class="btn btn-info text-white" >+ADD</a >
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Create MIR</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'uploadmaterialslist' project_id %}" type="button" class="btn btn-info text-white btn-lg" >+ADD</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+
+    <div class="p-lg-4  my-3 my-lg-0">
+        <div class="row">
+          <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-lg-3">
+                    <p class="text-muted m-0">Location</p>
+                    <select class="form-select text-muted" name="dropdown1" >
+                      <option disabled selected="" >Select</option>
+                      <option >SHOP</option>
+                      <option >FIELD</option>
+                      
+                    </select>
+                  </div>
+                  <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                    <p class="text-muted m-0">Category</p>
+                    <select class="form-select text-muted" id="Material_id" name="dropdown2" >
+                      <option selected="" disabled="">Select</option>
+                      <option value="RT">MOM</option>
+                      <option value="PMI">NON MOM</option>
+                    </select>
+                  </div>
+                  <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                    <p class="text-muted m-0">MIR No</p>
+                    <select class="form-select text-muted" id="Material_id" name="dropdown2" >
+                      <option selected="" disabled="">Select</option>
+                      <option value="RT">MIR-001</option>
+                      <option value="PMI">MIR-002</option>
+                    </select>
+                  </div>
+                  <div class="mt-3 mt-lg-0 col-12 col-lg-3">
+                    <button class="btn btn-info text-white w-100 mt-4">SEARCH</button>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">MIR list </p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="example" class="table m-0 nowrap" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th class="text-center">Part ID </th>
+                        <th class="text-center">Item</th>
+                        <th class="text-center">Material</th>
+                        <th class="text-center">Garde</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Size 1</th>
+                        <th class="text-center">SCH 1</th>
+                        <th class="text-center">THK 1</th>
+                        <th class="text-center">Size 2</th>
+                        <th class="text-center">SCH 2</th>
+                        <th class="text-center">THK 2</th>
+                        <th class="text-center">QTY</th>
+                        <th class="text-center">Length</th>
+                        <th class="text-center">Heat No</th>
+                        <th class="text-center">Certificate No</th>
+                        <th class="text-center">MFR/Orgin</th>
+                        <th class="text-center">Cal QTY</th>
+                        <th class="text-center">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for mir in mir_list %}
+                      <tr>
+                        <td class="text-center">{{mir.part_id}}</td>
+                        <td class="text-center">{{mir.mir_item}}</td>
+                        <td class="text-center">{{mir.material}}</td>
+                        <td class="text-center">{{mir.grade}}</td>
+                        <td class="text-center">{{mir.weld_type}}</td>
+                        <td class="text-center">{{mir.size_1}}</td>
+                        <td class="text-center">{{mir.sch_1}}</td>
+                        <td class="text-center">{{mir.thk_1}}</td>
+                        <td class="text-center">{{mir.size_2}}</td>
+                        <td class="text-center">{{mir.sch_2}}</td>
+                        <td class="text-center">{{mir.thk_2}}</td>
+                        <td class="text-center">{{mir.qty}}</td>
+                        <td class="text-center">{{mir.length}}</td>
+                        <td class="text-center">{{mir.heat_no}}</td>
+                        <td class="text-center">{{mir.certificate_no}}</td>
+                        <td class="text-center">{{mir.mfr}}</td>
+                        <td class="text-center">{{mir.cal_qty}}</td>
+                        <td class="text-center align-middle"> 
+                          <a href="" class="text-decoration-none text-info me-3 " >EDIT</a> 
+                          <a href="" class="text-decoration-none  text-danger "data-bs-toggle="modal" data-bs-target="" >DELETE</a>
+                        </td>     
+                      </tr>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  </section>
+{% endblock body_content %}
+{% block body_js %}
+
+{% endblock body_js %}

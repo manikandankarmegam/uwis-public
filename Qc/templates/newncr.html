@@ -1,0 +1,196 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='ncr' %}
+{% include 'include/sidebar.html' with active='ncr' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">NCR</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">NCR</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-12 mx-auto">
+          <form  method="post">
+            {% csrf_token %}
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Create NCR or QR </p>
+              </div>
+              <div class="card-body p-lg-5">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">NCR No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" type="text" value="" name="ncr_no"   />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Initiator</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <select class="form-select " id="ndeType_id" name="initiator"  >
+                      {% for inspector in admin_data %}
+                      <option value="JOHN">{{inspector.name}}</option>
+                      {% endfor %}
+                      {% for inspector in qc_data %}
+                      <option value="JOHN">{{inspector.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Discipline</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <select class="form-select " id="ndeType_id" name="discipline"  >
+                      <option  value="Civil">Civil</option>
+                      <option  value="Piping">Piping</option>
+                      <option  value="painting">painting</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Conractor</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <select class="form-select " id="ndeType_id" name="contractor"  >
+                      {% for con in contractor %}
+                      <option value="{{con.contractor}}"  >{{con.contractor}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Project</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <select class="form-select " id="ndeType_id" name="project"  >
+                      {% for proj in project %}
+                      <option value="{{proj.id}}"  >{{proj.projectname}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Date</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" type="date" value="" name="date"  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Non Conformity</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="form-floating">
+                      <textarea class="form-control" value="" placeholder="Leave a comment here" id="floatingTextarea2" name="non_conformity" style="height: 100px" ></textarea>
+                      <label for="floatingTextarea2" >Enter Your Comments</label >
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">NCR/OR</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <select class="form-select " id="ndeType_id" name="type"  >
+                      <option  value="ncr">NCR</option>
+                      <option  value="qr">QR</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Major</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input p-2" type="checkbox" role="switch" name="major" id="flexSwitchCheckDefault" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Minor</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input p-2" type="checkbox" role="switch" name="minor" id="flexSwitchCheckDefault" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Observation</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input p-2" type="checkbox" role="switch" name="observation" id="flexSwitchCheckDefault" />
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                      <a href="{% url 'ncr' %}" class="btn btn-outline-secondary" type="button" > CANCEL </a>
+                      <button class="btn btn-info text-white" type="submit" > SUBMIT </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

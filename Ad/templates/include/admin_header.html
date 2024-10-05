@@ -1,0 +1,22 @@
+{% load static %} 
+<div class="card border-0 rounded-bottom rounded-3  shadow-sm text-nowrap">
+    <div class="card-body d-flex overflow-auto">
+        <a href="{% url 'admin' %}" class="{% if active == 'home' %} admin_header {% endif %} text-muted text-decoration-none">Contractor </a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'createproject' %}" class="{% if active == 'createproject' %} admin_header {% endif %} text-muted text-decoration-none">Projects </a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'userprofile' %}" class="{% if active == 'profile' %} admin_header {% endif %} text-muted text-decoration-none">User profile</a>
+         <div class="vr mx-3"></div>
+        <a href="{% url 'weldtypes' %}" class="{% if active == 'weldtypes' %} admin_header {% endif %} text-muted text-decoration-none">Weld Types</a>
+         <div class="vr mx-3"></div>
+        <a href="{% url 'weldprocess' %}" class="{% if active == 'weldprocess' %} admin_header {% endif %} text-muted text-decoration-none">Welding Process</a>
+         <div class="vr mx-3"></div>
+        <a href="{% url 'weldlocation' %}" class="{% if active == 'weldlocation' %} admin_header {% endif %} text-muted text-decoration-none">Welding location</a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'materials' %}" class="{% if active == 'materials' %} admin_header {% endif %} text-muted text-decoration-none">Materials</a>
+         <div class="vr mx-3 "> </div>
+        <a href="{% url 'wps' %}" class="{% if active == 'wps' %} admin_header {% endif %} text-muted text-decoration-none">WPS</a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'welders' %}" class="{% if active == 'welders' %} admin_header {% endif %} text-muted text-decoration-none">Welders</a>
+    </div>
+</div>

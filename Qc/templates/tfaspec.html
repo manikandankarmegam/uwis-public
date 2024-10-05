@@ -1,0 +1,443 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='tfa_flange' %}
+{% include 'include/sidebar.html' with active='tfa_flange' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'tfa_specedit' tfa.id %}" type="button" class="btn btn-info text-white" >Edit</a >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0">
+    {% include 'include/tfa_header.html' with active='spec' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'tfa_specedit' tfa.id %}" type="button" class="btn btn-info text-white btn-lg" >Edit</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block">
+      {% include 'include/tfa_header.html' with active='spec' %}
+    </div>
+    <div class="p-lg-4 my-3 my-lg-0">
+      <div class="row ">
+          <div class="col-lg-6 col-12 mx-auto">
+              <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white p-3">
+                  <p class="m-0 fw-bold fs-5 ">Specifications </p>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Temporary Tag </p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">{{tfa.permanent_joint_id|default:'-'}} </p>
+                    </div>
+                  </div>
+                  <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Flange Size </p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">{{tfa.flange_size|default:'-'}}</p>
+                    </div>
+                  </div>
+                  <!-- <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Dissimilar Flange</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">No</p>
+                    </div>
+                  </div> -->
+                  <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Tightening Method</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">{{tfa.tightening_method|default:'-'}}</p>
+                    </div>
+                  </div>
+                  <!-- <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Flange A</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">N/A </p>
+                    </div>
+                  </div>
+                  <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Flange B</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">N/A</p>
+                    </div>
+                  </div> -->
+                  <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Flange Description</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">{{tfa.flange_description|default:'-'}}</p>
+                    </div>
+                  </div>
+                  <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Flange Type</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">{{tfa.standard|default:'-'}}</p>
+                    </div>
+                  </div>
+                  <div class="border_seprator my-2"></div>
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      <p class="small text-muted m-0">Flange Material</p>
+                    </div>
+                    <div class="col-lg-9 col-6">
+                      <p class="small m-0">{{tfa.flange_material|default:'-'}} </p>
+                    </div>
+                  </div>
+                </div>
+           
+              </div>
+          </div>
+          <div class="col-lg-6 col-12 mt-lg-0 mt-3 mx-auto ">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Pipe Spec </p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Piping Class </p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">{{tfa.pipe_specification|default:'-'}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Rating </p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">{{tfa.flange_rating|default:'-'}} </p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Fluid</p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">{{tfa.fluid|default:'-'}} </p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Critical Service</p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">{{tfa.critical_service|default:'-'}}</p>
+                  </div>
+                </div>
+                <!-- <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Construction Class</p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">N/A </p>
+                  </div>
+                </div> -->
+                <!-- <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Cryo Service</p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">No </p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Cleaning Solution</p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">N/A </p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <p class="small text-muted m-0">Construction Class</p>
+                  </div>
+                  <div class="col-lg-9 col-6">
+                    <p class="small m-0">N/A </p>
+                  </div>
+                </div> -->
+
+                
+               
+              </div>
+         
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-12   mx-auto mt-3">
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Bolts </p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Number of Bolts </p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">{{tfa.no_of_bolts|default:'-'}} </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Bolt Stud Size </p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">{{tfa.bolt_diameter|default:'-'}}  </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Bolt Material</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">{{tfa.bolt_material|default:'-'}} </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Nut Material</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">{{tfa.nut_material|default:'-'}}</p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Target Value</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">{{tfa.required_torque|default:'-'}}</p>
+                </div>
+              </div>
+              <!-- <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Bolt Stress Req</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">507 </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Bolt Description</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">N/A </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Stud And Nut Coating</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">N/A </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Target Residual Bolt Preload</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">N/A </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Effective Length</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">81mm </p>
+                </div>
+              </div> -->
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Bolt Length</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">{{tfa.bolt_length|default:'-'}}  </p>
+                </div>
+              </div>
+              <!-- <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Grip Length</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">62 mm </p>
+                </div>
+              </div>
+              <div class="border_seprator my-2"></div>
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <p class="small text-muted m-0">Load Factor</p>
+                </div>
+                <div class="col-lg-9 col-6">
+                  <p class="small m-0">0.6 </p>
+                </div>
+              </div> -->
+
+
+              
+             
+            </div>
+       
+          </div>
+      </div>
+      <div class="col-lg-6 col-12 mx-auto mt-3">
+        <div class="card border-0 shadow-sm rounded-3">
+          <div class="card-header bg-white p-3">
+            <p class="m-0 fw-bold fs-5 ">Gasket </p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <p class="small text-muted m-0">Gasket Type </p>
+              </div>
+              <div class="col-lg-9 col-6">
+                <p class="small m-0">{{tfa.gasket_material|default:'-'}} </p>
+              </div>
+            </div>
+            <!-- <div class="border_seprator my-2"></div>
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <p class="small text-muted m-0">Effective Area </p>
+              </div>
+              <div class="col-lg-9 col-6">
+                <p class="small m-0">216 mm² </p>
+              </div>
+            </div> -->
+   
+            <div class="border_seprator my-2"></div>
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <p class="small text-muted m-0">Lubricant</p>
+              </div>
+              <div class="col-lg-9 col-6">
+                <p class="small m-0">{{tfa.lubricant|default:'-'}}</p>
+              </div>
+            </div>
+        
+
+
+            
+           
+          </div>
+     
+        </div>
+        <div class="card border-0 shadow-sm rounded-3 my-3">
+          <div class="card-header bg-white p-3">
+            <p class="m-0 fw-bold fs-5 ">Location </p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <p class="small text-muted m-0">Location </p>
+              </div>
+              <div class="col-lg-9 col-6">
+                <p class="small m-0">{{tfa.location|default:'-'}} </p>
+              </div>
+            </div>
+            <div class="border_seprator my-2"></div>
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <p class="small text-muted m-0">Area </p>
+              </div>
+              <div class="col-lg-9 col-6">
+                <p class="small m-0">{{tfa.area|default:'-'}} </p>
+              </div>
+            </div>
+           
+        
+
+
+            
+           
+          </div>
+     
+        </div>
+    </div>
+    
+
+
+
+   
+
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+
+{% endblock body_js %}

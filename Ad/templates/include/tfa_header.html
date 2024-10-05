@@ -1,0 +1,15 @@
+{% load static %}
+<div class="card border-0 rounded-bottom rounded-3  shadow-sm text-nowrap">
+    <div class="card-body d-flex overflow-auto">
+        <a href="{% url 'tfa_overview' tfa.id %}" class="{% if active == 'Overview' %} admin_header {% endif %} text-muted text-decoration-none">Overview</a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'tfaspec' tfa.id  %}" class="{% if active == 'spec' %} admin_header {% endif %} text-muted text-decoration-none">Specifications </a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'tfa_pass' tfa.id  %}" class="{% if active == 'pass' %} admin_header {% endif %} text-muted text-decoration-none">Tighten Passes</a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'tfa_photos' tfa.id  %}" class="{% if active == 'photo' %} admin_header {% endif %} text-muted text-decoration-none">Photos </a>
+        <div class="vr mx-3"></div>
+        <a href="{% url 'tfa_report' tfa.id  %}" class="{% if active == 'report' %} admin_header {% endif %} text-muted text-decoration-none">Completion Report </a>
+     
+    </div>
+  </div>

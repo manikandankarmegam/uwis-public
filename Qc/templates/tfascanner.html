@@ -1,0 +1,225 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_header %} 
+
+
+{% endblock body_header %}
+{% block body_content %} 
+{% include 'include/header.html' with active='tfa_flange' %}
+{% include 'include/sidebar.html' with active='tfa_flange' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <!-- <a href="" type="button" class="btn btn-success text-white">SCANNER</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="/static/img/utoc_dualleaf.png" alt="">
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+            <!-- <a href="" type="button" class="btn btn-success text-white btn-lg">SCANNER</a> -->
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3 col-12">
+                  <p class="m-0 mb-2 text-muted">Find Flange</p>
+                  <div class="d-flex justify-content-between">
+                    <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                    <button class="btn btn-info ms-2 text-white" type="button" id="button-addon2" onclick="find_open()" > FIND </button>
+                    <!-- <button class="btn btn-success ms-2 text-white" type="button" id="button-addon2"  > <i class="bi bi-qr-code-scan"></i> </button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 mt-3 " id="hide_search">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Flanges list </p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <div class="table-responsive">
+                  <table id="example" class="table m-0 nowrap" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <!-- <th class=" text-muted">Check</th> -->
+                        <th class="align-middle text-center text-muted">Permanent Tag</th>
+                        <th class="align-middle text-center text-muted">Flange Status</th>
+                        <th class="align-middle text-center text-muted">Sheet no</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for tfa in tfa_list %}
+                      <tr>
+                 
+                        <td class="align-middle text-center"> <a href="{% url 'tfa_overview' tfa.tfa.id  %}" class="text-info text-decoration-none">{{tfa.tfa.permanent_joint_id}}</a>  </td>
+                        <td class="align-middle text-center d-flex justify-content-center">
+                          <!-- <i class="bi bi-pencil-square text-info fs-5 me-3 my-auto" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>  -->
+                           <div class="alert alert-success border-success p-0 px-1  m-0">{{tfa.tfa.status}}</div></td>
+                        <td class="align-middle text-center">{{tfa.tfa.sheet_no}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+       <p class="text-primary m-0 fs-5 fw-bold text-center">Flange Status Editor</p>
+        <hr class="border">
+       <div class="d-flex justify-content-between mt-3 bg-light p-3">
+        <div class="">
+          <p class="text-muted m-0">Selected Flange</p>
+          <p class="mt-2 m-0">01CNRV001-F1 </p>
+        </div>
+        <div class="">
+          <p class="text-muted m-0 mb-2">Selected Flange</p>
+          <span class="alert alert-success border-success p-0 px-1  m-0 ">Complted</span>
+        </div>
+       </div>
+       <div class=" mt-3">
+        <p class="m-0 text-muted mb-2">Connection Permanence</p>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <label class="form-check-label" for="inlineRadio1">Unchanged</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <label class="form-check-label" for="inlineRadio2">Permanent</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" >
+          <label class="form-check-label" for="inlineRadio3">Temporary</label>
+        </div>
+       </div>
+       <div class=" mt-3">
+        <p class="m-0 text-muted mb-2">Hold Status</p>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptionshold" id="inlineRadio1hold" value="holdoption1">
+          <label class="form-check-label" for="inlineRadio1hold">Unchanged</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptionshold" id="inlineRadio2hold" value="holdoption2">
+          <label class="form-check-label" for="inlineRadio2hold">Held </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptionshold" id="inlineRadio3hold" value="holdoption3">
+          <label class="form-check-label" for="inlineRadio3hold">Released</label>
+        </div>
+       </div>
+       <div class="mt-3">
+        <p class="m-0 text-muted mb-2">New Status</p>
+        <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" >
+        <label class="btn-sm btn btn-outline-primary" for="success-outlined">Untoched</label>
+        
+        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+        <label class="btn-sm btn btn-outline-info" for="danger-outlined">Tagged</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="dark-outlined" autocomplete="off">
+        <label class="btn-sm btn btn-outline-dark" for="dark-outlined">Break Down</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="ready-outlined" autocomplete="off">
+        <label class="btn-sm btn btn-outline-warning" for="ready-outlined">Break Down</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="complte-outlined" autocomplete="off">
+        <label class="btn-sm btn btn-outline-secondary" for="complte-outlined">CompltedManually</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="Decommissioned-outlined" autocomplete="off">
+        <label class=" btn-sm btn btn-outline-info" for="Decommissioned-outlined">Decommissioned</label>
+
+        
+        <input type="radio" class="btn-check" name="options-outlined" id="Defferd-outlined" autocomplete="off">
+        <label class=" btn-sm btn btn-outline-primary" for="Defferd-outlined">Defferd</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="QaPass-outlined" autocomplete="off">
+        <label class="mt-2 btn-sm btn btn-outline-success" for="QaPass-outlined">QaPass</label>
+        
+        <input type="radio" class="btn-check" name="options-outlined" id="QcPass-outlined" autocomplete="off">
+        <label class="mt-2 btn-sm btn btn-outline-success" for="QcPass-outlined">QcPass</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="QaFail-outlined" autocomplete="off">
+        <label class="mt-2 btn-sm btn btn-outline-danger" for="QaFail-outlined">QaFail</label>
+        
+        <input type="radio" class="btn-check" name="options-outlined" id="QcFail-outlined" autocomplete="off">
+        <label class="mt-2 btn-sm btn btn-outline-danger" for="QcFail-outlined">QcFail</label>
+
+
+        
+       </div>
+       <div class="mt-3">
+        <p class="m-0 text-muted mb-2">Remarks</p>
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+          <label for="floatingTextarea2">Comments</label>
+        </div>
+       </div>
+       <div class="d-flex mt-3">
+          <button type="button" class="text-white btn btn-secondary me-3 w-100" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="text-white btn btn-info w-100">Save changes</button>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable({
+      "dom": '<"top"i>rt<"bottom"lp><"clear">',
+        "paging": false,  
+        "searching": false,  
+        "info": false  
+    });
+    
+});
+  function find_open() {
+    $("#hide_search").removeClass("d-none");
+    $("#default").addClass("d-none");
+  }
+</script>
+{% endblock body_js %}

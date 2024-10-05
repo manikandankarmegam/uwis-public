@@ -1,0 +1,295 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_header %}
+
+<style>
+  
+  .text-accents {
+    color: #01840f !important;
+  }
+</style>
+<link rel="stylesheet" href="{% static 'css/wave-bsb.css' %}" />
+<!-- Google Fonts Files -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Satisfy&display=swap" rel="stylesheet" />
+{% endblock body_header %} 
+{% block body_content %}
+<!-- Header -->
+<div data-bs-spy="scroll" data-bs-target="#bsb-tpl-navbar" data-bs-smooth-scroll="true" tabindex="0">
+  <header id="header" class="sticky-top bsb-tpl-header-sticky bsb-tpl-header-sticky-animationX" >
+    <!-- Navbar 1 - Bootstrap Brain Component -->
+    <nav id="scrollspyNav" class="navbar navbar-expand-lg wave-bg-blue bsb-navbar bsb-navbar-hover bsb-navbar-caret bsb-tpl-navbar-sticky" data-bsb-sticky-target="#header">
+      <div class="container">
+        <a class="navbar-brand" href="#"> <img src="{% static 'img/utoc_headlogo.png' %}" class="bsb-tpl-logo" alt="" /> </a>
+      </div>
+    </nav>
+  </header>
+  <!-- Hero 2 - Bootstrap Brain Component -->
+  <section id="scrollspyHero" class="wave-bg-blue py-5 py-xl-8 py-xxl-10">
+    <div class="container overflow-hidden">
+      <div class="row gy-5 gy-lg-0 align-items-lg-center justify-content-lg-between" >
+        <div class="col-12 col-lg-6 order-1 order-lg-0">
+          <h1 class="display-3 fw-bolder mb-3"> Engineering Pte Ltd <br /><mark class="wave-highlight wave-highlight-blue" > <span class="wave-font-hw display-2 text-accents fw-normal" >UTOC</span ></mark > in Singapore since 1989 </h1>
+          <p class="fs-4 mb-5"> A wholly owned subsidiary of UTOC Corporation in Japan was established in Singapore since January 1989. </p>
+          <div class="d-grid gap-2 d-sm-flex">
+            <button type="button" class="btn btn-primary btn-2xl rounded-pill px-4 gap-3" > Learn More </button>
+            <a href="{% url 'project' %}" type="button" class="btn btn-outline-primaryx btn-outline-accent btn-2xl rounded-pill px-4" >Home</a>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 text-center">
+          <!-- <img class="img-fluid mask-position-center-center mask-repeat-no-repeat mask-size-auto" loading="lazy" src="{% static 'img/utoc_weld.png' %}" alt=""
+           style="-webkit-mask-image: url( {% static 'img/hero-blob-1.svg' %} )" /> -->
+
+           <img class="img-fluid mask-position-center-center mask-repeat-no-repeat mask-size-auto" loading="lazy" src="{% static 'img/utoc_weld.png' %}" alt="" 
+           style="-webkit-mask-image: url( {% static 'img/hero-blob-1.svg' %} )" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Main -->
+  <main id="main">
+    <!-- Section - Services -->
+    <!-- Service 3 - Bootstrap Brain Component -->
+    <section id="scrollspyServices" class="py-5 py-xl-8 py-xxl-16">
+      <div class="container mb-5 mb-md-6 mb-xl-10">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7 text-center">
+            <h2 class="display-3 fw-bolder mb-4"> You will get the <br />perfect <mark class="wave-highlight wave-highlight-yellow" ><span class="wave-font-hw display-1 text-accents fw-normal">resolutions</span ></mark > with our proficient services. </h2>
+          </div>
+        </div>
+      </div>
+      <div class="container overflow-hidden">
+        <div class="row gy-5 gy-md-6 gx-md-4 gy-lg-0 gx-xxl-5">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="badge wave-bg-yellow text-primary mb-4">
+              <img src="{% static 'img/utoc_steelloco.png' %}" class="w-50" alt="" />
+            </div>
+            <h4 class="mb-3">Steel Structural</h4>
+            <p class="mb-3 text-secondary"> We have a factory of 40,000 square feet capable of fabrication of steel structure 500 tonnes per month, and 1000 Tonnes per month at our overseas Steel Fabrication Partner. </p>
+            <a href="#!" class="fw-bold text-decoration-none link-primary">  Learn More
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+              </svg>
+            </a>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="badge wave-bg-green text-primary mb-4">
+              <img src="{% static 'img/utoc_transport.png' %}" class="w-50" alt="" />
+            </div>
+            <h4 class="mb-3 text-capitalize">Transportation & Installation</h4>
+            <p class="mb-3 text-secondary"> UTOC initially focused on mechanical contracting for Singapore’s up and coming oil & gas industry. It later ventured into heavy lifting and equipment installation related works. </p>
+            <a href="#!" class="fw-bold text-decoration-none link-primary"> Learn More
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+              </svg>
+            </a>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="badge wave-bg-pink text-primary mb-4">
+              <img src="{% static 'img/utoc_lifting.png' %}" class="w-50" alt="" />
+            </div>
+            <h4 class="mb-3">Lifting & Installation</h4>
+            <p class="mb-3 text-secondary"> UTOC initially focused on mechanical contracting for Singapore’s up and coming oil & gas industry. It later ventured into heavy lifting and equipment installation related works. </p>
+            <a href="#!" class="fw-bold text-decoration-none link-primary"> Learn More
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+              </svg>
+            </a>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="badge wave-bg-cyan text-primary mb-4">
+              <img src="{% static 'img/utoc_pipe.png' %}" class="w-50" alt="" />
+            </div>
+            <h4 class="mb-3">Piping</h4>
+            <p class="mb-3 text-secondary"> UTOC has been involved in piping fabrication and installation work since the early 90s. we are one of the most recognized piping contractor in Singapore. </p>
+            <a href="#!" class="fw-bold text-decoration-none link-primary"> Learn More
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Call To Action 1 - Bootstrap Brain Component -->
+    <section class="px-2 py-8 py-xxl-16 background-position-center background-size-cover background-attachment-fixed bsb-overlay" style="background-image: url('{% static 'img/utoc_gassstation.png' %}')" >
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-9 col-lg-8 col-xl-8 col-xxl-7">
+            <h3 class="fs-5 mb-3 text-white text-uppercase"> <mark class="text-white wave-highlight">Work Safety</mark> </h3>
+            <h2 class="display-3 text-white fw-bolder mb-4 pe-xl-5"> Safety has always been and will continually be a prerequisite in all our endeavors.  </h2>
+            <a href="#!" class="btn btn-accent btn-3xl rounded mb-0 text-nowrap" >Join Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section - Portfolio -->
+    <!-- Masonry 1 - Bootstrap Brain Component -->
+    <section id="scrollspyPortfolio" class="py-5 py-xl-8 py-xxl-16">
+      <div class="container mb-5 mb-md-6 mb-xl-10">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7 text-center">
+            <h2 class="display-3 fw-bolder mb-4"> Explore our phenomenal <br /><mark class="wave-highlight wave-highlight-yellow" ><span class="wave-font-hw display-1 text-accents fw-normal" >Projects</span ></mark > Ongoing & past </h2>
+          </div>
+        </div>
+      </div>
+      <div class="container overflow-hidden">
+        <div class="row gy-2 g-md-2 g-xl-3 bsb-project-2-grid">
+          <div class="col-12 col-md-4 bsb-project-2-item">
+            <figure class="rounded rounded-3 overflow-hidden bsb-hover-overlay m-0" >
+              <a href="#!"> <img class="img-fluid bsb-scale-up bsb-hover-scale" loading="lazy" src="{% static 'img/utoc_sg_flyer.png' %}" alt="" /> </a>
+              <figcaption>
+                <h3 class="text-white bsb-hover-fadeInLeft">Singapore Flyer</h3>
+                <div class="text-white bsb-hover-fadeInRight">Sept 2007</div>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-md-4 bsb-project-2-item">
+            <figure class="rounded rounded-3 overflow-hidden bsb-hover-overlay m-0" >
+              <a href="#!"> <img class="img-fluid bsb-scale-up bsb-hover-scale" loading="lazy" src="{% static 'img/petronas_project.png' %}" alt="" /> </a>
+              <figcaption>
+                <h3 class="text-white bsb-hover-fadeInUp">Petronas Rapid</h3>
+                <div class="text-white bsb-hover-fadeInDown"> April 2016 to Oct 2019 </div>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-md-4 bsb-project-2-item">
+            <figure class="rounded rounded-3 overflow-hidden bsb-hover-overlay m-0" >
+              <a href="#!"> <img class="img-fluid bsb-scale-up bsb-hover-scale" loading="lazy" src="{% static 'img/utoc_shll_bukom.png' %}" alt="" /> </a>
+              <figcaption>
+                <h3 class="text-white bsb-hover-fadeInLeft"> Shell Ecc Houdni </h3>
+                <div class="text-white bsb-hover-fadeInRight"> Oct 2007 to Nov 2009 </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="mx-auto text-center">
+          <button type="button" class="btn btn-outline-primaryx btn-outline-accent btn-2xl rounded-pill px-4 mt-5" > More Projects </button>
+        </div>
+      </div>
+    </section>
+    <!-- Section - About -->
+    <section id="scrollspyAbout" class="wave-bg-alice-blue py-5 py-xl-8 py-xxl-16" >
+      <!-- Fact 1 - Bootstrap Brain Component -->
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 border-bottom border-primary shadow-sm">
+              <div class="card-body text-center p-4 p-xxl-5">
+                <div class="btn btn-primary btn-circle btn-circle-4xl wave-bg-yellow border-0 text-primary pe-none mb-2" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16" >
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                    <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+                  </svg>
+                </div>
+                <h3 class="h1 mb-2">120K</h3>
+                <p class="fs-5 mb-0 text-secondary">Happy Customers</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 border-bottom border-primary shadow-sm">
+              <div class="card-body text-center p-4 p-xxl-5">
+                <div class="btn btn-primary btn-circle btn-circle-4xl wave-bg-green border-0 text-primary pe-none mb-2" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16" >
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Z" />
+                    <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z" />
+                  </svg>
+                </div>
+                <h3 class="h1 mb-2">1890+</h3>
+                <p class="fs-5 mb-0 text-secondary">Issues Solved</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 border-bottom border-primary shadow-sm">
+              <div class="card-body text-center p-4 p-xxl-5">
+                <div class="btn btn-primary btn-circle btn-circle-4xl wave-bg-pink border-0 text-primary pe-none mb-2" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16" >
+                    <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z" />
+                    <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z" />
+                  </svg>
+                </div>
+                <h3 class="h1 mb-2">250K</h3>
+                <p class="fs-5 mb-0 text-secondary">Finished Projects</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 border-bottom border-primary shadow-sm">
+              <div class="card-body text-center p-4 p-xxl-5">
+                <div class="btn btn-primary btn-circle btn-circle-4xl wave-bg-cyan border-0 text-primary pe-none mb-2" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cloud-moon" viewBox="0 0 16 16" >
+                    <path d="M7 8a3.5 3.5 0 0 1 3.5 3.555.5.5 0 0 0 .625.492A1.503 1.503 0 0 1 13 13.5a1.5 1.5 0 0 1-1.5 1.5H3a2 2 0 1 1 .1-3.998.5.5 0 0 0 .509-.375A3.502 3.502 0 0 1 7 8zm4.473 3a4.5 4.5 0 0 0-8.72-.99A3 3 0 0 0 3 16h8.5a2.5 2.5 0 0 0 0-5h-.027z" />
+                    <path d="M11.286 1.778a.5.5 0 0 0-.565-.755 4.595 4.595 0 0 0-3.18 5.003 5.46 5.46 0 0 1 1.055.209A3.603 3.603 0 0 1 9.83 2.617a4.593 4.593 0 0 0 4.31 5.744 3.576 3.576 0 0 1-2.241.634c.162.317.295.652.394 1a4.59 4.59 0 0 0 3.624-2.04.5.5 0 0 0-.565-.755 3.593 3.593 0 0 1-4.065-5.422z" />
+                  </svg>
+                </div>
+                <h3 class="h1 mb-2">786+</h3>
+                <p class="fs-5 mb-0 text-secondary">Awwwards Winning</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section - Contact -->
+    <!-- Contact 2 - Bootstrap Brain Component -->
+    <section id="scrollspyContact" class="py-5 py-xl-8 py-xxl-16">
+      <div class="container">
+        <div class="row gy-5 gy-lg-0 gx-lg-6 gx-xxl-8 align-items-lg-center">
+          <div class="col-12 col-lg-6">
+            <img class="img-fluid rounded-3 shadow-lg border" loading="lazy" src="{% static  'img/utoc_building.png' %}" alt="" />
+          </div>
+          <div class="col-12 col-lg-6">
+            <h2 class="h1 mb-3">Get in touch</h2>
+            <p class="lead fs-4 text-secondary mb-5"> We're always on the lookout to work with new clients. If you're interested in working with us, please get in touch in one of the following ways. </p>
+            <div class="d-flex mb-4">
+              <div class="me-4 text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-geo" viewBox="0 0 16 16" >
+                  <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="mb-3">Address</h4>
+                <address class="mb-0 text-secondary">352 Jalan Boon Lay, Singapore 619531 </address>
+              </div>
+            </div>
+            <div class="d-flex mb-4">
+              <div class="me-4 text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16" >
+                  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="mb-3">Phone</h4>
+                <p class="mb-0"> <a class="link-secondary text-decoration-none" href="tel:+65 6861 0566" >+65 6861 0566 </a> </p>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="me-4 text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16" >
+                  <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z" />
+                  <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="mb-3">E-Mail</h4>
+                <p> <a class="link-secondary text-decoration-none" href="mailto:utoc.sales@utoc.com.sg " >utoc.sales@utoc.com.sg </a> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  {% include 'include/footer.html'  %}
+</div>
+{% endblock body_content %} 
+{% block body_js %}
+<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'js/packery-mode.pkgd.min.js' %}"></script>
+<script src="{% static 'js/project-2.js' %}"></script>
+<script src="{% static 'js/global.js' %} "></script>
+{% endblock body_js %}

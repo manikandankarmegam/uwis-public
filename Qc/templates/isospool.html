@@ -1,0 +1,255 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='iso_sheet' %}
+{% include 'include/sidebar.html' with active='iso_sheet' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">ISO Spool</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0">
+    {% include 'include/iso_header.html' with active='iso_spool' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">ISO Spool</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block">
+      {% include 'include/iso_header.html' with active='iso_spool' %}
+    </div>
+    <div class="p-lg-4 my-3 my-lg-0">
+      <div class="row ">
+        <div class="col-lg-3 mx-auto">
+          <form method="get" action="">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <p class="m-0  fw-bold text-muted">Location</p>
+              <div class="input-group">
+                <select class="form-select " name="location" aria-label="Default select example">
+                  <option selected disabled>Select</option>
+                  {% for loc in locations %}
+                  <option {% if request.GET.location == loc.location   %} selected {% else %}  {% endif %}  value="{{loc.location}}">{{ loc.location }}</option>
+                  {% endfor %}
+                </select>
+                <button  class="btn btn-outline-info" type="submit">FIND</button>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+        </div>
+        <div class="row">
+          
+                  <div class="col-lg-4 mt-3">
+                    <div class="card shadow-sm rounded-3 border-0  text-center">
+                      <div class="card-body ">
+                        <p class="text-start fw-bold m-0 mb-3">Update ISOpack Spool</p>
+                        <div class="row">
+                          <div class="mt-3 mt-lg-0 col-12 col-lg-4">
+                            <input class="form-control form-control-sm text-muted" type="text" id="isoPackNoId" name="isoPackNo" placeholder="spool No" aria-label="default input example" />
+                          </div>
+                          <div class="mt-3 mt-lg-0 col-12 col-lg-4">
+                            <input class="form-control form-control-sm text-muted" type="date" id="dateid" name="date" placeholder="Default input" aria-label="default input example" />
+                          </div>
+                          <div class="mt-3 mt-lg-0 col-12 col-lg-4  ">
+                            <button class="btn btn-outline-primary btn-sm  w-100" disabled id="reqSubmitId" type="submit" onclick="submitForm()">UPDATE</button>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+
+        </div>
+
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3 mt-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">ISO spool list </p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="table-responsive datatabel_style pb-2">
+                    <table id="example" class="table m-0 nowrap" style="width: 100%" >
+                      <thead>
+                        <tr>
+                          <th class=" text-muted text-center">Check</th>
+                          <th class=" text-muted text-center">S.NO</th>
+                          <th class=" text-muted text-center">Iso No</th>
+                          <th class=" text-muted text-center">Sheet No</th>
+                          <th class=" text-muted text-center">Rev</th>
+                          <th class=" text-muted text-center">Spool No.</th>
+                          <th class=" text-muted text-center">IsoPack No</th>
+                          <th class=" text-muted text-center">Date</th>
+                          <th class=" text-muted text-center">Status %</th>
+                          <th class=" text-muted text-center"> Download </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for ispool in data %}
+                        <tr>
+                          <td class=" text-center align-middle d-flex mx-auto"> 
+                            <div class="form-check d-flex mx-auto"> 
+                                <input class="form-check form-check-input" name="spool" type="checkbox" onchange="selctedReq()" value="{{forloop.counter}}" id="flexCheckDefault"> 
+                            </div> 
+                        </td>
+                          <td class=" text-center align-middle"> {{forloop.counter }} </td>
+                          <td id="drgno_{{forloop.counter}}" class=" text-center align-middle">{{ispool.drgno}}</td>
+                          <td id="spoolno_{{forloop.counter}}" class=" text-center align-middle">{{ispool.sheetno}}</td>
+                          <td class=" text-center align-middle">{{ispool.rev}}</td>
+                          <td class=" text-center align-middle">{{ispool.spoolno}}</td>
+                          <td class=" text-center align-middle">{{ispool.isospool.isopacno|default:'-'}}</td>
+                          <td class=" text-center align-middle">{{ispool.isospool.relesdate|default:'-'}}</td>
+                          <td class=" text-center align-middle">{{ispool.status}}</td>
+                          <td class="text-center align-middle"> 
+                            <a target="_blank" class="alert alert-info p-1 text-info btn m-0" href="{% url 'isospool_form_download' %}?drgno={{ispool.drgno}}&sheetno={{ispool.sheetno}}&spoolno={{ispool.spoolno}}">  <i class="bi bi-file-pdf-fill"></i> Download</a>
+                          </td>                       
+                         </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  // $(document).ready(function () {
+  //   var tabel = $("#example").DataTable({
+  //     buttons: [""],
+  //   });
+
+  //   tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  // });
+
+//   $(document).ready(function() {
+//     $('#example').DataTable({
+//       "dom": '<"top"i>rt<"bottom"lp><"clear">',
+//         "paging": false,  
+//         "searching": false,  
+//         "info": false  
+//     });
+    
+// });
+
+
+
+const selctedReq = () => {
+  let checkboxes = document.querySelectorAll('input[name="spool"]:checked');
+  let selectedValues = [];
+  checkboxes.forEach((checkbox) => {
+    selectedValues.push(checkbox.value);
+  });
+  
+  let buttonDisabe = document.getElementById("reqSubmitId")
+  if(selectedValues.length  >= 1  ){
+    buttonDisabe.removeAttribute("disabled")
+
+  }
+  else{
+    buttonDisabe.setAttribute('disabled', true);
+  }
+
+  
+}
+
+function submitForm() {
+    let checkboxes = document.querySelectorAll('input[name="spool"]:checked');
+    let selectedValues = [];
+    checkboxes.forEach((checkbox) => {
+        selectedValues.push({drgno: $("#drgno_"+checkbox.value).text(), spoolno: $("#spoolno_"+checkbox.value).text()});
+    });
+    
+    sendAjaxRequest(selectedValues);
+    console.log(selectedValues);
+    
+}
+
+
+
+function sendAjaxRequest(selectedValues) {
+
+    // var ndeType = $('#nde_cate').val();
+    var isoPackNo = $('#isoPackNoId').val();
+    var date = $('#dateid').val();
+    let data = {
+        // 'cate': ndeType,
+        'isono': isoPackNo,
+        'date': date,
+        'selected_spools': selectedValues
+    };
+
+    fetch('/Qc/uisospool/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()  
+        },
+        body: JSON.stringify(data)  
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.assign(window.location.protocol + "//" + window.location.host + "/Qc/uisospool/");
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function getCsrfToken() {
+    let name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+</script>
+{% endblock body_js %}

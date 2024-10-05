@@ -1,0 +1,247 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Add Projects</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Add Projects</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+    <div class="p-lg-4">
+      <form action="" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <div class="row my-3 my-lg-0">
+          <div class="col-12 mx-auto">
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Project Details</p>
+                <p class="small text-muted m-0"> Collect Project | Form | Address details </p>
+              </div>
+         
+              <div class="card-body p-lg-5">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Project Number</p>
+                    <input class="form-control" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="text" name="projectnum"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Project Name</p>
+                    <input class="form-control" value="{% if data1.projectname %}{{data1.projectname}}{{else}}{% endif %}" type="text" name="projectname"  />
+                  </div>
+                </div>
+     
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Owner</p>
+                    <input class="form-control" value="{% if data1.maincont %}{{data1.maincont}}{{else}}{% endif %}" type="text" name="Owner"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Client</p>
+                    <input class="form-control" value="{% if data1.client %}{{data1.client}}{{else}}{% endif %}" type="text" name="client"  />
+                  </div>
+                </div>
+                
+               
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Main Contractor</p>
+                    <select class="form-select"  name="main" >
+                      <option disabled   selected value="">Select</option>
+                      {% for i in main %}
+                      <option value="{{i.id}}" {% if i.id|stringformat:"s" == request.GET.con %} selected {% endif %}>{{ i.contractor }}</option> 
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Sub Contractor</p>
+                    <select class="form-select" name="main" >
+                      <option disabled  selected value="">Select</option>
+                      {% for i in sub %}
+                      <option value="{{i.id}}" {% if i.id|stringformat:"s" == request.GET.con %} selected {% endif %}>{{ i.contractor }}</option> 
+                      {% endfor %}
+                      </select>
+                  </div>
+              
+                </div>
+              
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Client Contract No</p>
+                    <input class="form-control" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="text" name="clientcon"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">UTOC Job No</p>
+                    <input class="form-control"  value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="text" name="utocjob"  />
+                  </div>
+                </div>
+               
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Start Date</p>
+                    <input class="form-control" {% if data1.startdate %} value="{{ data1.startdate|date:"Y-m-d" }}" {% endif %}  type="date" name="sdate"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">End Date</p>
+                    <input class="form-control" {% if data1.enddate %} value="{{ data1.enddate|date:"Y-m-d" }}" {% endif %}   type="date" name="edate"  />
+                  </div>
+                </div>
+               
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Fabric. Contractor</p>
+                    <input class="form-control" value="{% if data1.fabcont %}{{data1.fabcont}}{{else}}{% endif %}" type="text" name="fab"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Final Acc-Client/ThirdParty</p>
+                    <input class="form-control" value="{% if data1.fabcli %}{{data1.fabcli}}{{else}}{% endif %}" type="text" name="finalacct"  />
+                  </div>
+                </div>
+              
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Drawing Revision Prefix</p>
+                    <input class="form-control" value="{% if data1.drarev %}{{data1.drarev}}{{else}}{% endif %}" type="text" name="draw"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Owner logo</p>
+                    <input class="form-control" value="" type="file" name="owner_logo" placeholder="Enter Owner logo" />
+                  </div>
+               
+                </div>
+            
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Client logo</p>
+                    <input class="form-control" value="" type="file" name="client_logo" placeholder="Enter Client logo" />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">UTOC logo</p>
+                    <input class="form-control" value="" type="file" name="utoc_logo" placeholder="Enter UTOC logo" />
+                  </div>
+                </div>
+           
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Form Details</p>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Weld summary Report Form No</p>
+                    <input class="form-control" value="{% if data1.weldsum %}{{data1.weldsum}}{{else}}{% endif %}" type="text" name="weldsum"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Daily weld Record Form No</p>
+                    <input class="form-control" value="{% if data1.dailyrec %}{{data1.dailyrec}}{{else}}{% endif %}" type="text" name="dailyrec"  />
+                  </div>
+                </div>
+     
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Individual Record Form No</p>
+                    <input class="form-control" value="{% if data1.indrec %}{{data1.indrec}}{{else}}{% endif %}" type="text" name="indrec"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Spool Release Form No</p>
+                    <input class="form-control" value="{% if data1.spoolre %}{{data1.spoolre}}{{else}}{% endif %}" type="text" name="spool" />
+                  </div>
+                </div>
+               
+
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Address Details</p>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Shop Address</p>
+                    <input class="form-control" value="{% if data1.shopadd %}{{data1.shopadd}}{{else}}{% endif %}" type="text" name="shopadd"  />
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Field Address</p>
+                    <input class="form-control" value="{% if data1.fieldadd %}{{data1.fieldadd}}{{else}}{% endif %}" type="text" name="fieldadd"  />
+                  </div>
+                </div>
+               
+                <div class="bg-grey p-2 rounded-3 mt-5" >
+                  <p class="m-0 fs-5 fw-bold">Welder Details</p>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Welder ID</p>
+                    <select class="form-select" name="weld_id"  >
+                    <option disabled   selected value="">Select</option>
+                      <option  value=">Primos No">Primos No</option>
+                      <option value="WelderId">WelderId </option>
+                    </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted">Project closed?</p>
+                    <select class="form-select" name="projectclosed"  >
+                    <option disabled   selected value="">Select</option>
+                      <option  value="Active">Active</option>
+                      <option value="Closed">Closed</option>
+                    </select>
+                  </div>
+                </div>
+              
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                      <a href="{% url 'createproject' %}" class="btn btn-outline-secondary" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="button"> CANCEL </a>
+                      <button class="btn btn-info text-white" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="submit"> CREATE </button>
+                    </div>
+                  </div>
+                </div>
+     
+             
+              
+              
+              </div>
+            </div>
+    
+              
+               
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %}

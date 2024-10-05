@@ -1,0 +1,670 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC </p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white">+ RECORD</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='home' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> FC-1PD-0553W </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'newweldhistory' %}" type="button" class="btn btn-info text-white btn-lg">+ RECORD</a>
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <!-- <div class="d-none d-lg-block"> {% include 'include/weldhistory_header.html' with active='Records' %} </div> -->
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header">
+              <p class="fw-bold m-0">CRISP EXISTING SITE</p>
+                  <p class="small text-muted m-0"> FC-1PD-0553W </p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted">ISO Number</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-dark">SP-0553-52-C1-FO-944011-01</p>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted">Sheet Number</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-dark">1</p>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted">Revision Number</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-dark">2 A</p>
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-lg-6 mt-3">
+                <div class="card shadow-sm border-0 rounded-3 h-100">
+                  <div class="card-header">
+                    <p class="fw-bold m-0">New Weld Record</p>
+                        <p class="small text-muted m-0"> FC-1PD-0553W </p>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Location</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Weld Number</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="weldno" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Weld NumText</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="weld_text" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">SPOOL NUM</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="spool_no" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">ISO No</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="iso_no" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">ISO PACK DATE</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="iso_date" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Test Pack No</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="pack_no" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Test Pack Date</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="pack_date" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Pipe Size</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="pipe_size" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Pipe THK</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="pip_thk" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <hr class="border">
+                    <div class="row ">
+                      <div class="col-md-5">
+                        <label for="inputEmail4" class="form-label text-muted">Material</label>
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2 pt-4 mt-2">
+                        <button type="submit" class="btn btn-outline-info w-100">WPS</button>
+                      </div>
+                      <div class="col-md-5">
+                        <label for="inputPassword4" class="form-label text-muted">Grade</label>
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-12">
+                        <p class="m-0 text-muted">WPS Number</p>
+                        <div class="input-group ">
+                          <input type="text" class="form-control" placeholder=""  >
+                          <button class="btn btn-outline-info" type="button" id="button-addon2">FIND</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label text-muted">Welder 1</label>
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label text-muted">All Welders</label>
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label text-muted">Welder 2</label>
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label text-muted">All Welders</label>
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr class="border">
+                    <div class="row ">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Weld Date	 </p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <label for="inputPassword4" class="form-label text-muted">All Welders</label>
+                      </div>
+                      <div class="col-lg-9">
+                        <select class="form-select " id="rt_repair">
+                          <option selected>Select</option>
+                          <option value="1">No</option>
+                          <option value="2">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Fitup Date</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-lg-3">
+                        <p class="m-0 text-muted">Tiein number</p>
+                      </div>
+                      <div class="col-lg-9">
+                        <input class="form-control" value="" name="" type="text" placeholder=""  />
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-lg-6 mt-3">
+              <div class="card shadow-sm border-0 rounded-3 h-100">
+                <div class="card-header">
+                  <p class="fw-bold m-0">NDE Details</p>
+                      <p class="small text-muted m-0"> FC-1PD-0553W </p>
+                </div>
+                <div class="card-body">
+                  <div class="row ">
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label text-muted">Visual Inspection Date</label>
+                      <input class="form-control" value="" name="weldno" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label text-muted">Visual Acc/Rej</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                  </div>
+                  <div class="row  mt-3">
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label text-muted">RT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label text-muted">RT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label text-muted">Films Accept</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label text-muted">Films Reject</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label text-muted">Weld Length</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label text-muted">Repair Length</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PT RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PT RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">PT DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">MT RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">MT RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">MT  DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PWHT RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PWHT RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">PWHT DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PRHT RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PRHT RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">PRHT  DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">UT  RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">UT  RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">UT  DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">BHN RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">BHN RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">BHN DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PMI RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PMI RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">PMI DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">FERRITE RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">FERRITE RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">FERRITE DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PAUT RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">PAUT RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">UTG  DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">UTG  RPT</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail4" class="form-label text-muted">UTG  RPT</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword4" class="form-label text-muted">PAUT DATE</label>
+                      <input class="form-control" value="" name="weld_no" type="text" placeholder=""  />
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    
+                    <div class="col-md-12">
+                      <label for="inputEmail4" class="form-label text-muted">PAUT STS</label>
+                      <select class="form-select " id="rt_repair">
+                        <option selected>Select</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
+                      </select>
+
+                    </div>
+                
+                  </div>
+
+                 
+                  </div>
+                  </div>
+          </div>
+          <p class="text-primary  m-0 mt-3 fs-3 fw-bold">Material Traceability Information & Piping Fitup Report Details</p>
+          <div class="col-lg-6 mt-3">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+              <div class="card-header">
+                <p class="fw-bold m-0">Material A </p>
+                    <p class="small text-muted m-0"> FC-1PD-0553W </p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Material Description 1</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Item Number 1	 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Heat Number 1	 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Mill Certificate No. 1</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                </div>
+                </div>
+          </div>
+          <div class="col-lg-6 mt-3">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+              <div class="card-header">
+                <p class="fw-bold m-0">Material B</p>
+                    <p class="small text-muted m-0"> FC-1PD-0553W </p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Material Description 2</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Item Number 2	 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Heat Number 2	 </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted">Mill Certificate No. 2</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <input class="form-control" value="" name="location" type="text" placeholder=""  />
+                  </div>
+                </div>
+                </div>
+                </div>
+          </div>
+          <div class="col-12 mt-3">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+          <div class="card-body">
+
+            <div class="d-grid gap-2 d-md-flex justify-content-center">
+              <a href="" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+              <!-- <a href="/Ad/uweldprocess/" class="btn btn-info text-white" type="submit"> SUBMIT </a> -->
+              <button type="submit" class="btn btn-info text-white"> SUBMIT </button>
+            </div>
+          </div>
+          </div>
+          </div>
+    </div>
+  </div>
+  </section>
+
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+  
+
+</script>
+{% endblock body_js %}

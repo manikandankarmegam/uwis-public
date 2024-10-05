@@ -1,0 +1,176 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='WelderPerfom' %}
+{% include 'include/sidebar.html' with active='WelderPerfom' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Welder Perfomance </p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+    
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Welder Perfomance </h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="my-3 my-lg-0">
+
+        <div class="card border-0 shadow-sm rounded-3 mt-3">
+          <div class="card-header bg-white p-3">
+            <p class="m-0 fw-bold fs-5 ">Print Welder Perfomance </p>
+          
+          </div>
+            <div class="card-body p-lg-5">
+              <div class="row">
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Report No</p>
+                    <input class="form-control " type="text"   >
+                </div>
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Week No</p>
+                    <input class="form-control " type="text"   >
+                </div>
+                <div class="col-lg-4">
+                    <p class="m-0 text-muted">Location</p>
+                    <select class="form-select " name="locations" >
+                        <option selected="" disabled="">Select</option>
+                        {% for loc in locations %}
+                        <option value="{{loc.location}}" >{{loc.location}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+              </div>
+              <div class="row mt-3">
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted">From</p>
+                      <input class="form-control " type="date" name="start_date"  >
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted">To</p>
+                      <input class="form-control " type="date" name="end_date"  >
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted">Radio Graphy</p>
+                      <select class="form-select " id="cate_id" name="dropdown4"  >
+                          <option selected="" disabled="">Select</option>
+                          <option value="piping">Random</option>
+                          <option value="service">100%</option>
+                          <option value="material">Overall</option>
+                        </select>
+                  </div>
+              </div>
+              
+            
+              <div class="row mt-3">
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Weld Type</p>
+                    <select class="form-select " id="weld_id" name="dropdown5" >
+                        <option selected="" disabled="">Select</option>
+                        {% for weldtype in weldtype %}
+                        <option value="{{weldtype.type}}" >{{weldtype.type}} </option>
+                        {% endfor %}
+                      </select>
+                </div>
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Welder</p>
+                    <select class="form-select " name="rtlot" >
+                        <option selected="" disabled="">Select</option>
+                        {% for welder in welder_list %}
+                        <option value="{{welder.welderid}}" >{{welder.welderid}} </option>
+                        {% endfor %}
+                      </select>
+                </div>
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Type</p>
+                    <select class="form-select " name="rtlot" >
+                        <option selected="" disabled="">Select</option>
+                        <option value="1">Length</option>
+                        <option value="2">Joint</option>
+                      </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Material</p>
+                    <select class="form-select " name="rtlot" >
+                      <option selected="" disabled="">Select</option>
+                      {% for material in materials %}
+                        <option value="{{material.materials}}" >{{material.materials}} </option>
+                        {% endfor %}
+                      </select>
+                </div>
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted">Date type</p>
+                    <select class="form-select " name="rtlot" >
+                      <option selected="" disabled="">Select</option>
+                      <option value="2">All</option>
+                      <option value="1">WELDER LAST WELD & RT DATE</option>
+                        <option value="1">FIRST PRODUCTION WELD & RT DATE</option>
+                      </select>
+                </div>
+               
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                    <a href="{% url 'createproject' %}" class="btn btn-outline-secondary"  type="button"> CANCEL </a>
+                    <button class="btn btn-info text-white"  type="submit"> CREATE </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+
+
+
+
+  
+          </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+</script>
+{% endblock body_js %}

@@ -1,0 +1,358 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='nde' %}
+{% include 'include/sidebar.html' with active='nde' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">NDE Request</p>
+          </div>
+          <div class="mt-2">
+            <a href="{% url 'nderequest' %}" class="btn btn-secondary text-white">REQUEST</a>
+            <a href="{% url 'ndereport' %}" class=" btn btn-info text-white ">REPORT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/nde_header.html' with active='nde_request' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">NDE Request</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'nderequest' %}" class="btn btn-secondary text-white btn-lg">REQUEST</a>
+          <a href="{% url 'ndereport' %}" class=" btn btn-info text-white btn-lg">REPORT</a>
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/nde_header.html' with active='nde_request' %} </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <!-- <div class="text-center">
+          <a href="{% url 'nderequest' %}" class="btn btn-outline-secondary">REQUEST</a>
+          <a href="{% url 'ndereport' %}" class=" btn btn-info text-white ">REPORT</a>
+        </div> -->
+
+        <div class="col-12 col-lg-6 mx-auto">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <form method="get" action="">
+              <div class="row">
+                <div class="mt-3 mt-lg-0 col-12 col-lg-5">
+                  <p class="text-muted m-0">NDE type</p>
+                  <select class="form-select " id="Material_id" name="ndt" aria-label="Default select example" onchange="get_grade()">
+                    <option selected disabled>Select</option>
+                    <option value="RT">RT</option>
+                    <option value="MTPT">MT/PT</option>
+                    <option value="PMI">PMI</option>
+                  </select>
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-5">
+                  <p class="text-muted m-0">Req No</p>
+                  <select class="form-select " id="grade_id" name="rqs" >
+                    <option selected disabled>Select</option>
+                  </select>
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-2 pt-lg-4 pt-0">
+                  <button class="btn btn-info text-white w-100" type="submit">FIND</button>
+                </div>
+              </div>   
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="border">
+      <div class="row">
+
+        <div class="col-12 col-lg-8 ">
+          <div class="card shadow-sm rounded-3 border-0   py-2">
+            <div class="card-body ">
+              <p class="text-start fw-bold m-0 mb-3">Report here</p>
+              <div class="row">
+                <div  class="mt-3 mt-lg-0 col-12 col-lg-2">
+                  <input class="form-control form-control-sm " type="text" id="reportNo_id" name="reportNo" placeholder="Report No" aria-label="default input example" />
+                </div>
+                <div  class="mt-3 mt-lg-0 col-12 col-lg-2">
+                  <input class="form-control form-control-sm " type="date" id="date_id" name="date" placeholder="Default input" aria-label="default input example" />
+                </div>
+                <div  class="mt-3 mt-lg-0 col-12 col-lg-2">
+                  <select class="form-select form-select-sm" id="category_id" aria-label="Default select example">
+                    <option selected value="Intial-Acc">Intial-Acc</option>
+                    <option value="Intial-Rej">Intial-Rej</option>
+                    <option value="T1">T1</option>
+                    <option value="T2">T2</option>
+                  </select>                 
+                </div>
+                <div  class="mt-3 mt-lg-0 col-12 col-lg-2">
+                  <select class="form-select form-select-sm" id="mtpt_id" aria-label="Default select example">
+                    <option selected value="MT">MT</option>
+                    <option value="PT">PT</option>
+                  </select>                 
+                </div>
+  
+                <div  class="mt-3 mt-lg-0 col-12 col-lg-1">
+                  <input class="form-control form-control-sm " type="text" id="flimAcc_id" name="flimAcc" placeholder="flim acc" aria-label="default input example" />
+                </div>
+                <div  class="mt-3 mt-lg-0 col-12 col-lg-1">
+                  <input class="form-control form-control-sm " type="text" id="flimRej_id" name="flimRej" placeholder="flim rej" aria-label="default input example" />
+                </div>
+                <div class="mt-3 mt-lg-0 col-12 col-lg-2  ">
+                  <button class="btn btn-outline-primary btn-sm  w-100" disabled id="reqSubmitId" type="submit" onclick="submitForm()" type="submit">Report</button>
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-sm border-0 rounded-3 mt-3 ">
+        <div class="card-header bg-white p-3">
+          <p class="m-0 fw-bold fs-5 ">Report list </p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="table-responsive datatabel_style pb-2 text-center">
+                <table id="example" class="table  m-0 nowrap text-center" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th class=" text-muted text-center">Req</th>
+                      <th class=" text-muted text-center">Drawing Nmber</th>
+                      <th class=" text-muted text-center">SHT No</th>
+                      <th class=" text-muted text-center">Joint No</th>
+                      <th class=" text-muted text-center">Welder 1</th>
+                      <th class=" text-muted text-center">Welder 2</th>
+                      <th class=" text-muted text-center">Size</th>
+                      <th class=" text-muted text-center">Thk</th>
+                      <th class=" text-muted text-center">Rep no</th>
+                      <th class=" text-muted text-center">Date</th>
+                      <th class=" text-muted text-center">category</th>
+                      <th class=" text-muted text-center">MT/PT</th>
+                      <th class=" text-muted text-center">Acc</th>
+                      <th class=" text-muted text-center">Rej</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for nde in list %}
+                    <tr>
+                      <td class=" align-middle "> 
+                        <div class="form-check"> 
+                          <input class="form-check-input" name="spool" type="checkbox" onchange="selctedReq()" 
+                          value="{{nde.nde_req.id}}" id="flexCheckDefault"> </div> </td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.drgno}}</td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.sheetno}}</td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.weldno}}</td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.welder1.welderid}}</td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.welder2.welderid}}</td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.size}}</td>
+                      <td class=" align-middle">{{nde.nde_req.searchprocess.thk}}</td>
+                      <td class=" align-middle">{{ nde.request_no_dct.reportno|default:"-" }}  </td>
+                      <td class=" align-middle"> {{nde.request_no_dct.date|default:"-"}}</td>
+                      <td class=" align-middle"> {{nde.request_no_dct.category|default:"-"}}</td>
+                      <td class=" align-middle"> - </td>
+                      <td class=" align-middle"> {{nde.request_no_dct.flim_accept|default:"-"}}</td>
+                      <td class=" align-middle"> {{nde.request_no_dct.flim_reject|default:"-"}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  //   $(document).ready(function () {
+  //   var tabel = $("#example").DataTable({
+  //     buttons: [""],
+      
+  //     aLengthMenu: [
+  //       [25, 50, 100, 200, -1],
+  //       [25, 50, 100, 200, "All"]
+  //   ],
+  //   iDisplayLength: -1
+  //   });
+  //   tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  // });
+
+//   $(document).ready(function() {
+//     $('#example').DataTable({
+//       "dom": '<"top"i>rt<"bottom"lp><"clear">',
+//         "paging": false,  
+//         "searching": false,  
+//         "info": false  
+//     });
+    
+// });
+
+const selctedReq = () => {
+  let checkboxes = document.querySelectorAll('input[name="spool"]:checked');
+  let selectedValues = [];
+  checkboxes.forEach((checkbox) => {
+    selectedValues.push(checkbox.value);
+  });
+  
+  let buttonDisabe = document.getElementById("reqSubmitId")
+  if(selectedValues.length  >= 1  ){
+    buttonDisabe.removeAttribute("disabled")
+
+  }
+  else{
+    buttonDisabe.setAttribute('disabled', true);
+  }
+
+  
+}
+
+
+function submitForm() {
+    let checkboxes = document.querySelectorAll('input[name="spool"]:checked');
+    let selectedValues = [];
+
+    checkboxes.forEach((checkbox) => {
+        selectedValues.push(checkbox.value);
+    });
+
+    sendAjaxRequest(selectedValues);
+}
+
+
+
+function sendAjaxRequest(selectedValues) {
+
+    var reportNo = $('#reportNo_id').val();
+    var date = $('#date_id').val();
+    var category = $('#category_id').val();
+    var mtpt = $('#mtpt_id').val();
+    var flimAcc = $('#flimAcc_id').val();
+    var flimRej = $('#flimRej_id').val();
+
+    console.log(mtpt);
+    
+    let data = {
+        'reportno': reportNo,
+        'date': date,
+        'category': category,
+        'mtpt': mtpt,
+        'flim_accept': flimAcc,
+        'flim_reject': flimRej,
+        'selected_spools': selectedValues
+    };
+
+    fetch('/Qc/undereportrequestnoreq/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()  
+        },
+        body: JSON.stringify(data) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        location.reload();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function getCsrfToken() {
+    let name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+ function get_grade() {
+    var materialId = $('#Material_id').val();
+    console.log(materialId);
+    let mtpt = document.getElementById("mtpt_id")
+    let acc = document.getElementById("flimAcc_id")
+    let rej = document.getElementById("flimRej_id")
+    let cate = document.getElementById("category_id")
+    if(materialId == "RT"){
+      mtpt.parentElement.classList.add("d-none")
+      acc.parentElement.classList.remove("d-none")
+      rej.parentElement.classList.remove("d-none")
+      cate.parentElement.classList.remove("d-none")
+      
+    }
+    else if ( materialId == "MTPT" ){
+      mtpt.parentElement.classList.remove("d-none")
+      acc.parentElement.classList.add("d-none")
+      rej.parentElement.classList.add("d-none")
+      cate.parentElement.classList.add("d-none")
+      
+    }
+    else{
+      mtpt.parentElement.classList.add("d-none")
+      acc.parentElement.classList.add("d-none")
+      rej.parentElement.classList.add("d-none")
+      cate.parentElement.classList.add("d-none")
+
+    }
+    
+
+    $.ajax({
+        type: 'GET',
+        url: "/Qc/fetch-ndereq-details/?material=" + materialId,
+        success: function (data) {
+
+          var gradesSelect = $('#grade_id');
+          gradesSelect.empty()
+          gardes = data.products
+
+        for ( let i in gardes ){
+          grade_id = gardes[i].id;
+          grade_value = gardes[i].GradeNmae;
+          gradesSelect.append($('<Option>',{
+            value: grade_id,
+            text: grade_value
+          }));
+        }
+    
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching grades:", error);
+        }
+    });
+}
+ 
+
+</script>
+{% endblock body_js %}

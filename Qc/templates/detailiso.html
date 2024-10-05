@@ -1,0 +1,498 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='weld_history' %}
+{% include 'include/sidebar.html' with active='weld_history' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <a href="#" type="button" class="btn btn-danger text-white" >DELETE</a >
+            <a href="#" type="button" class="btn btn-info text-white" >EDIT</a >
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='home' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <a  type="button" class="btn btn-danger text-white btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" >DELETE</a >
+          <a href="{% url 'unew_isoedit' data.id %}" type="button" class="btn btn-info text-white btn-lg" >EDIT</a >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+          <div class="col-lg-6">
+
+            <div class="card shadow-sm border-0 rounded-3 ">
+              <div class="card-header p-3">
+                <p class="fw-bold m-0">Detail Project</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">ISO NUMBER</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.drgno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Drawing Rev Prefix</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.drgprefix}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">HOLD</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.hold}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Sub Project No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.subproject}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">PC No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.pcno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">PIPE CLASS</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.piping}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">AREA</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.area}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">LINE NUMBER</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.lineno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">SERVICE</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.service}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">PID No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.pidno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">T PRESS</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.tpress}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">T MEDIA</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.tmedia}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> MOM </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.mom}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> ACCEPT. STD </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.acceptance}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+               
+              
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+
+            <div class="card shadow-sm border-0 rounded-3 ">
+              <div class="card-header p-3">
+                <p class="fw-bold m-0">Detail Project</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> MATL </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.material}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> RT REQT </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.rt}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0"> PWHT REQT </p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.pwht}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">BHN REQT</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.bhn}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">FERRITE REQT</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.ferraite}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">MT/PT REQT</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.mtpt}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">PMI REQT</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.pmi}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">INSULATION</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.insulation}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">PAINT SYS</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.paint}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">OPT TEMP</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.opttemp}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">ITEM NO</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.itemno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">CONTRACT NO</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.contractno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">UNIT NO</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.unit}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Sheet No</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.sheetno}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="small text-muted m-0">Rev NO</p>
+                  </div>
+                  <div class="col-lg-9">
+                    <p class="small m-0">{{data.rev}}</p>
+                  </div>
+                </div>
+                <!-- <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">PLATE </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.plate}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">LENGTH </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.length}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">THK </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.thk}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">WELD CONDITION</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.weldcondition}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">GROUND </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.ground}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">WELDED </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.welded}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">HEAT TREATMENT</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.treatment}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">PRE </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.pre}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0">POST </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.post}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> RULE EQUIPMENT </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.rule}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> WELDING GUAGE </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.welding}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> MAGNIFYING GLASS </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.magnifying}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> OTHERS  </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.others}}</p>
+                  </div>
+                </div>
+                <div class="border_seprator my-2"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <p class="small text-muted m-0"> FINAL SURFACE REQD </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="small m-0">{{data.finalsurface}}</p>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <div class="modal-body pt-0">
+          <div class="text-center">
+            <img src="{% static 'img/icons8-warning.gif' %}" width="100" alt="" />
+          </div>
+          <div class="">
+            <p class="m-0 text-center fs-5">Are you sure?</p>
+            <p class="m-0 text-center text-muted small"> Do you really want to delete these records? This process cannot be undone. </p>
+          </div>
+          <div class="d-flex justify-content-center pt-3">
+            <button type="button" class="btn btn-secondary text-white me-3" data-bs-dismiss="modal" > CANCEL </button>
+            <form action="{% url 'unew_isodel'  %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="drgno" value="{{data.drgno}}" >
+              <input type="hidden" name="delete_type" value="iso" >
+              <button type="submit" class="btn btn-danger text-white w-100"> DELETE </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+  $(document).ready(function () {
+    var tabel = $("#example").DataTable({
+      buttons: [""],
+    });
+
+    tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  });
+</script>
+{% endblock body_js %}

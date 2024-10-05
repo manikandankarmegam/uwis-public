@@ -1,0 +1,178 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Add Welder</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='welders' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Add Welder</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='welders' %} </div>
+    <div class="p-lg-4">
+
+      <form action="" method="post">
+        {% csrf_token %}
+      <div class="row my-3 my-lg-0">
+        <div class="col-12 mx-auto">
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Create welder</p>
+            </div>
+            <div class="card-body p-lg-5">
+              <div class="row">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted">Welder Id</p>
+                </div>
+                <div class="col-lg-9">
+                  <input class="form-control" type="text" name="welder_id" value="{% if data.welderid %}{{data.welderid}}{% else %}{% endif %}"  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted">Welder Name</p>
+                </div>
+                <div class="col-lg-9">
+                  <input class="form-control" type="text" name="welder_name" value="{% if data.weldname %}{{data.weldname}}{% else %}{% endif %}"   />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted">Fin No</p>
+                </div>
+                <div class="col-lg-9">
+                  <input class="form-control" type="text" name="fin_no" value="{% if data.finno %}{{data.finno}}{% else %}{% endif %}"   />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted">Primos No</p>
+                </div>
+                <div class="col-lg-9">
+                  <input class="form-control" type="text" name="primos_no" value="{% if data.primosno %}{{data.primosno}}{% else %}{% endif %}"   />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted">Primos Expiry Date</p>
+                </div>
+                <div class="col-lg-9">
+                  <input class="form-control text-muted" type="date" name="expiry_date" {% if data.primosexpdate %} value="{{ data.primosexpdate|date:"Y-m-d" }}" {% endif %}     />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted">Contractor</p>
+                </div>
+                <div class="col-lg-9">
+                  <select class="form-select" name="con" aria-label="Default select example">
+                    <option disabled  selected value="">Select a Contractor</option>
+                    {% for i in con %}
+                    <option value="{{i.id}}" {% if i.id|stringformat:"s" == request.GET.con %} selected {% endif %}>{{ i.contractor }}</option> 
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mx-auto mt-3">
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Assign WPS </p>
+            </div>
+            <div class="card-body ">
+              <div class="table-responsive">
+                <table id="example" class="table m-0 nowrap" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center text-muted">Add</th>
+                      <th class="text-center text-muted">WPS No</th>
+                      <th class="text-center text-muted">Start Size </th>
+                      <th class="text-center text-muted">ENd Size </th>
+                      <th class="text-center text-muted">Start Shedule</th>
+                      <th class="text-center text-muted">ENd Shedule</th>
+                      <th class="text-center text-muted">Material</th>
+                      <th class="text-center text-muted">Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                 
+                    {% for wps in wps %}
+                    <tr>
+                      <td class="text-center"> 
+                        <div class="form-check d-flex justify-content-center">
+                          <input class="form-check-input" name="wpsSelect" {% if wps in selected_wps %}checked{% endif %} type="checkbox" value="{{wps.id}}" id="flexCheckDefault">
+                        </div>
+                      </td>
+                      <td class="text-center">{{wps.wpsno}}</td>
+                      <td class="text-center">{{wps.pipesize1}}</td>
+                      <td class="text-center">{{wps.pipesize2}}</td>
+                      <td class="text-center">{{wps.pipethickness1}}</td>
+                      <td class="text-center">{{wps.pipethickness2}}</td>
+                      <td class="text-center">{{wps.material.materials}}</td>
+                      <td class="text-center">{{wps.grade.materialgrade}}</td>
+                 
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{% url 'welders' %}" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+                    <button class="btn btn-info text-white" type="submit"> SUBMIT </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </form>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %}
+{% block body_js %}
+
+{% endblock body_js %}

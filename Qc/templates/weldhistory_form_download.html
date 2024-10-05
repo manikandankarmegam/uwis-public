@@ -1,0 +1,285 @@
+{% extends 'include/main.html' %}
+{% load static %}
+{% block body_content %}
+<style type="text/css">
+   	body{
+		font-family: Arial,Verdana, Geneva, Helvetica, sans-serif;
+		font-size: 11px;
+		font-weight: 300;
+	}
+	
+	input {font-size: 12px; /*border:0px solid;*/}
+	table{
+		
+		border-spacing:0;
+		border-collapse:collapse;
+		vertical-ali
+	}
+	
+	table tr td{vertical-align:top}
+			
+	.tbl-main, .tbl-header, .tbl-footer, .tbl-body{
+		width:1200px;
+	}
+	
+	.tbl-main{margin:0px auto;}
+	
+	.tbl-tal tr td {text-align: left}
+	.no-border  tr td, .no-border  tr th{border:none}
+	.no-border-must  tr td, .no-border-must  tr th{border:none !important}
+	
+	.bordered tr td, .bordered tr th { border: 1px solid #666; border-right:none;} 	
+	.bordered tr td:last-child, .bordered tr th:last-child{border-right:1px solid #666}
+	.img-width{ width : 80px}
+	.tac { text-align:center}
+	.center { margin:0px auto}
+	
+	.w100p{width:100% !important}
+	.w33p{width:33% !important}
+	
+	.pad5 tr th,.pad5 tr td { padding: 5px 3px}
+	.pad8 tr th,.pad8 tr td { padding: 8px}
+	.pad10 tr th,.pad10 tr td { padding: 10px}
+	.pad0 tr th,.pad0 tr td { padding: 0px}
+	
+	.w80{width:80px}
+	.w100{width:100px}
+	.w220{width:220px}
+	.w320{width:320px}
+	.bl{border-left:1px solid #666}
+	.bb{border-bottom:1px solid #666}
+	
+	tr.tac td {text-align: center}
+	tr.bg_grey td, tr.bg_grey th {background-color:#e5e5e5}
+	
+	.page-break { margin-top:20px}
+	@media print {
+		.page-break	{ display: block; page-break-before: always; margin-top:0px}
+		input{border:0px solid}
+	}
+	
+	tr.info td{line-height:150%}
+	tr.vam td{vertical-align:middle}
+	
+	table.font_big tr td{font-size: 1.2em !important}
+</style>
+
+<div>
+    <table class="tbl-main">
+        <tr>
+            <td>
+                <table class="tbl-header bordered pad5">
+                    <tr>
+                        <th>
+                            <img src="{{data.0.ProId.owner_logo.url}}" alt="" />
+                        </th>
+                        <td>
+                            <table class="no-border-must w100p">
+                                <tr>
+                                    <th class="center">
+                                        <h2 class="center">FIT-UP & VISUAL INSPECTION REPORT (SHOP/FIELD)</h2>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="margin:0px auto;width:600px" class="font_big">
+                                            <tr>
+                                                <td style="width:100px">
+                                                    PROJECT
+                                                </td>
+                                                <td> : {{data.0.ProId.projectname}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td> PROJECT NO </td>
+                                                <td> : {{data.0.ProId.projectno}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CLIENT </td>
+                                                <td> : {{data.0.ProId.client}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <th>
+                            <img name="clfid" src="{{data.0.ProId.client_logo.url}}" style="padding: 0px 20px" />
+                        </th>
+                    </tr>
+                    <!-- /HEADER ROW 1--->
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="tbl-header bordered pad5">
+                    <!-- HEADER ROW 2--->
+                    {% for fitup in data|slice:1 %}
+                    <tr>
+                        <td>LINE NO: {{fitup.lineno}}</td>
+                        <td>DWG NO:
+                            <a href="" style="text-decoration:none">
+                                {{fitup.drgno}} </a>
+                        </td>
+                        <td>SHT NO: &nbsp; {{fitup.sheetno}}</td>
+                        <td>REV NO: &nbsp; {{fitup.rev}}</td>
+                        <td>PIPE CLASS:{{fitup.piping}}</td>
+                        <td>REPORT NO: -</td>
+                    </tr>
+                    <!-- /HEADER ROW 2 --->
+                    <tr>
+                        <td style="vertical-align:middle">
+                            AREA:&nbsp;&nbsp; {{fitup.area}} </td>
+                        <td colspan="3">&nbsp;</td>
+                        <td style="vertical-align:middle">
+                            DATE: {{fitup.fitupdate}};
+                        <td style="vertical-align:middle">
+                            PAGE: &nbsp;&nbsp; - </td >
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!--- BODY TABLE --->
+                <table class="tbl-body bordered pad5">
+
+                    <tr class="tac bg_grey vam">
+                        <td colspan="5">JOINT</td>
+                        <td colspan="4">MATERIAL</td>
+                        <td colspan="2">SIZE</td>
+                        <td colspan="2">FIT-UP</td>
+                        <td rowspan="2">WPS</td>
+                        <td colspan="2">WELDER ROOT</td>
+                        <td colspan="2">WELDER FILL/CAP</td>
+                        <td rowspan="2">WELDED <BR /> DATE</td>
+                        <td colspan="2">VISUAL</td>
+                    </tr>
+                    <tr class="tac bg_grey vam">
+                        <td>NO.</td>
+                        <td style="width:30px">SPL NO</td>
+                        <td>TYPE</td>
+                        <td>NDE%</td>
+                        <td>MTPT%</td>
+                        <td>DESC1</td>
+                        <td>MAT SPEC1</td>
+                        <td>DESC2</td>
+                        <td>MAT SPEC2</td>
+                        <td style="width:30px">DIA (INCH)</td>
+                        <td style="width:30px">THK (MM)</td>
+                        <td>DATE</td>
+                        <td>RESULT</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>DATE</td>
+                        <td>RESULT</td>
+                    </tr>
+                    {% for fitup in data %}
+                    <tr class="tac">
+                        <td>{{fitup.weldno}}</td>
+                        <td>{{fitup.spoolno}}</td>
+                        <td>{{fitup.type}}</td>
+                        <td>{{fitup.rt}}</td>
+                        <td>{{fitup.mtpt}}</td>
+                        <td>{{fitup.material}}</td>
+                        <td>{{fitup.mat_A}}</td>
+                        <td>{{fitup.material}}</td>
+                        <td>{{fitup.mat_B}}</td>
+                        <td>{{fitup.size}}</td>
+                        <td>{{fitup.thk}}</td>
+                        <td>{{fitup.fitupdate}}</td>
+                        <td>{{fitup.rtrepair}}</td>
+                        <td>{{fitup.wpsnum.wpsno}}</td>
+                        <td>{{fitup.welder1.welderid}}</td>
+                        <td>{{fitup.welder1.welderid}}</td>
+                        <td>{{fitup.welder2.welderid}}</td>
+                        <td>{{fitup.welder2.welderid}}</td>
+                        <td>{{fitup.start}}</td>
+                        <td>{{fitup.start}}</td>
+                        <td>{{fitup.rtrepair}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <!---/BODY TABLE -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="tbl-footer bordered pad5">
+                    <tr class="info">
+                        <td style="height:50px">REMARK: </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="tbl-footer bordered pad8">
+                    <tr class="bg_grey">
+                        <th>COMPLETED BY</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="w100">COMPANY</th>
+                        <th>UTOC QA/QC</th>
+                        <th>NESTE </th>
+                        <th>MOM/3rd party</th>
+                    </tr>
+                    <tr>
+                        <th>SIGNATURE</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>NAME</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>DATE</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table width="1300" align="center">
+        <tr>
+            <td style='font-size:11px'>&emsp;&emsp;&emsp;&emsp;&emsp;UE-F-010</td>
+        </tr>
+    </table>
+</div>
+
+
+
+{% endblock body_content %}
+{% block body_js %}
+<script>
+    // $(document).ready(function () {
+    //   var tabel = $("#example").DataTable({
+    //     buttons: [""],
+    //   });
+
+    //   tabel.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+    // });
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "dom": '<"top"i>rt<"bottom"lp><"clear">',
+            "paging": false,
+            "searching": false,
+            "info": false
+        });
+
+    });
+</script>
+{% endblock body_js %}

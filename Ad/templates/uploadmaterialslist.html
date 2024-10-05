@@ -1,0 +1,305 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">Create MIR</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">Create MIR</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+
+    <div class="p-lg-4  my-3 my-lg-0">
+     
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+
+          <div class="col-lg-12 mt-3">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Create MIR </p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Location</p>
+                    <select class="form-select text-muted" name="location" >
+                      {% for loc in locations %}
+                      <option value="{{loc.weldlocation}}" >{{loc.weldlocation}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Category</p>
+                    <select class="form-select text-muted"  name="category" >
+                      <option selected="" disabled="">Select</option>
+                      <option value="MOM">MOM</option>
+                      <option value="NON-MOM">NON-MOM</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">MIR No</p>
+                    <input class="form-control text-muted" type="text" name="mirNo"  >
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Start Date</p>
+                    <input class="form-control text-muted" type="date" name="startDate" >
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Part ID</p>
+                    <input class="form-control text-muted" type="text"  name="partId"   >
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Item</p>
+                    <select class="form-select text-muted"  name="item" >
+                      {% for item in material_item_list %}
+                      <option value="{{item.value}}" >{{item.value}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Material</p>
+                    <select class="form-select text-muted" id="Material_id"  name="material" onchange="get_grade()">
+                      {% for material in mat_list %}
+                      <option value="{{material.materials}}" >{{material.materials}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">Grade</p>
+                    <select class="form-select text-muted" id="grade_id" name="grade" >
+                      {% for grade in material_grade_list %}
+                      <option value="{{grade.value}}" >{{grade.value}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted mt-2">W-Type</p>
+                    <select class="form-select text-muted"  name="WType" >
+                      {% for type in weld_type_list %}
+                      <option value="{{type.weldType}}" >{{type.weldType}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2" >Size 1</label>
+                      <select class="form-select text-muted"  name="size1" id="size1" onchange="getSch('1')">
+                        <option selected disabled >select size</option>
+
+                        {% for size in material_size_list %}
+                        <option value="{{size.size}}" >{{size.size}}</option>
+                        {% endfor %}
+                      </select>                    
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2" >SCH 1</label>
+                      <select class="form-select text-muted"  name="sch1" id="sch1" onchange="sizesch_1('1')">
+                      </select>                    
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">THK 1</label>
+                      <input class="form-control text-muted" type="text" name="thk1" id="thk1"   >
+                    </div>
+                  
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">Size 2</label>
+                      <select class="form-select text-muted"  name="size2" id="size2" onchange="getSch('2')">
+                        <option selected disabled >select size</option>
+
+                        {% for size in material_size_list %}
+                        <option value="{{size.size}}" >{{size.size}}</option>
+                        {% endfor %}
+                      </select>             
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">SCH 2</label>
+                      <select class="form-select text-muted"  name="sch2" id="sch2" onchange="sizesch_1('2')">
+                      </select>                    
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">THK 2</label>
+                   <input class="form-control" value="" name="thk2" id="thk2" type="text"   />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">QTY</label>
+                   <input class="form-control" value="" name="qty" type="text"   />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">Length</label>
+                   <input class="form-control" value="" name="length" type="text"   />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">Heat No</label>
+                   <input class="form-control" value="" name="heatNo" type="text"   />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">Certificate No</label>
+                   <input class="form-control" value="" name="certiNo" type="text"   />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">MFR/Orgin</label>
+                   <input class="form-control" value="" name="mfr" type="text"   />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="inputPassword4" class="form-label text-muted mt-2">Cal QTY</label>
+                   <input class="form-control" value="" name="callQty" type="text"   />
+                    </div>
+                </div>
+                <hr class="border">
+
+                <div class="row mt-3">
+                  <div class="col-lg-12">
+                    <div class="d-grid gap-2 d-flex justify-content-end">
+                      <a href="" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+                      <button type="submit" class="btn btn-info text-white"> SUBMIT </button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </div>
+        </div>
+
+      </div>
+      </form>
+    </div>
+  </div>
+  </section>
+{% endblock body_content %}
+{% block body_js %}
+<script>
+
+  function get_grade() {
+    var materialId = $('#Material_id').val();
+
+    $.ajax({
+      type: 'GET',
+      url: "/Ad/material-grade-fetch/?material="+materialId,
+      success: function (data) {
+        console.log(data);
+        
+        var gradesSelect = $('#grade_id');
+        gradesSelect.empty()
+        gardes = data.results
+
+        for (let i in gardes) {
+          grade_id = gardes[i];
+          grade_value = gardes[i];
+          gradesSelect.append($('<Option>', {
+            value: grade_id,
+            text: grade_value
+          }));
+        }
+
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching grades:", error);
+      }
+    });
+  }
+
+function getSch(row) {
+  var size = $('#size'+row).val();
+  var sch = $('#sch'+row)
+
+  $.ajax({
+      type: 'GET',
+      url: "/Ad/material-schedule-fetch/?size="+size,
+      success: function (data) {
+        console.log(data);
+
+        var schSelect = $('#sch'+row);
+        schSelect.empty()
+        sch = data.results
+
+        for (let i in sch) {
+          grade_id = sch[i];
+          grade_value = sch[i];
+          schSelect.append($('<Option>', {
+            value: grade_id,
+            text: grade_value
+          }));
+        }
+        $("#thk"+row).val(data.thickness)
+
+
+
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching grades:", error);
+      }
+    });
+
+}
+
+
+  function sizesch_1(row) {
+    var size = $('#size'+row).val();
+    var sch = $('#sch'+row).val()
+
+
+
+    $.ajax({
+      type: 'GET',
+      url: "/Ad/material-thickness-fetch/?size="+size+"&schedule="+sch,
+      success: function (data) {
+        console.log(data);
+        
+        $("#thk"+row).val(data.results)
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching grades:", error);
+      }
+    });
+    
+
+  }
+
+
+
+ 
+  
+
+  
+
+
+
+</script>
+{% endblock body_js %}
+

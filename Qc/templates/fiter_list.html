@@ -1,0 +1,183 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_header %} 
+
+
+{% endblock body_header %}
+{% block body_content %} 
+{% include 'include/header.html' with active='fiter_list' %}
+{% include 'include/sidebar.html' with active='fiter_list' %}
+
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="/static/img/utoc_dualleaf.png" alt="">
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3 col-12">
+                  <p class="m-0 mb-2 text-muted">Find Flange</p>
+                  <div class="d-flex justify-content-between">
+                    <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                    <button class="btn btn-info ms-2 text-white" type="button" id="button-addon2" onclick="find_open()" > FIND </button>
+                    <!-- <button class="btn btn-success ms-2 text-white" type="button" >  QR </button> -->
+                    <button id="scan-button" class="ms-2 text-white btn btn-success btn-block">Start </button>
+                    <button id="stop-button" class="ms-2 text-white btn btn-danger btn-block mt-2" style="display: none;">Stop </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-lg-4 mx-auto">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-body">
+                <div id="my-qr-reader" class="mb-3   rounded"></div>
+              
+            </div>
+          </div>
+          </div>
+        </div>
+    
+        <div class="col-lg-12 mt-3 " id="hide_search">
+     
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-white p-3">
+              <p class="m-0 fw-bold fs-5 ">Flanges list </p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table id="example" class="table m-0 nowrap" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th class="align-middle text-center text-muted">Permanent Tag</th>
+                      <th class="align-middle text-center text-muted">Flange Status</th>
+                      <th class="align-middle text-center text-muted">Sheet no</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for tfa in tfa_list %}
+                    <tr>
+               
+                      <td class="align-middle text-center"> <a href="{% url 'fitter_photos' tfa.tfa.id  %}" class="text-info text-decoration-none">{{tfa.tfa.permanent_joint_id}}</a>  </td>
+                      <td class="align-middle text-center d-flex justify-content-center">
+                        <div class="alert alert-success border-success p-0 px-1  m-0">{{tfa.tfa.status}}</div>
+                      </td>
+                      <td class="align-middle text-center">{{tfa.tfa.sheet_no}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+
+{% endblock body_content %} 
+{% block body_js %}
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+// script.js file
+
+function domReady(fn) {
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(fn, 1000);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
+domReady(function () {
+    let htmlscanner = null;
+
+    // If found your QR code
+    function onScanSuccess(decodeText, decodeResult) {
+        // alert("Your QR code is: " + decodeText);
+        const targetUrl = `http://127.0.0.1:8000/Qc/ufiter_list/?search=${decodeText}`;
+        window.location.href = targetUrl;
+        // const getUrl = window.location.host
+
+        // console.log(`getUrl${decodeText}`);
+        
+
+    }
+
+    document.getElementById('scan-button').addEventListener('click', function() {
+        if (!htmlscanner) {
+            htmlscanner = new Html5Qrcode("my-qr-reader");
+            htmlscanner.start(
+                { facingMode: "user" }, // Use user-facing camera
+                { fps: 10, qrbox: 250 },
+                onScanSuccess)
+                .catch(err => {
+                    console.error("Error starting the scanner:", err);
+                });
+            
+            this.style.display = "none"; // Hide the start button
+            document.getElementById('stop-button').style.display = "block"; // Show the stop button
+        }
+    });
+
+    document.getElementById('stop-button').addEventListener('click', function() {
+        if (htmlscanner) {
+            htmlscanner.stop().then(() => {
+                console.log("QR Code scanning stopped.");
+                this.style.display = "none"; // Hide the stop button
+                document.getElementById('scan-button').style.display = "block"; // Show the start button
+                htmlscanner = null; // Reset the scanner
+            }).catch(err => {
+                console.error("Error stopping the scanner:", err);
+            });
+        }
+    });
+});
+
+
+</script>
+{% endblock body_js %}

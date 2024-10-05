@@ -1,0 +1,1029 @@
+
+{% extends 'include/main.html' %}
+{% load static %}
+{% block body_content %}
+
+<style>
+    div[size="a4"] {
+        width: 21cm;
+        height: 29.5cm;
+        font-size: 13px;
+        border: 1px solid #f0f0f0
+    }
+
+    select::-ms-expand {
+        display: none;
+    }
+
+
+
+    table.tblfull {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1px;
+    }
+
+    table.tblfull,
+    table.tblfull td,
+    table.tblfull th {
+        border: 1px solid #333;
+        padding: 3px;
+    }
+
+
+
+    table.reduced {
+        width: 98%;
+        margin: 5px 0px 3px 5px;
+    }
+
+    table.reduced,
+    table.reduced td,
+    table.reduced th {
+        border: 1px solid rgba(0, 0, 0, .25);
+    }
+
+    table.nborder,
+    table.nborder td,
+    table.nborder th {
+        border: none;
+        padding: 3px;
+    }
+
+    table.tblpad td {
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+
+    table.tblhead,
+    table.tblhead td,
+    table.tblhead th {
+        padding: 5px 3px;
+    }
+
+    table.tblfoot,
+    table.tblfoot td,
+    table.tblfoot th {
+        padding: 10px 3px;
+    }
+
+
+    .fl {
+        float: left
+    }
+
+    .fr {
+        float: right
+    }
+
+    .tar {
+        text-align: right;
+    }
+
+    .tac {
+        text-align: center;
+    }
+
+    .tal {
+        text-align: left;
+    }
+
+
+    .page-footer {
+
+        width: 21cm;
+
+    }
+
+    .page-header {
+
+        width: 21cm;
+
+    }
+
+    .page-body {
+        width: 21cm;
+    }
+
+    .pagediv {
+        border: 1px solid #333;
+        min-height: 13cm;
+        margin: 2px 1px 2px 0px;
+        position: relative;
+    }
+
+    .page-footer table,
+    .page-header table {
+        background: rgba(242, 217, 132, 0.3);
+    }
+
+    .nodisc {
+        padding-left: 0px;
+        padding-right: 5px;
+        margin: 2px 0px;
+        list-style-type: none;
+        clear: both;
+    }
+
+    .page {
+        page-break-after: always;
+    }
+
+    .w25 {
+        width: 25%;
+    }
+
+    .w33 {
+        width: 33%
+    }
+
+
+ 
+
+    @page {
+        margin: 20mm, 0mm
+    }
+
+    @media print {
+        div[size="a4"] {
+            border: none
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+        }
+
+        .phide {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        select.tick {
+            width: 30px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            text-overflow: '';
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            padding-left: 3px;
+        }
+
+        .cnb select.tick {
+            border: none
+        }
+
+        .page {
+            page-break-after: always;
+        }
+
+        .ptext {
+            border: none
+        }
+
+        .cnb select.tick {
+            border: none
+        }
+
+
+    }
+</style>
+
+<div size='a4' class='page'>
+    <div class='page-header' style='text-align: center'>
+        <table class='tblfull tblhead' style='margin-bottom:2px'>
+            <tr>
+                <td colspan='3' class='tar'>
+                    <b style='font-size:16px'>ISO PACK NO: {{isosheet.isopackno}}</b>
+                    <button type='button' onClick='window.print()' class='phide' style='font-weight:bold'> PRINT </button>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan='2' style='width:5cm'><img src='{{spool.ProId.owner_logo.url}}'></img></td>
+                <th style='font-size:1.3em; width:16cm'> UTOC ENGINEERING PTE LTD<br />  {{spool.ProId.client}}<br />  {{spool.ProId.projectno}} </th>
+                <td rowspan='2' style='width:5cm'> <img src='{{spool.ProId.client_logo.url}}'></img> </td>
+            </tr>
+            <tr style='font-size:1.3em'>
+                <th>PIPING ISO PACK CONTENTS</th>
+            </tr>
+        </table>
+        <table class='tblfull tblhead'>
+            <tr>
+                <td class='tal'><b>System No:</b>&nbsp; NA</td>
+                <td class='tal w33'><b>Contract No:</b>&nbsp; {{spool.ProId.cliconno}}</td>
+                <td class='tal w33'><b>UTOC Job No:</b>&nbsp; {{spool.ProId.utocjobno}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Sub Project No:</b>&nbsp;{{spool.ProId.projectno}}</td>
+                <td class='tal'></td>
+                <td class='tal'><b>PC No:</b>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>ISO No:</b>&nbsp;{{spool.drgno}}</td>
+                <td class='tal'><b>Sheet No:</b>&nbsp;{{spool.sheetno}} of &nbsp;18</td>
+                <td class='tal'><b>REV. No:</b>&nbsp;{{spool.rev}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Line No:</b>&nbsp;{{spool.lineno}}</td>
+                <td class='tal'><b>Unit:</b>&nbsp;{{spool.unitno}}</td>
+                <td class='tal'><b>Area:</b>&nbsp;{{spool.area}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class='page-body'>
+        <div class='pagediv' style='line-height:2em; font-size:14px'>
+            <table class='tblfull nborder w99p'>
+                <tr>
+                    <th style='padding:10px 0px'>&nbsp;&nbsp;</th>
+                    <th></th>
+                    <th>YES</th>
+                    <th>NO</th>
+                    <th>NA</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Completed Isometric Welding NDE-PWHT-PMI-Pack Handover & Acceptance - UE-F-059</td>
+                    <td>
+                        <select class="tick">
+                        <option value="0">&nbsp;</option>
+                        <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                        <option value="0">&nbsp;</option>
+                        <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                        <option value="0">&nbsp;</option>
+                        <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pipework Pre-Fabication Inspection Release -AmecFW-5084 Rev-1</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Weld Map Drawings / Isometric Drawings</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Fit-Up And Visual Inspection Reports - UE-F-010</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>Weld/Joint Inspection Summary Sheets - UE-F-015</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>ALL NDE Reports (RT / MT/PT / PMI / PWHT)</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td>Pipework Dimensional Check Certificate - UE-F-025D</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>Pipework Internal Cleaning Report - UE-F-025C</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td>Pipe Cleanliness Inspection Sheet</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>10</td>
+                    <td>Reinforcing Pad Test Report - UE-F-025E</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>11</td>
+                    <td>Release of Shop Fabricated Pipe Spools to Painting or Site Installation - UE-F-025B</td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class='page-footer'>
+        <table class='tblfull tblfoot'>
+            <tr>
+                <th colspan='4' class='tal' style='height:70px; vertical-align:0px'> REMARKS: </th>
+            </tr>
+            <tr>
+                <th class='tal w25'>COMPLETED BY</th>
+                <th class='w25'>Contractor</th>
+                <th class='w25'>Client</th>
+                <th class='w25'>Owner/Third Party(If Applicable)</th>
+            </tr>
+            <tr>
+                <th class='tal'>COMPANY</th>
+                <th>UTOC QA/QC</th>
+                <th>NESTE </th>
+                <th>MOM/3rd party</th>
+            </tr>
+            <tr>
+                <th class='tal'>SIGNATURE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>NAME</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>DATE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <ul class='nodisc'>
+        <li class='fl'>Page 1 of 1</li>
+        <li class='tar'>UE-F060</li>
+    </ul>
+</div>
+<div size='a4' class='page'>
+    <div class='page-header' style='text-align: center'>
+        <table class='tblfull tblhead' style='margin-bottom:2px'>
+            <tr>
+                <td colspan='3' class='tar'>
+                    <b style='font-size:16px'>ISO PACK NO: {{isosheet.isopackno}}</b>
+                    <button type='button' onClick='window.print()' class='phide' style='font-weight:bold'> PRINT </button>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan='2' style='width:5cm'><img src='{{spool.ProId.owner_logo.url}}'></img></td>
+                <th style='font-size:1.3em; width:16cm'> UTOC ENGINEERING PTE LTD<br />  {{spool.ProId.client}}<br />  {{spool.ProId.projectno}} </th>
+                <td rowspan='2' style='width:5cm'> <img src='{{spool.ProId.client_logo.url}}'></img> </td>
+            </tr>
+            <tr style='font-size:1.3em'>
+                <th>COMPLETED ISOMETRIC WELDING NDE/PWHT/PMI PACK HANDOVER AND ACCEPTANCE CERTIFICATE</th>
+            </tr>
+        </table>
+        <table class='tblfull tblhead'>
+            <tr>
+                <td class='tal'><b>System No:</b>&nbsp; NA</td>
+                <td class='tal w33'><b>Contract No:</b>&nbsp; {{spool.ProId.cliconno}}</td>
+                <td class='tal w33'><b>UTOC Job No:</b>&nbsp; {{spool.ProId.utocjobno}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Sub Project No:</b>&nbsp;{{spool.ProId.projectno}}</td>
+                <td class='tal'></td>
+                <td class='tal'><b>PC No:</b>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan='3' class='tal'>The following Isometric sheet has been completed and is submitted for <b>NESTE </b> acceptance.</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>ISO No:</b>&nbsp;{{spool.drgno}}</td>
+                <td class='tal'><b>Sheet No:</b>&nbsp;{{spool.sheetno}} of &nbsp;18</td>
+                <td class='tal'><b>REV. No:</b>&nbsp;{{spool.rev}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Line No:</b>&nbsp;{{spool.lineno}}</td>
+                <td class='tal'><b>Unit:</b>&nbsp;{{spool.unitno}}</td>
+                <td class='tal'><b>Area:</b>&nbsp;{{spool.area}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class='page-body'>
+        <div class='pagediv' style='padding:0px 10px'>
+            <h4>Declaration by Contractor</h4>
+            <p>We certify that the above Isometric is completed and complies with the following statements.</p>
+            <ol>
+                <li>Full documentation completed and included in pack are all original documents.</li>
+                <li>All welds have been visually examined.</li>
+                <li>All NDE/PMI/PWHT has been carried out, and any repairs completed and re-tested.</li>
+            </ol>
+            <ul class='nodisc' style='margin:40px 0px 10px 0px'>
+                <li class='fl' style='margin-right:20px'>
+                    <b>Name / Sign :</b> _______________________________________
+                </li>
+                <li><b>Date:</b> ____________________ </li>
+                <li style='margin-left: 140px;'>Signed For contractor</li>
+            </ul>
+            <p style='border-top:1px solid #000'>&nbsp;</p>
+            <p>The above Isometric has been checked by <b>NESTE </b> and found to be acceptable.</p>
+            <p>This ISO pack is now considered handed over.</p>
+            <ul class='nodisc' style='margin:40px 0px 10px 0px'>
+                <li class='fl' style='margin-right:20px'>
+                    <b>Name / Sign :</b> _______________________________________
+                </li>
+                <li><b>Date:</b> ____________________ </li>
+                <li style='margin-left: 140px;'>Signed for Client/Owner</li>
+            </ul>
+            <p style='border-top:1px solid #000'>&nbsp;</p>
+            <p>The above Isometric is returned to the contractor as the following items are incorrect/incomplete.
+            </p>
+            <ul class='nodisc' style='margin:40px 0px 10px 0px'>
+                <li class='fl' style='margin-right:20px'>
+                    <b>Name / Sign :</b> _______________________________________
+                </li>
+                <li><b>Date:</b> ____________________ </li>
+                <li style='margin-left: 140px;'>Signed for Client/Owner</li>
+            </ul>
+        </div>
+    </div>
+    <div class='page-footer'>
+        <table class='tblfull tblfoot'>
+            <tr>
+                <th colspan='4' class='tal' style='height:70px; vertical-align:0px'> REMARKS: </th>
+            </tr>
+            <tr>
+                <th class='tal w25'>COMPLETED BY</th>
+                <th class='w25'>Contractor</th>
+                <th class='w25'>Client</th>
+                <th class='w25'>Owner/Third Party(If Applicable)</th>
+            </tr>
+            <tr>
+                <th class='tal'>COMPANY</th>
+                <th>UTOC QA/QC</th>
+                <th>NESTE </th>
+                <th>MOM/3rd party</th>
+            </tr>
+            <tr>
+                <th class='tal'>SIGNATURE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>NAME</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>DATE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <ul class='nodisc'>
+        <li class='fl'>Page 1 of 1</li>
+        <li class='tar'>UE-{{isosheet.isopackno}}</li>
+    </ul>
+</div>
+<div size='a4' class='page'>
+    <div class='page-header' style='text-align: center'>
+        <table class='tblfull tblhead' style='margin-bottom:2px'>
+            <tr>
+                <td colspan='3' class='tar'>
+                    <b style='font-size:16px'>ISO PACK NO: {{isosheet.isopackno}}</b>
+                    <button type='button' onClick='window.print()' class='phide' style='font-weight:bold'> PRINT </button>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan='2' style='width:5cm'><img src='{{spool.ProId.owner_logo.url}}'></img></td>
+                <th style='font-size:1.3em; width:16cm'> UTOC ENGINEERING PTE LTD<br />  {{spool.ProId.client}}<br />  {{spool.ProId.projectno}} </th>
+                <td rowspan='2' style='width:5cm'> <img src='{{spool.ProId.client_logo.url}}'></img> </td>
+            </tr>
+            <tr style='font-size:1.3em'>
+                <th>PIPEWORK DIMENSIONAL CHECK CERTIFICATE</th>
+            </tr>
+        </table>
+        <table class='tblfull tblhead'>
+            <tr>
+                <td class='tal'><b>System No:</b>&nbsp; NA</td>
+                <td class='tal w33'><b>Contract No:</b>&nbsp; {{spool.ProId.cliconno}}</td>
+                <td class='tal w33'><b>UTOC Job No:</b>&nbsp; {{spool.ProId.utocjobno}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Sub Project No:</b>&nbsp;{{spool.ProId.projectno}}</td>
+                <td class='tal'></td>
+                <td class='tal'><b>PC No:</b>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>ISO No:</b>&nbsp;{{spool.drgno}}</td>
+                <td class='tal'><b>Sheet No:</b>&nbsp;{{spool.sheetno}} of &nbsp;18</td>
+                <td class='tal'><b>REV. No:</b>&nbsp;{{spool.rev}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Line No:</b>&nbsp;{{spool.lineno}}</td>
+                <td class='tal'><b>Unit:</b>&nbsp;{{spool.unitno}}</td>
+                <td class='tal'><b>Area:</b>&nbsp;{{spool.area}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class='page-body'>
+        <div class='pagediv'>
+            <table class='tblfull reduced'>
+                <tr>
+                    <th rowspan='2'>SPOOL NO.</th>
+                    <th rowspan='2'>PIPING CLASS</th>
+                    <th rowspan='2'>PIPE SIZE&SCH CORRECT</th>
+                    <th rowspan='2'>DIMENSIONS CORRECT</th>
+                    <th rowspan='2'>FLANGES RATINGS CORRECT</th>
+                    <th rowspan='2'>BRANCH ORIENTATION CORRECT</th>
+                    <th colspan='2'>PIPING INSPECTOR</th>
+                </tr>
+                <tr>
+                    <th>CONTRACTOR</th>
+                    <th>CLIENT</th>
+                </tr>
+                {% for spool in spool_queryset %}
+                
+             
+                <tr>
+                    <td class='tac'>{{spool.spoolno}}</td>
+                    <td class='tac'>{{spool.piping}}</td>
+                    <td class='tac'><span>&#10003;</span></td>
+                    <td class='tac'><span>&#10003;</span></td>
+                    <td class='tac cnb'>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1">NA</option>
+                            <option value="2"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td class='tac cnb'>
+                        <select class="tick">
+                            <option value="0">&nbsp;</option>
+                            <option value="1">NA</option>
+                            <option value="2"><span>&nbsp;&#10003;</span></option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class='page-footer'>
+        <table class='tblfull tblfoot'>
+            <tr>
+                <th colspan='4' class='tal' style='height:70px; vertical-align:0px'> REMARKS: </th>
+            </tr>
+            <tr>
+                <th class='tal w25'>COMPLETED BY</th>
+                <th class='w25'>Contractor</th>
+                <th class='w25'>Client</th>
+                <th class='w25'>Owner/Third Party(If Applicable)</th>
+            </tr>
+            <tr>
+                <th class='tal'>COMPANY</th>
+                <th>UTOC QA/QC</th>
+                <th>NESTE </th>
+                <th>MOM/3rd party</th>
+            </tr>
+            <tr>
+                <th class='tal'>SIGNATURE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>NAME</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>DATE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <ul class='nodisc'>
+        <li class='fl'>Page 1 of 1</li>
+        <li class='tar'>UE-F-025D</li>
+    </ul>
+</div>
+<div size='a4' class='page'>
+    <div class='page-header' style='text-align: center'>
+        <table class='tblfull tblhead' style='margin-bottom:2px'>
+            <tr>
+                <td colspan='3' class='tar'>
+                    <b style='font-size:16px'>ISO PACK NO: {{isosheet.isopackno}}</b>
+                    <button type='button' onClick='window.print()' class='phide' style='font-weight:bold'> PRINT </button>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan='2' style='width:5cm'><img src='{{spool.ProId.owner_logo.url}}'></img></td>
+                <th style='font-size:1.3em; width:16cm'> UTOC ENGINEERING PTE LTD<br />  {{spool.ProId.client}}<br />  {{spool.ProId.projectno}} </th>
+                <td rowspan='2' style='width:5cm'>
+                    <img src='{{spool.ProId.client_logo.url}}'></img>
+                </td>
+            </tr>
+            <tr style='font-size:1.3em'>
+                <th>PIPEWORK INTERNAL CLEANING REPORT</th>
+            </tr>
+        </table>
+        <table class='tblfull tblhead'>
+            <tr>
+                <td class='tal'><b>System No:</b>&nbsp; NA</td>
+                <td class='tal w33'><b>Contract No:</b>&nbsp; {{spool.ProId.cliconno}}</td>
+                <td class='tal w33'><b>UTOC Job No:</b>&nbsp; {{spool.ProId.utocjobno}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Sub Project No:</b>&nbsp;{{spool.ProId.projectno}}</td>
+                <td class='tal'></td>
+                <td class='tal'><b>PC No:</b>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>ISO No:</b>&nbsp;{{spool.drgno}}</td>
+                <td class='tal'><b>Sheet No:</b>&nbsp;{{spool.sheetno}} of &nbsp;18</td>
+                <td class='tal'><b>REV. No:</b>&nbsp;{{spool.rev}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Line No:</b>&nbsp;{{spool.lineno}}</td>
+                <td class='tal'><b>Unit:</b>&nbsp;{{spool.unitno}}</td>
+                <td class='tal'><b>Area:</b>&nbsp;{{spool.area}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class='page-body'>
+        <div class='pagediv'>
+            <table class='tblfull reduced'>
+                <tr>
+                    <th>SPOOL NO.</th>
+                    <th>PIPING CLASS</th>
+                    <th style='width:100px'>SIZE</th>
+                    <th>CLEANING SATISFACTORY <br>(YES/NO) </th>
+                    <th style='width:240px'>OPEN END PROTECTION PROVIDED<br>(YES/NO)</th>
+                </tr>
+                {% for spool in spool_queryset %}
+                <tr>
+                    <td class='tac'>{{spool.spoolno}}</td>
+                    <td class='tac'>{{spool.piping}}</td>
+                    <td class='tac'>{{spool.size}}</td>
+                    <td class='tac'>YES</td>
+                    <td class='tac'>YES</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class='page-footer'>
+        <table class='tblfull tblfoot'>
+            <tr>
+                <th colspan='4' class='tal' style='height:70px; vertical-align:0px'>
+                    REMARKS:
+                </th>
+            </tr>
+            <tr>
+                <th class='tal w25'>COMPLETED BY</th>
+                <th class='w25'>Contractor</th>
+                <th class='w25'>Client</th>
+                <th class='w25'>Owner/Third Party(If Applicable)</th>
+            </tr>
+            <tr>
+                <th class='tal'>COMPANY</th>
+                <th>UTOC QA/QC</th>
+                <th>NESTE </th>
+                <th>MOM/3rd party</th>
+            </tr>
+            <tr>
+                <th class='tal'>SIGNATURE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>NAME</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>DATE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <ul class='nodisc'>
+        <li class='fl'>Page 1 of 1</li>
+        <li class='tar'>UE-F-025C</li>
+    </ul>
+</div>
+<div size='a4' class='page'>
+    <div class='page-header' style='text-align: center'>
+
+        <table class='tblfull tblhead' style='margin-bottom:2px'>
+            <tr>
+                <td colspan='3' class='tar'>
+
+                    <b style='font-size:16px'>SRN No: {{isosheet.isopackno}}</b>
+                    <button type='button' onClick='window.print()' class='phide' style='font-weight:bold'>
+                        PRINT
+                    </button>
+
+                </td>
+            </tr>
+            <tr>
+                <td rowspan='2' style='width:5cm'><img src='{{spool.ProId.owner_logo.url}}'></img></td>
+                <th style='font-size:1.3em; width:16cm'>
+                    UTOC ENGINEERING PTE LTD<br />
+                     {{spool.ProId.client}}<br />
+                     {{spool.ProId.projectno}}
+                </th>
+                <td rowspan='2' style='width:5cm'>
+                    <img src='{{spool.ProId.client_logo.url}}'></img>
+                </td>
+            </tr>
+            <tr style='font-size:1.3em'>
+                <th>RELEASE OF FABRICATED PIPE SPOOLS TO PAINTING OR SITE INSTALLATION</th>
+            </tr>
+        </table>
+        <table class='tblfull tblhead'>
+            <tr>
+                <td colspan='2'></td>
+                <td class='tal' colspan='1'><b>Paint Sys:</b>&nbsp;B</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>System No:</b>&nbsp; NA</td>
+                <td class='tal w33'><b>Contract No:</b>&nbsp; {{spool.ProId.cliconno}}</td>
+                <td class='tal w33'><b>UTOC Job No:</b>&nbsp; {{spool.ProId.utocjobno}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Sub Project No:</b>&nbsp;{{spool.ProId.projectno}}</td>
+                <td class='tal'><b>PC No:</b>&nbsp;</td>
+                <td class='tal'><b>Line No:</b>&nbsp;{{spool.lineno}}</td>
+            </tr>
+            <tr>
+                <td class='tal'><b>Sheet No:</b>&nbsp;{{spool.sheetno}} of &nbsp;18</td>
+                <td class='tal'><b>REV. No:</b>&nbsp;{{spool.rev}}</td>
+                <td class='tal' style='border-left:none'><b>Unit:</b>&nbsp;{{spool.unitno}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class='page-body'>
+        <div class='pagediv'>
+            <table class='tblfull reduced'>
+                <tr>
+                    <th>Area</th>
+                    <th>Isometric Nos</th>
+                    <th>Spool</th>
+                    <th>Dimension Check Complete</th>
+                    <th>NDE/PWHT Complete</th>
+                </tr>
+                {% for spool in spool_queryset %}
+                <tr>
+                    <td class='tac'>{{spool.area}}</td>
+                    <td class='tac'>{{spool.drgno}}</td>
+                    <td class='tac'>{{spool.spoolno}}</td>
+                    <td class='tac'>COMPLETED</td>
+                    <td class='tac'>COMPLETED</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class='page-footer'>
+        <table class='tblfull tblfoot'>
+            <tr>
+                <th colspan='4' class='tal' style='height:70px; vertical-align:0px'>
+                    REMARKS:
+                </th>
+            </tr>
+            <tr>
+                <th class='tal w25'>COMPLETED BY</th>
+                <th class='w25'>Contractor</th>
+                <th class='w25'>Client</th>
+                <th class='w25'>Owner/Third Party(If Applicable)</th>
+            </tr>
+            <tr>
+                <th class='tal'>COMPANY</th>
+                <th>UTOC QA/QC</th>
+                <th>NESTE </th>
+                <th>MOM/3rd party</th>
+            </tr>
+            <tr>
+                <th class='tal'>SIGNATURE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>NAME</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class='tal'>DATE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <ul class='nodisc'>
+        <li class='fl'>Page 1 of 1</li>
+        <li class='tar'>UE-F-025B</li>
+    </ul>
+</div>
+
+
+
+{% endblock body_content %}
+{% block body_js %}
+
+{% endblock body_js %}
+

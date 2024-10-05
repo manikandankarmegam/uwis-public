@@ -1,0 +1,144 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %} 
+{% include 'include/header.html' with active='admin' %}
+{% include 'include/sidebar.html' with active='admin' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <!-- <div class="mt-2">
+            <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white" >CHART</a >
+            <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white" >TABEL</a >
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <!-- <div class="my-auto" style="z-index: 1">
+          <a href="{% url 'dashboard' %}" type="button" class="btn btn-info text-white btn-lg" >CHART</a >
+          <a href="{% url 'dashboardtabel' %}" type="button" class="btn btn-info text-white btn-lg" >TABEL</a >
+        </div> -->
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block"> {% include 'include/admin_header.html' with active='createproject' %} </div>
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12">
+          <div class="text-center mt-4">
+            <a href="{% url 'detailproject' proId %}" class="btn btn-outline-secondary" >Project</a >
+            <a href="{% url 'project_welder' proId %}" class="btn btn-info text-white" >+ Welder</a >
+              <a href="{% url 'uploads' proId %}" class="btn btn-outline-secondary">Uploads</a>
+            </div>
+          <div class="row mt-5">
+              <div class="col-lg-3 mx-auto">
+                  <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-body">
+                    <form method="get" action="">
+                      <div class="row align-items-center">
+
+                          <div class="col-12 col-lg-8">
+                              <p class="m-0 text-primary fw-bold">Contractor</p>
+                              <select class="form-select mt-3" name="dropdown1" aria-label="Default select example">
+                              <option value="">All</option>
+                              {% for i in con %}
+                              <option value="{{i.id}}" >{{ i.contractor }}</option>
+                              {% endfor %}
+                              </select>
+                              
+                          </div>
+                          <div class="col-12 col-lg-4 pt-4 mt-3">
+  
+                              <button type="submit" class="btn btn-info text-white w-100">SEARCH</button>
+                          </div>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-lg-12 col-12 mt-3">
+              <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-white p-3">
+                  <p class="m-0 fw-bold fs-5 ">Assign Welders</p>
+                </div>
+              <form method="post" action="">
+                  {% csrf_token %}
+                <div class="card-body ">
+                  <div class="table-responsive">
+                    <table id="example" class="table m-0 nowrap" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th class="text-center text-muted">ADD</th>
+                          <th class="text-center text-muted">ID</th>
+                          <th class="text-center text-muted">Name</th>
+                          <th class="text-center text-muted">Primos No</th>
+                          <th class="text-center text-muted">Primos Expiry Date</th>
+                          <th class="text-center text-muted">Fin Number</th>
+                          <th class="text-center text-muted">Size</th>
+                          <th class="text-center text-muted">Thickness</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in welders %}
+                        <tr>
+                          <td class="text-center"> 
+                            <div class="form-check d-flex justify-content-center">
+                              <input class="form-check-input" name="prowelder" type="checkbox" value="{{i.id}}" id="flexCheckDefault">
+                            </div>
+                          </td>
+                          <td class="text-center align-middle">{{i.weldid}}</td>
+                          <td class="text-center align-middle">{{i.weldname}}</td>
+                          <td class="text-center align-middle">{{i.primosno}}</td>
+                          <td class="text-center align-middle">{{i.primosexpdate}}</td>
+                          <td class="text-center align-middle">{{i.finno}}</td>
+                          <td class="text-center align-middle"> 3mm to 18mm </td>
+                          <td class="text-center align-middle">  4mm to  16mm</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row pt-3">
+                    <div class="col-12">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="" class="btn btn-outline-secondary" type="button"> CANCEL </a>
+                        <button class="btn btn-info text-white" type="submit"> ADD </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+{% endblock body_js %}

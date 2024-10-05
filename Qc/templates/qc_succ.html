@@ -1,0 +1,74 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_header %} 
+
+
+{% endblock body_header %}
+{% block body_content %} 
+{% include 'include/header.html' with active='qc' %}
+{% include 'include/sidebar.html' with active='qc' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <!-- <a href="" type="button" class="btn btn-success text-white">SCANNER</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="/static/img/utoc_dualleaf.png" alt="">
+    </div>
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC </h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+            <!-- <a href="" type="button" class="btn btn-success text-white btn-lg">SCANNER</a> -->
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <div class="p-lg-4">
+      <div class="row my-3 my-lg-0">
+        <div class="col-lg-12 mt-3 " id="hide_search">
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body p-lg-5">
+                <h1 class="text-success m-0 mb-2"><i class="bi bi-check-circle-fill"></i></h1>
+                <p class="text-dark fw-bold fs-5 m-0">QC Flange <span class="text-normal text-info">{{tfa_obj.permanent_joint_id}}</span> request created succesfully</p>                <p class="text-muted small ">QC Admin will verify the flange details and approve</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-start">
+                  <a href="{% url 'qc_list' %}" class="btn btn-info text-white" type="button">FLANGE LIST</a>
+                </div>
+       
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+
+{% endblock body_content %} 
+{% block body_js %}
+<script>
+
+</script>
+{% endblock body_js %}

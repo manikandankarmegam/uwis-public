@@ -1,0 +1,1067 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_header %} 
+<style>
+/* Bootstrap CSS */
+
+/* Custom Styles for Section 2 */
+.section-2 {
+    width: 794px; /* A4 size in pixels */
+    height: 1123px; /* A4 size in pixels */
+    margin: 20px auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    page-break-after: always; /* Ensure pages break correctly */
+}
+
+.section-2:last-child {
+    page-break-after: auto; /* Prevent an extra blank page at the end */
+}
+
+.section-2 .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px; /* Consistent margin for rows */
+}
+
+.section-2 .col-lg-12, 
+.section-2 .col-lg-6, 
+.section-2 .col-lg-4, 
+.section-2 .col-lg-3, 
+.section-2 .col-lg-2 {
+    padding: 0 15px; /* Padding for columns */
+}
+
+.section-2 .col-lg-12 {
+    flex: 0 0 100%;
+}
+
+.section-2 .col-lg-6 {
+    flex: 0 0 50%;
+}
+
+.section-2 .col-lg-4 {
+    flex: 0 0 33.33%;
+}
+
+.section-2 .col-lg-3 {
+    flex: 0 0 25%;
+}
+
+.section-2 .col-lg-2 {
+    flex: 0 0 16.66%;
+}
+
+.section-2 .card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px; /* Margin for cards */
+}
+
+.section-2 .card-body {
+    padding: 15px; /* Padding for card body */
+    font-size: 12pt; /* Set consistent font size for card body */
+}
+
+.section-2 .bg-grey {
+    background-color: #f5f5f5; /* Light grey background */
+    padding: 15px; /* Padding for grey background */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.section-2 .text-muted {
+    color: #6c757d; /* Muted text color */
+}
+
+.section-2 .fw-bold {
+    font-weight: bold; /* Bold text */
+}
+
+.section-2 .border {
+    border-top: 1px solid #ccc; /* Top border */
+}
+
+.section-2 hr {
+    border: none;
+    border-top: 1px solid #ccc; /* Horizontal rule */
+}
+
+.section-2 .form-check {
+    margin: 5px 0; /* Margin for form check items */
+}
+
+/* Print Styles for Section 2 */
+@media print {
+    .section-2 {
+        width: 210mm; /* A4 size in mm */
+        height: 297mm; /* A4 size in mm */
+        margin: 0; /* No margin for print */
+        border: none; /* No border for print */
+        font-size: 12pt; /* Ensure font size is maintained during print */
+    }
+}
+
+.section-2 p {
+    font-size: 10pt; /* Adjust this value as needed for smaller font size */
+}
+</style>
+{% endblock body_header %}
+{% block body_content %} 
+{% include 'include/header.html' with active='tfa_flange' %}
+{% include 'include/sidebar.html' with active='tfa_flange' %}
+<section class="home-section pt-lg-3 pt-1">
+
+  <div class="position-relative d-lg-none mt-5" style="background-color: #3256a1">
+    <div class="container">
+      <div class="py-3" style="z-index: 1">
+        <div class="">
+          <div>
+            <p class="m-0 text-white fw-bold fs-5">SRC</p>
+          </div>
+          <div class="mt-2">
+            <button type="button" class="btn btn-info text-white" onclick="downloadPDF('{{tfa.id}}')" >DOWNLOAD</button >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 end-0">
+      <img src="{% static 'img/utoc_dualleaf.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="d-lg-none px-0">
+    {% include 'include/tfa_header.html' with active='report' %}
+  </div>
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+    <div class="position-relative">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1 class="text-white fw-bold m-0">SRC</h1>
+          <p class="small text-white m-0"> Here you can control everything </p>
+        </div>
+        <div class="my-auto" style="z-index: 1">
+          <button type="button" class="btn btn-info text-white btn-lg" onclick="downloadPDF('{{tfa.id}}')" >DOWNLOAD</button >
+        </div>
+      </div>
+      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+        <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="d-none d-lg-block">
+      {% include 'include/tfa_header.html' with active='report' %}
+    </div>
+    <div class="p-lg-4 my-3 my-lg-0" >
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">QC Inspection</p>
+              </div>
+              <div class="card-body ">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="text-muted m-0">QC Signoff</p>
+                    <p class="m-0">QC Signoff</p>
+                  </div>
+                  <div>
+                    <p class="text-muted m-0">Approval Date</p>
+                    <p class="m-0">08-18-2021</p>
+                  </div>
+                </div>
+                </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-3 mt-3">
+                  <div class="card-header bg-white p-3">
+                    <p class="m-0 fw-bold fs-5 ">QA Inspection</p>
+                  </div>
+                  <div class="card-body ">
+                      <div>
+                        <p class="text-muted m-0">Is the flange TFA satisfactory?</p>
+                        <div class="row mt-2">
+                          <div class="col-lg-4">
+                            <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" >
+                            <label class="btn-sm w-100 btn btn-outline-success" for="success-outlined">YES</label>
+                          </div>
+                          <div class="col-lg-4">
+                            <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined">
+                            <label class="btn-sm w-100 btn btn-outline-danger" for="danger-outlined">NO</label>
+                          </div>
+                          <div class="col-lg-4">
+                            <input type="radio" class="btn-check" name="options-outlined" id="secondary-outlined">
+                            <label class="btn-sm w-100 btn btn-outline-secondary" for="secondary-outlined">N/A</label>
+                          </div>
+
+                        
+                          
+                        
+  
+                         
+
+                        </div>
+
+                      </div>
+
+                      <div class="form-floating mt-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2 text-muted">please enter your  comments</label>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                            <a href="{% url 'createproject' %}" class="btn btn-outline-secondary" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="button"> CANCEL </a>
+                            <button class="btn btn-info text-white" value="{% if data1.projectno %}{{data1.projectno}}{{else}}{% endif %}" type="submit"> APPROVE </button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                 
+                    </div>
+                    </div>
+
+          </div>
+          <div class="col-lg-9">
+            <div class="card border-0 shadow-sm rounded-3">
+              <div class="card-header bg-white p-3">
+                <p class="m-0 fw-bold fs-5 ">Report</p>
+              </div>
+         
+              <div class="card-body ">
+                <div class="row">
+                    <div class="col-6">
+                    <p class="m-0 fw-bold fs-5">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="m-0 text-muted ">CLIENT DOCUMENT NUMBER</p>
+                        <p class="m-0 ">N/A</p>
+                    </div>
+                    <div class="col-3">
+                      <p class="m-0 text-muted ">Page </p>
+                      <p class="m-0 ">1 of 1</p>
+                    </div>
+                 </div>
+                 <div class="bg-grey p-2 mt-3">
+
+                   <div class="row ">
+                     <div class="col-lg-3">
+                       <p class="m-0 text-muted ">RECORD</p>
+                       <p class="m-0 fs-5 fw-bold">01CNRV016-F2 Rev 000</p>
+                     </div>
+                     <div class="col-lg-3">
+                       <p class="m-0 text-muted ">PROJECT NO</p>
+                           <p class="m-0 ">N/A</p>
+                     </div>
+                     <div class="col-lg-3">
+                       <p class="m-0 text-muted ">PROJECT NAME</p>
+                           <p class="m-0 ">N/A</p>
+                     </div>
+                     <div class="col-lg-3">
+                       <p class="m-0 text-muted ">DATE CREATED </p>
+                           <p class="m-0 ">2021-08-16 08:08:03</p>
+                     </div>
+                    </div>
+                    <hr class="border m-0 my-4 pt-1">
+                    <div class="row ">
+                     <div class="col-lg-3">
+                       <p class="m-0 text-muted ">DRAWING NAME</p>
+                       <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                     </div>
+                     <div class="col-lg-3">
+                       <p class="m-0 text-muted ">TEST PACK NO.</p>
+                           <p class="m-0 ">N/A</p>
+                     </div>
+                    </div>
+                 </div>
+          
+
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">JOINT ID</p>
+                    <p class="m-0 fs-5 fw-bold">01CNRV016-F2 Rev 000</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">PIPE CLASS </p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">FLANGE RATING</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">FLANGE SIZE </p>
+                        <p class="m-0 ">2021-08-16 08:08:03</p>
+                  </div>
+                 </div>
+
+                  
+
+         
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">FLANGE MATERIAL</p>
+                    <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">BOLT MATERIAL</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">NUMBER OF BOLTS</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">BOLT STUD SIZE </p>
+                        <p class="m-0 ">2021-08-16 08:08:03</p>
+                  </div>
+                 </div>
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">BOLT LENGTH</p>
+                    <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">NUT MATERIAL</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">GASKET TYPE</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">LUBRICANT </p>
+                        <p class="m-0 ">2021-08-16 08:08:03</p>
+                  </div>
+                 </div>
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">TIGHTENING METHOD</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        MANUAL
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                      <label class="form-check-label" for="flexCheckChecked">
+                        HYDRAULIC
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                      <label class="form-check-label" for="flexCheckChecked">
+                        TENSIONING
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="col-lg-3">
+                      <p class="m-0 text-muted ">CRITICAL</p>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Yes
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                        <label class="form-check-label" for="flexCheckChecked">
+                          No
+                        </label>
+                      </div>
+                 
+                    </div>
+                  </div>
+           
+         
+                 </div>
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">TOOL DESCRIPTION</p>
+                    <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">SERIAL NUMBER</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="m-0 text-muted ">CALIBRATION DUE DATE</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+          
+                 </div>
+
+                 
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-4">
+                    <p class="m-0 text-muted ">REQUIRED TORQUE VALUE</p>
+                    <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">1ST PASS RANGE</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">2ND PASS RANGE</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">3RD PASS RANGE</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">FINAL PASS RANGE</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+          
+                 </div>
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">ANSWER</p>
+                    <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted ">VERIFICATION CHECKS</p>
+                        <p class="m-0 ">Is flange gasket seating surface good?</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">FULL NAME</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="m-0 text-muted ">DATE COMPLETED</p>
+                        <p class="m-0 ">N/A</p>
+                  </div>
+            
+          
+                 </div>
+
+                 <hr class="border m-0 my-4 pt-1">
+                 <div class="row ">
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted ">QC ENGINEER</p>
+                    <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="m-0 text-muted ">DATE APPROVED</p>
+                        <p class="m-0 ">Is flange gasket seating surface good?</p>
+                  </div>
+            
+            
+          
+                 </div>
+
+
+
+
+
+
+
+                 
+
+              
+                </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-lg-3">
+        
+      </div>
+      <div class="col-lg-9">
+        <div class="card border-0 shadow-sm rounded-3">
+          <div class="card-header bg-white p-3">
+            <p class="m-0 fw-bold fs-5 ">Report</p>
+          </div>
+     
+          <div class="card-body ">
+            <div class="row">
+                <div class="col-6">
+                <p class="m-0 fw-bold fs-5">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+                </div>
+                <div class="col-3">
+                    <p class="m-0 text-muted ">CLIENT DOCUMENT NUMBER</p>
+                    <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-3">
+                  <p class="m-0 text-muted ">Page </p>
+                  <p class="m-0 ">1 of 1</p>
+                </div>
+             </div>
+             <div class="bg-grey p-2 mt-3">
+
+               <div class="row ">
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">RECORD</p>
+                   <p class="m-0 fs-5 fw-bold">01CNRV016-F2 Rev 000</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">PROJECT NO</p>
+                       <p class="m-0 ">N/A</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">PROJECT NAME</p>
+                       <p class="m-0 ">N/A</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">DATE CREATED </p>
+                       <p class="m-0 ">2021-08-16 08:08:03</p>
+                 </div>
+                </div>
+                <hr class="border m-0 my-4 pt-1">
+                <div class="row ">
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">DRAWING NAME</p>
+                   <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">TEST PACK NO.</p>
+                       <p class="m-0 ">N/A</p>
+                 </div>
+                </div>
+             </div>
+      
+
+
+             <hr class="border m-0 my-4 pt-1">
+             <div class="row ">
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">JOINT ID</p>
+                <p class="m-0 fs-5 fw-bold">01CNRV016-F2 Rev 000</p>
+              </div>
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">PIPE CLASS </p>
+                    <p class="m-0 ">N/A</p>
+              </div>
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">FLANGE RATING</p>
+                    <p class="m-0 ">N/A</p>
+              </div>
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">FLANGE SIZE </p>
+                    <p class="m-0 ">2021-08-16 08:08:03</p>
+              </div>
+             </div>
+
+             <hr class="border m-0 my-4 pt-1">
+             <div class="row mt-3">
+              <div class="col-lg-3">
+                <div class="card border-0 shadow-sm rounded-3">
+                  <div class="card-body">
+                    <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                  </div>
+                  <div class="card-footer bg-none alert alert-info m-0 p-3">
+                    <p class="m-0 text-primary fw-bold">QaPass</p>
+                    <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                    <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="card border-0 shadow-sm rounded-3">
+                  <div class="card-body">
+                    <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                  </div>
+                  <div class="card-footer bg-none alert alert-info m-0 p-3">
+                    <p class="m-0 text-primary fw-bold">QaPass</p>
+                    <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                    <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="card border-0 shadow-sm rounded-3">
+                  <div class="card-body">
+                    <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                  </div>
+                  <div class="card-footer bg-none alert alert-info m-0 p-3">
+                    <p class="m-0 text-primary fw-bold">QaPass</p>
+                    <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                    <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="card border-0 shadow-sm rounded-3">
+                  <div class="card-body">
+                    <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                  </div>
+                  <div class="card-footer bg-none alert alert-info m-0 p-3">
+                    <p class="m-0 text-primary fw-bold">QaPass</p>
+                    <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                    <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+     
+
+     
+
+          
+
+
+
+
+
+
+
+             
+
+          
+            </div>
+      </div>
+    </div>
+</div>
+
+
+    
+    
+  </div>
+  </div>
+  </section>
+
+  <section class="section-2" id="main-container">
+    <div class="container a4-page" >
+      <div class="row">
+    
+        <div class="col-lg-12">
+          <div class="card border-0  rounded-3">
+       
+            <div class="card-body ">
+              <div class="row">
+                  <div class="col-6">
+                  <p class="m-0 fw-bold ">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+                  </div>
+                  <div class="col-4">
+                      <p class="m-0 text-muted ">CLIENT DOCUMENT NUMBER</p>
+                      <p class="m-0 ">N/A</p>
+                  </div>
+                  <div class="col-2">
+                    <p class="m-0 text-muted ">Page </p>
+                    <p class="m-0 ">1 of 1</p>
+                  </div>
+               </div>
+               <div class="bg-grey p-2 mt-3">
+    
+                 <div class="row ">
+                   <div class="col-lg-3">
+                     <p class="m-0 text-muted ">RECORD</p>
+                     <p class="m-0 fw-bold">01CNRV016-F2 Rev 000</p>
+                   </div>
+                   <div class="col-lg-3">
+                     <p class="m-0 text-muted ">PROJECT NO</p>
+                         <p class="m-0 ">N/A</p>
+                   </div>
+                   <div class="col-lg-3">
+                     <p class="m-0 text-muted ">PROJECT NAME</p>
+                         <p class="m-0 ">N/A</p>
+                   </div>
+                   <div class="col-lg-3">
+                     <p class="m-0 text-muted ">DATE CREATED </p>
+                         <p class="m-0 ">2021-08-16 08:08:03</p>
+                   </div>
+                  </div>
+                  <hr class="border m-0 my-4 pt-1">
+                  <div class="row ">
+                   <div class="col-lg-3">
+                     <p class="m-0 text-muted ">DRAWING NAME</p>
+                     <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                   </div>
+                   <div class="col-lg-3">
+                     <p class="m-0 text-muted ">TEST PACK NO.</p>
+                         <p class="m-0 ">N/A</p>
+                   </div>
+                  </div>
+               </div>
+        
+    
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">JOINT ID</p>
+                  <p class="m-0  fw-bold">01CNRV016-F2 Rev 000</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">PIPE CLASS </p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">FLANGE RATING</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">FLANGE SIZE </p>
+                      <p class="m-0 ">2021-08-16 08:08:03</p>
+                </div>
+               </div>
+    
+                
+    
+       
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">FLANGE MATERIAL</p>
+                  <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">BOLT MATERIAL</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">NUMBER OF BOLTS</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">BOLT STUD SIZE </p>
+                      <p class="m-0 ">2021-08-16 08:08:03</p>
+                </div>
+               </div>
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">BOLT LENGTH</p>
+                  <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">NUT MATERIAL</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">GASKET TYPE</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">LUBRICANT </p>
+                      <p class="m-0 ">2021-08-16 08:08:03</p>
+                </div>
+               </div>
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">TIGHTENING METHOD</p>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <p class="form-check-label" for="flexCheckDefault">
+                      MANUAL
+                    </p>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                    <p class="form-check-label" for="flexCheckChecked">
+                      HYDRAULIC
+                    </p>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                    <p class="form-check-label" for="flexCheckChecked">
+                      TENSIONING
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                    <p class="m-0 text-muted ">CRITICAL</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <p class="form-check-label" for="flexCheckDefault">
+                        Yes
+                      </p>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                      <p class="form-check-label" for="flexCheckChecked">
+                        No
+                      </p>
+                    </div>
+               
+                </div>
+         
+       
+               </div>
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">TOOL DESCRIPTION</p>
+                  <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">SERIAL NUMBER</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="m-0 text-muted ">CALIBRATION DUE DATE</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+        
+               </div>
+    
+               
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-4">
+                  <p class="m-0 text-muted ">REQUIRED TORQUE VALUE</p>
+                  <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">1ST PASS RANGE</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">2ND PASS RANGE</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">3RD PASS RANGE</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">FINAL PASS RANGE</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+        
+               </div>
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">ANSWER</p>
+                  <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted ">VERIFICATION CHECKS</p>
+                      <p class="m-0 ">Is flange gasket seating surface good?</p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">FULL NAME</p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="m-0 text-muted ">DATE </p>
+                      <p class="m-0 ">N/A</p>
+                </div>
+          
+        
+               </div>
+    
+               <hr class="border m-0 my-4 pt-1">
+               <div class="row ">
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted ">QC ENGINEER</p>
+                  <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                </div>
+                <div class="col-lg-6">
+                  <p class="m-0 text-muted ">DATE APPROVED</p>
+                      <p class="m-0 ">Is flange gasket seating surface good?</p>
+                </div>
+          
+          
+        
+               </div>
+    
+    
+    
+    
+    
+    
+    
+               
+    
+            
+              </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    <div class="container a4-page mt-4">
+      <div class="row ">
+    
+        <div class="col-lg-12">
+          <div class="card border-0  rounded-3">
+        
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-6">
+                <p class="m-0 fw-bold ">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+                </div>
+                <div class="col-4">
+                    <p class="m-0 text-muted ">CLIENT DOCUMENT NUMBER</p>
+                    <p class="m-0 ">N/A</p>
+                </div>
+                <div class="col-2">
+                  <p class="m-0 text-muted ">Page </p>
+                  <p class="m-0 ">1 of 1</p>
+                </div>
+             </div>
+             <div class="bg-grey p-2 mt-3">
+        
+               <div class="row ">
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">RECORD</p>
+                   <p class="m-0 fw-bold">01CNRV016-F2 Rev 000</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">PROJECT NO</p>
+                       <p class="m-0 ">N/A</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">PROJECT NAME</p>
+                       <p class="m-0 ">N/A</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">DATE CREATED </p>
+                       <p class="m-0 ">2021-08-16 08:08:03</p>
+                 </div>
+                </div>
+                <hr class="border m-0 my-4 pt-1">
+                <div class="row ">
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">DRAWING NAME</p>
+                   <p class="m-0 ">01CNRV016-F2 Rev 000</p>
+                 </div>
+                 <div class="col-lg-3">
+                   <p class="m-0 text-muted ">TEST PACK NO.</p>
+                       <p class="m-0 ">N/A</p>
+                 </div>
+                </div>
+             </div>
+        
+        
+        
+             <hr class="border m-0 my-4 pt-1">
+             <div class="row ">
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">JOINT ID</p>
+                <p class="m-0  fw-bold">01CNRV016-F2 Rev 000</p>
+              </div>
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">PIPE CLASS </p>
+                    <p class="m-0 ">N/A</p>
+              </div>
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">FLANGE RATING</p>
+                    <p class="m-0 ">N/A</p>
+              </div>
+              <div class="col-lg-3">
+                <p class="m-0 text-muted ">FLANGE SIZE </p>
+                    <p class="m-0 ">2021-08-16 08:08:03</p>
+              </div>
+             </div>
+        
+              
+        
+        
+        
+             <hr class="border m-0 my-4 pt-1">
+               <div class="row mt-3">
+                <div class="col-lg-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                      <img class="img-fluid rounded-3"  src="{% static 'img/pipe.jpg' %}" alt="">
+                    </div>
+                    <div class="card-footer bg-none alert alert-info m-0 p-3">
+                      <p class="m-0 text-primary fw-bold">QaPass</p>
+                      <p class="m-0  text-dark small">ROSARIO RYAN CARLO</p>
+                      <p class="m-0  text-muted small">2021-08-20 15:59</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+        
+        
+        
+            
+        
+        
+        
+        
+        
+        
+        
+               
+        
+            
+              </div>
+        </div>
+        </div>
+        </div>
+    </div>
+  </section>
+{% endblock body_content %} 
+{% block body_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+<script>
+    function downloadPDF(id){
+      var element = document.getElementById('main-container');
+
+      html2pdf()
+                .from(element)
+                .save();
+    }
+</script>
+{% endblock body_js %}

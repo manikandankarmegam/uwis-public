@@ -1,0 +1,227 @@
+{% load static %}
+<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <div class="container-fluid px-lg-5">
+    <div class="">
+      <div class="d-flex align-items-center">
+        <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="my-auto">
+          <i class='bi bi-list text-white fs-3 d-none d-lg-block' style="cursor: pointer;" ></i>
+        </div>
+        <div class="flex-shrink-0 bg-white p-1 py-2 rounded-circle ms-2">
+          <a href="{% url 'project' %}">
+            <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />
+          </a>
+        </div>
+        <div class="flex-grow-1 ms-2">
+          <p class="text-white fw-bold m-0">UTOC Engineering Pte Ltd</p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex ms-auto d-none d-lg-block">
+      <div class="dropdown">
+        <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{% static 'img/utoc_userprofile_icon.svg' %}" class="cursor-poiner rounded-circle" alt="Assist" style="width: 35px; height: 35px" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end pt-4 px-2 rounded-3" style="min-width: 250px">
+          <div class="d-flex align-items-center px-2">
+            <div class="flex-grow-1 ms-3">
+              <h5 class="small fw-bold text-primary m-0">User name : {{request.user}}</h5>
+              <p class="d-inline-block m-0 text-truncate text-muted small mt-1" style="max-width: 150px">Role : {{request.user.role}} </p>
+              <p class="d-inline-block m-0 text-truncate text-muted small mt-1" style="max-width: 150px">Num : {{request.user.ad.number}} </p>
+            </div>
+          </div>
+          <hr class="text-muted mb-1" />
+          <div class="my-2">
+            <li> <a class="dropdown-item small text-muted px-2" href="#">My Profile</a> </li>
+            <li> <a class="dropdown-item small text-muted px-2" href="#">My Account</a> </li>
+          </div>
+          <hr class="text-muted my-1" />
+          <div class="my-2">
+            <li> <a  class="dropdown-item small text-muted px-2" href="{% url 'logout_view'  %}">Logout</a> </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary py-2">
+  <div class="container-fluid px-lg-5">
+    <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <p class="text-white fw-bold m-0 d-lg-none">UTOC Engineering Pte Ltd</p>
+    <div class="my-auto">
+      <i class='bi bi-list text-white fs-3 d-none d-lg-block' style="cursor: pointer;" ></i>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item bg-white p-1 py-2 rounded-circle mx-2">
+          <a href="{% url 'project' %}">
+            <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />
+          </a>
+        </li>
+        <li class="nav-item my-auto">
+          <p class="text-white fw-bold m-0">UTOC Engineering Pte Ltd</p>
+
+        </li>
+       
+       
+      </ul>
+        <div class="alert alert-info p-1 my-auto me-2 text-primary border border-info">
+          {{active_project.projectname}}
+        </div>
+        <div class="dropdown">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{% static 'img/utoc_userprofile_icon.svg' %}" class="cursor-poiner rounded-circle" alt="Assist" style="width: 35px; height: 35px" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end pt-4 px-2 rounded-3" style="min-width: 250px">
+            <div class="d-flex align-items-center px-2">
+              <div class="flex-grow-1 ms-3">
+                <h5 class="small fw-bold text-primary m-0">User name : {{request.user}}</h5>
+                <p class="d-inline-block m-0 text-truncate text-muted small mt-1" style="max-width: 150px">Role : {{request.user.role}} </p>
+                <p class="d-inline-block m-0 text-truncate text-muted small mt-1" style="max-width: 150px">Num : {{request.user.ad.number}} </p>
+              </div>
+            </div>
+            <hr class="text-muted mb-1" />
+            <div class="my-2">
+              <li> <a class="dropdown-item small text-muted px-2" href="#">My Profile</a> </li>
+              <li> <a class="dropdown-item small text-muted px-2" href="#">My Account</a> </li>
+            </div>
+            <hr class="text-muted my-1" />
+            <div class="my-2">
+              <li> <a  class="dropdown-item small text-muted px-2" href="{% url 'logout_view'  %}">Logout</a> </li>
+            </div>
+          </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-body p-0">
+    <div class="ms-auto text-end" style="background-color: #d4eefc">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="text-center" style="background-color: #d4eefc">
+      <div class="position-relative p-3">
+        <a href="{% url 'project' %}">
+          <img src="{% static 'img/utoc_userprofile_icon.svg' %}" alt="" class="" width="50" />
+        </a>
+        <p class="m-0 text-primary fw-bold small text-center"> QC INSPECTOR NAME </p>
+        <p class="m-0 text-muted small text-center"> +65 8877655 | qc@gmail.com </p>
+        <div class="position-absolute bottom-0 start-0">
+          <svg width="205" height="131" viewBox="0 0 205 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.175" d="M53.5396 116.583C43.2194 79.7346 105.97 44.1643 131.361 36.4972C131.955 36.2547 132.582 36.1112 133.219 36.0719C171.405 25.4205 191.634 57.7951 199.479 88.4662C207.324 119.137 210.418 159.172 172.23 169.83C152.826 175.155 130.946 169.83 112.162 163.014C93.7915 156.197 73.768 146.187 60.7629 130C57.57 126.028 55.1206 121.479 53.5396 116.583Z"
+              fill="#2AACEF"></path>
+            <path opacity="0.175" d="M128.198 95.8358C123.365 133.713 51.6815 141.87 25.2945 138.994C24.6529 138.984 24.019 138.871 23.4163 138.658C-15.9259 133.524 -21.9664 95.8856 -17.2565 64.6496C-12.5467 33.4136 0.186633 -4.56678 39.5339 0.561701C59.491 3.25144 77.5839 16.6892 92.2435 30.2885C106.521 43.7259 121.079 60.7422 126.764 80.6907C128.161 85.5859 128.647 90.7216 128.198 95.8358Z"
+              fill="#2AACEF"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="">
+        <div class="list-group list-group-flush border-0 scrollarea rounded">
+          <div id="myDIV px-3">
+            <hr class="mt-0 border m-0" />
+            <a href="" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'my_projects' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-list-task fs-5 pe-2"></i> My Projects </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'dashboard' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'dash_board' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold">  <i class="bi bi-speedometer fs-5 pe-2"></i> Dashboard </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'admin' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'admin' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-gear-fill fs-5 pe-2"></i> Admin </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'sheetweldhistory' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'weld_history' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-fire fs-5 pe-2"></i> Weld History </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'ndemonitor' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'nde' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-person-fill-check fs-5 pe-2"></i> NDE </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'welderperformance' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'WelderPerfom' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-ui-radios-grid fs-5 pe-2"></i> Welder Perfom </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'spool' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'spool' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-funnel-fill fs-5 pe-2"></i> Spool Management </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'rfirequest' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'rfi_create' %} sidebar_color {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-question-circle-fill fs-5 pe-2"></i> RFI </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'isosheet' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'iso_sheet' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi bi-box fs-5 pe-2"></i> ISO pack </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'painting' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'painting' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-palette-fill fs-5 pe-2"></i> Painting </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'ncr' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'ncr' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-clipboard-check-fill fs-5 pe-2"></i> NCR | QR </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'fiter_list' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'fiter_list' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-tools fs-5 pe-2"></i> Fitter </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'qc_list' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'qc' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-person-check-fill fs-5 pe-2"></i> QC Check </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'tfascanner' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'tfa_flange' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-tags-fill fs-5 pe-2"></i> TFA </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            
+            <a href="{% url 'qr_scanner' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'qr_scanner' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-qr-code fs-5 pe-2"></i> QR Scanner </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="{% url 'aboutus' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-buildings-fill fs-5 pe-2"></i> About us </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <a href="#" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi bi-box-arrow-right fs-5 pe-2"></i> Logout </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+            <div class="py-4 px-2 mt-2">
+              <hr class="mt-0 border border-2 mb-2" />
+              <p class="text-info m-0 text-center small"> UTOC UWIS VERSION 2.0 </p>
+              <p class="small m-0 text-muted text-center"> Copyright UTOC. All rights reserved </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

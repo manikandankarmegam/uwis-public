@@ -1,0 +1,91 @@
+{% extends 'include/main.html' %} 
+{% load static %} 
+{% block body_content %}
+<style>
+  .fix--top {
+    top: -60px 
+}
+</style>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <div class="container-fluid px-lg-5">
+      <div class="mx-auto">
+        <div class="d-flex align-items-center">
+          <div class="flex-shrink-0 bg-white p-1 py-2 rounded-circle ms-2">
+            <a href="{% url 'project' %}">
+              <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />
+            </a>
+          </div>
+          <div class="flex-grow-1 ms-2">
+            <p class="text-white fw-bold m-0">UTOC Engineering Pte Ltd</p>
+          </div>
+        </div>
+      </div>
+      </div>
+      </nav>
+<div class="container-fluid pt-4 px-0 mt-4">
+  <div class="position-relative">
+    <div class="alert-info p-0 py-5">
+        <div class="container">
+            <div class="position-relative pt-lg-0 pt-lg-5">
+                <h1 class="text-primary text-center fw-bold  m-0"> <span class="text-danger">Quality</span>  is more important than <span class="text-warning">Quantity</span> </h1>
+                <h2 class="text-primary text-center fs-6 mt-1">Start your work</h2>
+                <img class="img-fluid mx-auto d-block" src="{% static 'img/supporthz.png' %}" >
+            </div>
+        </div>
+    </div>
+</div>
+<div class="position-relative fix--top mx-2">
+  <div class="container rounded-3 p-3">
+      <div class="row">
+          <div class="col-lg-9 mx-auto col-sm-12 p-0">
+              <div class="pb-5 mb-5">
+                <form method="post" action="">
+                  {% csrf_token %}
+                  <div class="card shadow-sm p-0 rounded-3 border-0">
+                      <div class="card-body">
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item border-light text-primary fw-bold">Terms and Condation</li>
+                              <li class="list-group-item border-light">
+                                <p class="text-primary m-0 small"> <i class="bi bi-check2-circle text-success pe-2"></i>adhere to strict  Employees must refrain from sharing any sensitive information, especially passwords, and adhere to strict </p>
+                              </li>
+                              <li class="list-group-item border-light">
+                                <p class="text-primary m-0 small"> <i class="bi bi-check2-circle text-success pe-2"></i>adhere to strict Employees must refrain from sharing any sensitive information, especially passwords, and adhere to strict </p>
+                              </li>
+                              <li class="list-group-item border-light">
+                                <p class="text-primary m-0 small"> <i class="bi bi-check2-circle text-success pe-2"></i>adhere to strict Employees must refrain from sharing any sensitive information, especially passwords, and adhere to strict </p>
+                              </li>
+                              <li class="list-group-item border-light ">
+                                <div class="text-center mx-auto  mt-3 col-lg-6 col-12">
+                                <div class="form-floating  ">
+                                  <textarea class="form-control w-100" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                  <label class="text-muted" for="floatingTextarea2">How do you feel today ?</label>
+                                </div>
+                                <a href="{% url 'uprojectlist' %}"  class="btn btn-info text-white btn-lg w-100 mt-3 d-none d-lg-block">START</a>
+                              </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+               </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="col-lg-12 col-12 px-0 mx-auto d-lg-none fixed-bottom">
+  <div class="card shadow-sm border-0 rounded-3">
+    <div class="card-body">
+      <div class="text-center mx-auto  ">
+        <button type="submit" class="btn btn-info text-white btn-lg w-100">START</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+  </div>
+{% include 'include/footer.html' %} 
+{% endblock body_content %} 
+{% block body_js %}
+{% endblock body_js %}

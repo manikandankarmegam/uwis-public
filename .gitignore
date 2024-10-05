@@ -1,0 +1,17 @@
+# Pyre type checker
+.pyre/
+
+**/migrations/
+
+Ad/migrations/*
+app/migrations/*
+client/migrations/*
+login/migrations/*
+Qc/migrations/*
+
+Ad/__pycache__/*
+app/__pycache__/*
+client/__pycache__/*
+login/__pycache__/*
+Qc/__pycache__/*
+

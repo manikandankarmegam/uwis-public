@@ -1,0 +1,99 @@
+body {
+    font-family: 'Poppins';
+}
+
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+.card_zoom:hover {
+  transform: scale(1.02);
+}
+.card_zoom {
+  transition: transform 0.5s;
+}
+
+.all_mrgin_top{
+    margin-top: 3.1rem !important;
+}
+
+.sm_margin_top{
+  margin-top: 2.6rem !important;
+}
+
+.border_seprator{
+    border: 1px dashed #E4E6EF;
+}
+
+.sidebar_color{
+  background-color: #DEF4FF !important;
+  border-left: 4px solid #2AACEF !important;
+  color: #112F70 !important;
+}
+
+.admin_header{
+  color: #2AACEF !important;
+  font-weight: 700 !important;
+  border-width: 2px !important;
+  border-color: #2AACEF !important;
+  border-bottom: 1px solid #2AACEF
+}
+
+.left_90{
+  left: 90% !important;
+}
+
+.list-group-item-action:active {
+  color: #212529;
+  background-color: #ffffff !important;
+}
+
+
+
+ .list-group-item-action:focus{
+  background-color: #ffffff !important;
+}
+
+
+.wave-bg-blue {
+  background: #c0ffcd !important; 
+}
+
+
+
+.sidebar_admin_lg{
+
+  color: #2AACEF !important;
+}
+
+
+.sidebar_head_lg{
+  background-color: #DEF4FF !important;
+  border-left: 4px solid #2AACEF !important;
+}
+
+.table tbody tr {
+  border-bottom: 2px dashed #E4E6EF !important; 
+}
+
+.table tbody td {
+  border: none !important;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none !important;
+}
+
+.table tbody td {
+  border-bottom: 2px dashed #E4E6EF !important; /* Add dashed border to cells */
+}
+
+
+
+.bg-grey{
+  background-color: #F8F8F8;
+}
