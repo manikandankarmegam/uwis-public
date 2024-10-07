@@ -141,11 +141,9 @@
       let htmlscanner = null;
   
       function onScanSuccess(decodeText, decodeResult) {
-          const targetUrl = `http://127.0.0.1:8000/Qc/ufiter_list/?search=${decodeText}`;
-          window.location.href = targetUrl;
-  
-          
-  
+    // Get the base URL dynamically
+    const baseUrl = `${window.location.protocol}//${window.location.host}/Qc/ufiter_list/?search=${decodeText}`;
+    window.location.href = baseUrl;
       }
   
       document.getElementById('scan-button').addEventListener('click', function() {
