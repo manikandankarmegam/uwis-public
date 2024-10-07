@@ -12,9 +12,6 @@
           <div>
             <p class="m-0 text-white fw-bold fs-5">SRC Dashboard</p>
           </div>
-          <div class="mt-2">
-            <!-- <a href="" type="button" class="btn btn-success text-white">SCANNER</a> -->
-          </div>
         </div>
       </div>
     </div>
@@ -24,36 +21,33 @@
   </div>
   <div class="d-lg-none px-0">
   </div>
-  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1" >
+  <div class="p-4 d-none d-lg-block overflow-hidden mt-5" style="background-color: #3256a1">
     <div class="position-relative">
       <div class="d-flex justify-content-between">
         <div>
           <h1 class="text-white fw-bold m-0">SRC Dashboard </h1>
           <p class="small text-white m-0"> Here you can control everything </p>
         </div>
-        <div class="my-auto" style="z-index: 1">
-            <!-- <a href="" type="button" class="btn btn-success text-white btn-lg">SCANNER</a> -->
-        </div>
       </div>
-      <div class="position-absolute top-100 start-100 translate-middle left_90" >
+      <div class="position-absolute top-100 start-100 translate-middle left_90">
         <img src="{% static 'img/utoc_topdual.png' %}" alt="" />
       </div>
     </div>
   </div>
   <div class="container-fluid">
     <div class="d-none d-lg-block">
-      </div>
+    </div>
     <div class="p-lg-4 my-3 my-lg-0">
-      <div class="row ">
+      <div class="row">
         <p class="fs-3 fw-bold text-primary m-0 mb-3">TFA</p>
         <div class="col-lg-3 mb-3 mt-lg-0">
-          <div class="card shadow-sm border-0 h-100   alert-success rounded-3">
+          <div class="card shadow-sm border-0 h-100 alert-success rounded-3">
             <div class="card-header bg-none alert-success border-success">
-                <p class=" fw-bold m-0 fs-5 text-center text-success">Untouch </p>
+                <p class="fw-bold m-0 fs-5 text-center text-success">Untouch </p>
             </div>
             <div class="card-body">
-                <div class="" >
-                    <p id="count1" class="my-auto display-4 text-center m-0 fw-bold " ></p>
+                <div>
+                    <p id="count1" class="my-auto display-4 text-center m-0 fw-bold">0</p>
                 </div>
             </div>
           </div>
@@ -61,99 +55,72 @@
         <div class="col-lg-3 mb-3 mt-lg-0">
           <div class="card shadow-sm border-0 h-100 rounded-3 border-primary alert-primary">
             <div class="card-header bg-none alert-primary border-primary">
-                <p class=" fw-bold m-0 fs-5 text-center text-primary">Progress </p>
+                <p class="fw-bold m-0 fs-5 text-center text-primary">Progress </p>
             </div>
             <div class="card-body">
-              <p id="count2" class="display-4 text-center m-0 fw-bold " ></p>
+              <p id="count2" class="display-4 text-center m-0 fw-bold">0</p>
             </div>
           </div>
         </div>
         <div class="col-lg-3 mb-3 mt-lg-0">
           <div class="card shadow-sm border-0 h-100 rounded-3 border-info alert-info">
             <div class="card-header bg-none alert-info border-info">
-                <p class=" fw-bold m-0 fs-5 text-center text-info">QC Pass </p>
+                <p class="fw-bold m-0 fs-5 text-center text-info">QC Pass </p>
             </div>
             <div class="card-body">
-              <p id="count3" class="display-4 text-center m-0 fw-bold " ></p>
+              <p id="count3" class="display-4 text-center m-0 fw-bold">0</p>
             </div>
           </div>
         </div>
-        <!-- <div class="col-lg-3 mb-3 mt-lg-0">
-          <div class="card shadow-sm border-0 h-100 rounded-3 border-dark alert-dark">
-            <div class="card-header bg-none alert-dark border-dark">
-                <p class=" fw-bold m-0 fs-5 text-center text-dark">Assembled </p>
-            </div>
-            <div class="card-body">
-              <p id="count4" class="display-4 text-center m-0 fw-bold " ></p>
-            </div>
-          </div>
-        </div> -->
         <div class="col-lg-3 mb-3 mt-lg-0">
             <div class="card shadow-sm border-0 h-100 rounded-3 border-warning alert-warning">
                 <div class="card-header bg-none alert-warning border-warning">
-                    <p class=" fw-bold m-0 fs-5 text-center text-warning">QA Approve </p>
+                    <p class="fw-bold m-0 fs-5 text-center text-warning">QA Approve </p>
                 </div>
               <div class="card-body">
-                <p id="count5" class="display-4 text-center m-0 fw-bold " ></p>
+                <p id="count4" class="display-4 text-center m-0 fw-bold">0</p>
               </div>
             </div>
           </div>
-          
-          <!-- <div class="col-lg-2 mt-lg-0">
-            <div class="card shadow-sm border-0 h-100 rounded-3 border-dark alert-dark">
-                <div class="card-header bg-none alert-dark border-dark">
-                    <p class=" fw-bold m-0 fs-5 text-center text-dark">QC </p>
-                </div>
-              <div class="card-body">
-                <p id="count6" class="display-4 text-center m-0 fw-bold " ></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 mt-lg-0">
-            <div class="card shadow-sm border-0 h-100 rounded-3 border-danger alert-danger">
-                <div class="card-header bg-none alert-danger border-danger">
-                    <p class=" fw-bold m-0 fs-5 text-center text-danger">QA </p>
-                </div>
-              <div class="card-body">
-                <p id="count7" class="display-4 text-center m-0 fw-bold " ></p>
-              </div>
-            </div>
-          </div> -->
       </div>
-
     </div>
   </div>
   </section>
   
 {% endblock body_content %} 
+
 {% block body_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/helpers.esm.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    function counter(id, start, end, duration) {
-      let obj = document.getElementById(id),
-        current = start,
-        range = end - start,
-        increment = end > start ? 1 : -1,
-        step = Math.abs(Math.floor(duration / range)),
-        timer = setInterval(() => {
-          current += increment;
-          obj.textContent = current;
-          if (current == end) {
-            clearInterval(timer);
-          }
-        }, step);
-    }
-    counter("count1", 0, '{{status_report.Untouched}}', 100);
-    counter("count2", 0, '{{status_report.tightened}}', 100);
-    counter("count3", 0, '{{status_report.qcpass}}', 100);
-    // counter("count4", 0, 100, 100);
-    counter("count5", 0, '{{status_report.qcpass}}', 100);
-    // counter("count6", 0, 80, 100);
-    // counter("count7", 0, 80, 100);
-  });
-
+  document.addEventListener("DOMContentLoaded", () => {
+      function counter(id, start, end, duration) {
+          let obj = document.getElementById(id),
+              current = start,
+              range = Math.abs(end - start),
+              increment = end > start ? 1 : -1,
+              step = range === 0 ? duration : Math.abs(Math.floor(duration / range)),
+              timer = setInterval(() => {
+                  current += increment;
+                  obj.textContent = current < 0 ? 0 : current; // Ensure the value is never negative.
+                  if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                      clearInterval(timer);
+                  }
+              }, step);
+      }
   
-</script>
+      // Parsing the values and ensuring we have valid numbers.
+      const untouch = parseInt('{{ status_report.Untouched|default:"0" }}', 10) || 0;
+      const progress = Math.max(parseInt('{{ status_report.progress|default:"0" }}', 10), 0) || 0; // Ensure non-negative.
+      const qcpass = Math.max(parseInt('{{ status_report.qcpass|default:"0" }}', 10), 0) || 0; // Ensure non-negative.
+      const qaapprove = Math.max(parseInt('{{ status_report.qaapprove|default:"0" }}', 10), 0) || 0; // Ensure non-negative.
+  
+      // Calling the counter function for each value.
+      counter("count1", 0, untouch, 100);
+      counter("count2", 0, progress, 100);
+      counter("count3", 0, qcpass, 100);
+      counter("count4", 0, qaapprove, 100);
+  });
+  </script>
+  
 {% endblock body_js %}

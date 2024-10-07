@@ -223,7 +223,7 @@ class TFAUpload(models.Model):
     pass_four=models.CharField(max_length=100,blank=True,null=True)
     is_flange_satisfactory=models.CharField(max_length=100,blank=True,null=True)
     admin_comments=models.TextField(blank=True)
-    status=models.CharField(max_length=100, choices=STATUS_CHOICES,default="Untouched")
+    status=models.CharField(max_length=100, choices=STATUS_CHOICES,default="untouched")
     project=models.ForeignKey(project, on_delete=models.CASCADE, null = True, blank= True)
 
 
@@ -248,6 +248,6 @@ class TFAVerify(models.Model):
 
 class TFAHistory(models.Model):
     tfa_upload = models.ForeignKey(TFAUpload, on_delete=models.CASCADE, null = True, blank= True)
-    status=models.CharField(max_length=100, choices=STATUS_CHOICES,default="Untouched")
+    status=models.CharField(max_length=100, choices=STATUS_CHOICES,default="untouched")
     operator=models.CharField(max_length=100,blank=True,null=True)
     created_on = models.DateTimeField(auto_now_add=True)

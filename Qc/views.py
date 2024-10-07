@@ -1994,8 +1994,10 @@ def fiter_list(request):
     tfa_list = []
     if request.GET and request.GET.get("search"):
         qs = TFAUpload.objects.filter(permanent_joint_id=request.GET.get("search"),status="untouched")
+        print(qs,"www")
     else:
         qs = TFAUpload.objects.filter(status="untouched")
+        print(TFAUpload.objects.values("status"),"aaa")
     for tfa_obj in qs:
         tfa_list.append(get_TFA_detail(tfa_obj))
     return render(request,'fiter_list.html',{"tfa_list":tfa_list})
