@@ -145,13 +145,13 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }, step);
     }
-    counter("count1", 0, 25, 3000);
-    counter("count2", 0, 50, 3000);
-    counter("count3", 0, 36, 3000);
-    // counter("count4", 0, 100, 3000);
-    counter("count5", 0, 70, 3000);
-    // counter("count6", 0, 80, 3000);
-    // counter("count7", 0, 80, 3000);
+    counter("count1", 0, '{{status_report.Untouched}}', 100);
+    counter("count2", 0, '{{status_report.tightened}}', 100);
+    counter("count3", 0, '{{status_report.qcpass}}', 100);
+    // counter("count4", 0, 100, 100);
+    counter("count5", 0, '{{status_report.qcpass}}', 100);
+    // counter("count6", 0, 80, 100);
+    // counter("count7", 0, 80, 100);
   });
 
   

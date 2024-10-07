@@ -269,7 +269,13 @@
                 {% for history in tfa_history %}
                 <div class="row">
                   <div class="col-lg-4 col-4">
-                    <p class="small  m-0"><span class="alert alert-success border-success px-1 p-0  m-0">{{history.status  }} </span>  </p>
+                    <p class="small  m-0"><span class=" {% if history.status == 'qcpass' %}
+                      alert-success border-success 
+                     {% elif history.status == 'untouched'  %}
+                     alert-warning border-warning 
+                     {% elif history.status == 'tightened'  %}
+                     alert-info border-info 
+                     {% endif %} alert p-0 px-1  m-0">{{history.status  }} </span>  </p>
                   </div>
                   <div class="col-lg-4 col-4">
                     <p class="small  m-0">{{history.operator}}</p>

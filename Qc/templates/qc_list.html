@@ -63,16 +63,16 @@
             </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" id="hide_show" style="display: none;">
           <div class="col-lg-4 mx-auto">
             <div class="card shadow-sm border-0 rounded-3">
               <div class="card-body">
-                <div id="my-qr-reader" class="mb-3   rounded"></div>
-              
+                <div id="my-qr-reader" class="mb-3 rounded"></div>
+              </div>
             </div>
           </div>
-          </div>
         </div>
+        
     
         <div class="col-lg-12 mt-3 " id="hide_search">
      
@@ -96,8 +96,14 @@
                
                       <td class="align-middle text-center"> <a href="{% url 'qc_overview' tfa.tfa.id  %}" class="text-info text-decoration-none">{{tfa.tfa.permanent_joint_id}}</a>  </td>
                       <td class="align-middle text-center d-flex justify-content-center">
-                        <div class="alert alert-success border-success p-0 px-1  m-0">{{tfa.tfa.status}}</div>
-                      </td>
+                         <div class="
+                          {% if tfa.tfa.status == 'qcpass' %}
+                           alert-success border-success 
+                          {% elif tfa.tfa.status == 'Untouched'  %}
+                          alert-warning border-warning 
+                          {% elif tfa.tfa.status == 'tightened'  %}
+                          alert-info border-info 
+                          {% endif %} alert p-0 px-1  m-0">{{tfa.tfa.status}}</div></td>
                       <td class="align-middle text-center">{{tfa.tfa.sheet_no}}</td>
                     </tr>
                     {% endfor %}
@@ -149,33 +155,35 @@ domReady(function () {
     }
 
     document.getElementById('scan-button').addEventListener('click', function() {
-        if (!htmlscanner) {
-            htmlscanner = new Html5Qrcode("my-qr-reader");
-            htmlscanner.start(
-                { facingMode: "user" }, // Use user-facing camera
-                { fps: 10, qrbox: 250 },
-                onScanSuccess)
-                .catch(err => {
-                    console.error("Error starting the scanner:", err);
-                });
-            
-            this.style.display = "none"; // Hide the start button
-            document.getElementById('stop-button').style.display = "block"; // Show the stop button
-        }
-    });
+    if (!htmlscanner) {
+        htmlscanner = new Html5Qrcode("my-qr-reader");
+        htmlscanner.start(
+            { facingMode: "user" }, // Use user-facing camera
+            { fps: 10, qrbox: 250 },
+            onScanSuccess
+        ).catch(err => {
+            console.error("Error starting the scanner:", err);
+        });
 
-    document.getElementById('stop-button').addEventListener('click', function() {
-        if (htmlscanner) {
-            htmlscanner.stop().then(() => {
-                console.log("QR Code scanning stopped.");
-                this.style.display = "none"; // Hide the stop button
-                document.getElementById('scan-button').style.display = "block"; // Show the start button
-                htmlscanner = null; // Reset the scanner
-            }).catch(err => {
-                console.error("Error stopping the scanner:", err);
-            });
-        }
-    });
+        this.style.display = "none"; // Hide the start button
+        document.getElementById('stop-button').style.display = "block"; // Show the stop button
+        document.getElementById('hide_show').style.display = "block"; // Show the total div
+    }
+});
+
+document.getElementById('stop-button').addEventListener('click', function() {
+    if (htmlscanner) {
+        htmlscanner.stop().then(() => {
+            console.log("QR Code scanning stopped.");
+            this.style.display = "none"; // Hide the stop button
+            document.getElementById('scan-button').style.display = "block"; // Show the start button
+            document.getElementById('hide_show').style.display = "none"; // Hide the total div
+            htmlscanner = null; // Reset the scanner
+        }).catch(err => {
+            console.error("Error stopping the scanner:", err);
+        });
+    }
+});
 });
 
 

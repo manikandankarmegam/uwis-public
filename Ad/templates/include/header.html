@@ -183,6 +183,12 @@
                 <p class="py-1 m-0 small fw-bold"> <i class="bi bi-clipboard-check-fill fs-5 pe-2"></i> NCR | QR </p> <i class="bi bi-chevron-right"></i>
               </div>
             </a>
+            <a href="{% url 'tfascanner_dashboard' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'tfa_dash' %} sidebar_color  {% endif %}">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <p class="py-1 m-0 small fw-bold"> <i class="bi-speedometer2 fs-5 pe-2"></i> TFA Dashboard </p> <i class="bi bi-chevron-right"></i>
+              </div>
+            </a>
+
             <a href="{% url 'fiter_list' %}" class="list--bg list-group-item btn-col text-muted list-group-item-action border-light py-3 lh-sm {% if active == 'fiter_list' %} sidebar_color  {% endif %}">
               <div class="d-flex w-100 align-items-center justify-content-between">
                 <p class="py-1 m-0 small fw-bold"> <i class="bi bi-tools fs-5 pe-2"></i> Fitter </p> <i class="bi bi-chevron-right"></i>

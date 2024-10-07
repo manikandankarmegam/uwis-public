@@ -86,7 +86,14 @@
                         <td class="align-middle text-center"> <a href="{% url 'tfa_overview' tfa.tfa.id  %}" class="text-info text-decoration-none">{{tfa.tfa.permanent_joint_id}}</a>  </td>
                         <td class="align-middle text-center d-flex justify-content-center">
                           <!-- <i class="bi bi-pencil-square text-info fs-5 me-3 my-auto" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>  -->
-                           <div class="alert alert-success border-success p-0 px-1  m-0">{{tfa.tfa.status}}</div></td>
+                           <div class="
+                            {% if tfa.tfa.status == 'qcpass' %}
+                             alert-success border-success 
+                            {% elif tfa.tfa.status == 'Untouched'  %}
+                            alert-warning border-warning 
+                            {% elif tfa.tfa.status == 'tightened'  %}
+                            alert-info border-info 
+                            {% endif %} alert p-0 px-1  m-0">{{tfa.tfa.status}}</div></td>
                         <td class="align-middle text-center">{{tfa.tfa.sheet_no}}</td>
                       </tr>
                       {% endfor %}

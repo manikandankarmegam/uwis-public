@@ -421,17 +421,60 @@
                  <div class="row ">
                   <div class="col-lg-2">
                     <p class="m-0 text-muted ">ANSWER</p>
-                    <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
-                    <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
-                    <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
-                    <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
+                    <p class="m-0 ">
+                      {% if tfa_verify.is_gasket_type_correct == 'YES' %}
+                      <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                      {% elif tfa_verify.is_gasket_type_correct == 'NO' %}
+                      <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                      {% else %}
+                      <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                      {% endif %}
+                    </p>
+                    <p class="m-0 ">
+                      {% if tfa_verify.are_bolts_lubricated == 'YES' %}
+                      <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                      {% elif tfa_verify.are_bolts_lubricated == 'NO' %}
+                      <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                      {% else %}
+                      <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                      {% endif %}
+                    </p>
+                    <p class="m-0 ">
+                      {% if tfa_verify.is_flange_gap_within_tolerance == 'YES' %}
+                      <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                      {% elif tfa_verify.is_flange_gap_within_tolerance == 'NO' %}
+                      <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                      {% else %}
+                      <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                      {% endif %}
+                    </p>
+                    <p class="m-0 ">
+                      {% if tfa_verify.are_flanges_aligned == 'YES' %}
+                      <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                      {% elif tfa_verify.are_flanges_aligned == 'NO' %}
+                      <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                      {% else %}
+                      <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                      {% endif %}
+                    </p>
+                    <p class="m-0 ">
+                      {% if tfa_verify.is_sign_of_corrosion == 'YES' %}
+                      <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                      {% elif tfa_verify.is_sign_of_corrosion == 'NO' %}
+                      <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                      {% else %}
+                      <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                      {% endif %}
+                    </p>
+
                   </div>
                   <div class="col-lg-6">
                     <p class="m-0 text-muted ">VERIFICATION CHECKS</p>
                         <p class="m-0 ">Do you have the correct Gasket type?</p>
-                        <p class="m-0 ">Are the bolts properly lubricated with correct BOSTIK NEVER-SEEZ lubricant?</p>
+                        <p class="m-0 ">Are bolts lubed with correct BOSTIK N-S?</p>
                         <p class="m-0 ">Are the flange gaps within tolerance?</p>
                         <p class="m-0 ">Are the flanges properly aligned?</p>
+                        <p class="m-0 ">Do the faces show signs of corrosion?</p>
                   </div>
                   <div class="col-lg-2">
                     <p class="m-0 text-muted ">FULL NAME</p>
@@ -816,17 +859,59 @@
                    <div class="row ">
                     <div class="col-lg-2">
                       <p class="m-0 text-muted ">ANSWER</p>
-                      <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
-                      <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
-                      <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
-                      <p class="m-0 "><i class="bi bi-check-circle-fill text-success ms-4 "></i></p>
+                      <p class="m-0 ">
+                        {% if tfa_verify.is_gasket_type_correct == 'YES' %}
+                        <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                        {% elif tfa_verify.is_gasket_type_correct == 'NO' %}
+                        <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                        {% else %}
+                        <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                        {% endif %}
+                      </p>
+                      <p class="m-0 ">
+                        {% if tfa_verify.are_bolts_lubricated == 'YES' %}
+                        <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                        {% elif tfa_verify.are_bolts_lubricated == 'NO' %}
+                        <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                        {% else %}
+                        <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                        {% endif %}
+                      </p>
+                      <p class="m-0 ">
+                        {% if tfa_verify.is_flange_gap_within_tolerance == 'YES' %}
+                        <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                        {% elif tfa_verify.is_flange_gap_within_tolerance == 'NO' %}
+                        <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                        {% else %}
+                        <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                        {% endif %}
+                      </p>
+                      <p class="m-0 ">
+                        {% if tfa_verify.are_flanges_aligned == 'YES' %}
+                        <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                        {% elif tfa_verify.are_flanges_aligned == 'NO' %}
+                        <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                        {% else %}
+                        <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                        {% endif %}
+                      </p>
+                      <p class="m-0 ">
+                        {% if tfa_verify.is_sign_of_corrosion == 'YES' %}
+                        <i class="bi bi-check-circle-fill text-success ms-4 "></i>
+                        {% elif tfa_verify.is_sign_of_corrosion == 'NO' %}
+                        <i class="bi bi-x-circle-fill text-danger ms-4 "></i>
+                        {% else %}
+                        <i class="bi bi-slash-circle-fill text-secondary ms-4 "></i>
+                        {% endif %}
+                      </p>
                     </div>
                     <div class="col-lg-6">
                       <p class="m-0 text-muted ">VERIFICATION CHECKS</p>
-                          <p class="m-0 ">Do you have the correct Gasket type?</p>
-                          <p class="m-0 ">Are the bolts properly lubricated with correct BOSTIK NEVER-SEEZ lubricant?</p>
-                          <p class="m-0 ">Are the flange gaps within tolerance?</p>
-                          <p class="m-0 ">Are the flanges properly aligned?</p>
+                      <p class="m-0 ">Do you have the correct Gasket type?</p>
+                      <p class="m-0 ">Are bolts lubed with correct BOSTIK N-S?</p>
+                      <p class="m-0 ">Are the flange gaps within tolerance?</p>
+                      <p class="m-0 ">Are the flanges properly aligned?</p>
+                      <p class="m-0 ">Do the faces show signs of corrosion?</p>
                     </div>
                     <div class="col-lg-2">
                       <p class="m-0 text-muted ">FULL NAME</p>
