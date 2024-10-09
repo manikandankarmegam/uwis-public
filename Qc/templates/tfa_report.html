@@ -202,15 +202,15 @@
                         <div>
                           <p class="text-muted m-0">Is the flange TFA satisfactory?</p>
                           <div class="row mt-2">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-4">
                               <input type="radio" class="btn-check" name="is_flange_satisfactory" value="YES" id="success-outlined" >
                               <label class="btn-sm w-100 btn btn-outline-success" for="success-outlined">YES</label>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-4">
                               <input type="radio" class="btn-check" name="is_flange_satisfactory" value="NO" id="danger-outlined">
                               <label class="btn-sm w-100 btn btn-outline-danger" for="danger-outlined">NO</label>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-4">
                               <input type="radio" class="btn-check" name="is_flange_satisfactory" value="NA" id="secondary-outlined">
                               <label class="btn-sm w-100 btn btn-outline-secondary" for="secondary-outlined">N/A</label>
                             </div>
@@ -234,7 +234,7 @@
                     {% endif %}
 
           </div>
-          <div class="col-lg-9">
+          <div class="col-lg-9 mt-lg-0 mt-3">
             <div class="card border-0 shadow-sm rounded-3">
               <div class="card-header bg-white p-3">
                 <p class="m-0 fw-bold fs-5 ">Report</p>
@@ -243,13 +243,14 @@
               <div class="card-body ">
                 <div class="row">
                     <div class="col-6">
-                    <p class="m-0 fw-bold fs-5">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+                    <p class="m-0 fw-bold fs-5 d-none d-lg-block">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+                    <p class="m-0 fw-bold  d-lg-none">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <p class="m-0 text-muted ">CLIENT DOCUMENT NUMBER</p>
                         <p class="m-0 ">{{tfa.temp_joint_id|default:"-"}}</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                       <p class="m-0 text-muted ">Page </p>
                       <p class="m-0 ">1 of 1</p>
                     </div>
@@ -257,30 +258,30 @@
                  <div class="bg-grey p-2 mt-3">
 
                    <div class="row ">
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-3">
                        <p class="m-0 text-muted ">RECORD</p>
                        <p class="m-0 fs-5 fw-bold">{{tfa.id|default:"-"}}</p>
                      </div>
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-3">
                        <p class="m-0 text-muted ">PROJECT NO</p>
                            <p class="m-0 ">{{tfa.project_name|default:"-"}}</p>
                      </div>
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-3">
                        <p class="m-0 text-muted ">PROJECT NAME</p>
                            <p class="m-0 ">{{tfa.project_name|default:"-"}}</p>
                      </div>
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-3">
                        <p class="m-0 text-muted ">DATE CREATED </p>
                            <p class="m-0 ">{{tfa.project_name|default:"-"}}</p>
                      </div>
                     </div>
                     <hr class="border m-0 my-4 pt-1">
                     <div class="row ">
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-3">
                        <p class="m-0 text-muted ">DRAWING NAME</p>
                        <p class="m-0 ">{{tfa.permanent_joint_id|default:"-"}}</p>
                      </div>
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-3">
                        <p class="m-0 text-muted ">TEST PACK NO.</p>
                            <p class="m-0 ">{{tfa.test_pack_no|default:"-"}}</p>
                      </div>
@@ -291,19 +292,19 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">JOINT ID</p>
                     <p class="m-0 fs-5 fw-bold">{{tfa.temp_joint_id|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">PIPE CLASS </p>
                         <p class="m-0 ">{{tfa.pipe_specification|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">FLANGE RATING</p>
                         <p class="m-0 ">{{tfa.flange_rating|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">FLANGE SIZE </p>
                         <p class="m-0 ">{{tfa.flange_size|default:"-"}}</p>
                   </div>
@@ -315,19 +316,19 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">FLANGE MATERIAL</p>
                     <p class="m-0 ">{{tfa.flange_material|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">BOLT MATERIAL</p>
                         <p class="m-0 ">{{tfa.bolt_material|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">NUMBER OF BOLTS</p>
                         <p class="m-0 ">{{tfa.no_of_bolts|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">BOLT STUD SIZE </p>
                         <p class="m-0 ">{{tfa.bolt_diameter|default:"-"}}</p>
                   </div>
@@ -335,19 +336,19 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">BOLT LENGTH</p>
                     <p class="m-0 ">{{tfa.bolt_length|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">NUT MATERIAL</p>
                         <p class="m-0 ">{{tfa.nut_material|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">GASKET TYPE</p>
                         <p class="m-0 ">{{tfa.gasket_material|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">LUBRICANT </p>
                         <p class="m-0 ">{{tfa.lubricant|default:"-"}}</p>
                   </div>
@@ -355,15 +356,15 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">TIGHTENING METHOD</p>
                     <p class="m-0 "> <i class="bi bi-square"></i> MANUAL</p>
                     <p class="m-0 "> <i class="bi bi-square"></i> 2HYDRAULIC</p>
                     <p class="m-0 "> <i class="bi bi-square"></i> TENSIONING</p>
                    
                   </div>
-                  <div class="col-lg-3">
-                    <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
+                    <div class="col-lg-3 col-3">
                       <p class="m-0 text-muted ">CRITICAL</p>
                       <p class="m-0 "> <i class="bi bi-square"></i> YES</p>
                     <p class="m-0 "> <i class="bi bi-square"></i> NO</p>
@@ -376,15 +377,15 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">TOOL DESCRIPTION</p>
                     <p class="m-0 ">{{tfa.flange_description|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">SERIAL NUMBER</p>
                         <p class="m-0 ">{{tfa.system_number|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-3">
                     <p class="m-0 text-muted ">CALIBRATION DUE DATE</p>
                         <p class="m-0 ">{{tfa.temp_joint_id|default:"-"}}</p>
                   </div>
@@ -394,23 +395,23 @@
                  
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-4">
+                  <div class="col-lg-4 col-4">
                     <p class="m-0 text-muted ">REQUIRED TORQUE VALUE</p>
                     <p class="m-0 ">{{tfa.required_torque|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">1ST PASS RANGE</p>
                         <p class="m-0 ">{{tfa.pass_one|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">2ND PASS RANGE</p>
                         <p class="m-0 ">{{tfa.pass_two|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">3RD PASS RANGE</p>
                         <p class="m-0 ">{{tfa.pass_three|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">FINAL PASS RANGE</p>
                         <p class="m-0 ">{{tfa.pass_four|default:"-"}}</p>
                   </div>
@@ -419,7 +420,7 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">ANSWER</p>
                     <p class="m-0 ">
                       {% if tfa_verify.is_gasket_type_correct == 'YES' %}
@@ -468,7 +469,7 @@
                     </p>
 
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-6">
                     <p class="m-0 text-muted ">VERIFICATION CHECKS</p>
                         <p class="m-0 ">Do you have the correct Gasket type?</p>
                         <p class="m-0 ">Are bolts lubed with correct BOSTIK N-S?</p>
@@ -476,11 +477,11 @@
                         <p class="m-0 ">Are the flanges properly aligned?</p>
                         <p class="m-0 ">Do the faces show signs of corrosion?</p>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">FULL NAME</p>
                         <p class="m-0 ">{{tfa.temp_joint_id|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-2">
                     <p class="m-0 text-muted ">DATE COMPLETED</p>
                         <p class="m-0 ">{{tfa.temp_joint_id|default:"-"}}</p>
                   </div>
@@ -491,11 +492,11 @@
 
                  <hr class="border m-0 my-4 pt-1">
                  <div class="row ">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-6">
                     <p class="m-0 text-muted ">QC ENGINEER</p>
                     <p class="m-0 ">{{tfa.temp_joint_id|default:"-"}}</p>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-6">
                     <p class="m-0 text-muted ">DATE APPROVED</p>
                         <p class="m-0 ">Is flange gasket seating surface good?</p>
                   </div>
@@ -531,13 +532,14 @@
           <div class="card-body ">
             <div class="row">
               <div class="col-6">
-              <p class="m-0 fw-bold fs-5">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+              <p class="m-0 fw-bold fs-5 d-none d-lg-block">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
+              <p class="m-0 fw-bold  d-lg-none">  <img src="{% static 'img/utoc_headlogo1.png' %}" class="" width="50" alt="" />  FLANGE JOINT CONNECTION DATA SHEET</p>
               </div>
-              <div class="col-3">
+              <div class="col-4">
                   <p class="m-0 text-muted ">CLIENT DOCUMENT NUMBER</p>
                   <p class="m-0 ">{{tfa.temp_joint_id|default:"-"}}</p>
               </div>
-              <div class="col-3">
+              <div class="col-2">
                 <p class="m-0 text-muted ">Page </p>
                 <p class="m-0 ">1 of 1</p>
               </div>
@@ -545,30 +547,30 @@
            <div class="bg-grey p-2 mt-3">
 
              <div class="row ">
-               <div class="col-lg-3">
+               <div class="col-lg-3 col-3">
                  <p class="m-0 text-muted ">RECORD</p>
                  <p class="m-0 fs-5 fw-bold">{{tfa.id|default:"-"}}</p>
                </div>
-               <div class="col-lg-3">
+               <div class="col-lg-3 col-3">
                  <p class="m-0 text-muted ">PROJECT NO</p>
                      <p class="m-0 ">{{tfa.project_name|default:"-"}}</p>
                </div>
-               <div class="col-lg-3">
+               <div class="col-lg-3 col-3">
                  <p class="m-0 text-muted ">PROJECT NAME</p>
                      <p class="m-0 ">{{tfa.project_name|default:"-"}}</p>
                </div>
-               <div class="col-lg-3">
+               <div class="col-lg-3 col-3">
                  <p class="m-0 text-muted ">DATE CREATED </p>
                      <p class="m-0 ">{{tfa.project_name|default:"-"}}</p>
                </div>
               </div>
               <hr class="border m-0 my-4 pt-1">
               <div class="row ">
-               <div class="col-lg-3">
+               <div class="col-lg-3 col-3">
                  <p class="m-0 text-muted ">DRAWING NAME</p>
                  <p class="m-0 ">{{tfa.permanent_joint_id|default:"-"}}</p>
                </div>
-               <div class="col-lg-3">
+               <div class="col-lg-3 col-3">
                  <p class="m-0 text-muted ">TEST PACK NO.</p>
                      <p class="m-0 ">{{tfa.test_pack_no|default:"-"}}</p>
                </div>
@@ -579,28 +581,32 @@
 
            <hr class="border m-0 my-4 pt-1">
            <div class="row ">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-3">
               <p class="m-0 text-muted ">JOINT ID</p>
               <p class="m-0 fs-5 fw-bold">{{tfa.temp_joint_id|default:"-"}}</p>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-3">
               <p class="m-0 text-muted ">PIPE CLASS </p>
                   <p class="m-0 ">{{tfa.pipe_specification|default:"-"}}</p>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-3">
               <p class="m-0 text-muted ">FLANGE RATING</p>
                   <p class="m-0 ">{{tfa.flange_rating|default:"-"}}</p>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-3">
               <p class="m-0 text-muted ">FLANGE SIZE </p>
                   <p class="m-0 ">{{tfa.flange_size|default:"-"}}</p>
             </div>
            </div>
+    
+
+
+     
 
              <hr class="border m-0 my-4 pt-1">
              <p class="text-muted fw-bold fs-3">Photos</p>
              <div class="row mt-3">
-              <div class="col-lg-3">
+              <div class="col-lg-3 col-3">
                 <div class="card border-0 shadow-sm rounded-3">
                   <div class="card-body">
                     <img class="img-fluid rounded-3"  src="{{tfa_photos.flange_face_image.url}}" alt="">
@@ -612,7 +618,7 @@
                   </div> -->
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3 col-3">
                 <div class="card border-0 shadow-sm rounded-3">
                   <div class="card-body">
                     <img class="img-fluid rounded-3"  src="{{tfa_photos.gasket_image.url}}" alt="">
@@ -624,7 +630,7 @@
                   </div> -->
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3 col-3">
                 <div class="card border-0 shadow-sm rounded-3">
                   <div class="card-body">
                     <img class="img-fluid rounded-3"  src="{{tfa_photos.assembled_image.url}}" alt="">
@@ -636,7 +642,7 @@
                   </div> -->
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3 col-3">
                 <div class="card border-0 shadow-sm rounded-3">
                   <div class="card-body">
                     <img class="img-fluid rounded-3"  src="{{tfa_photos.check_image.url}}" alt="">
@@ -648,7 +654,7 @@
                   </div> -->
                 </div>
               </div>
-              <div class="col-lg-3 mt-3">
+              <div class="col-lg-3 col-3 mt-3">
                 <div class="card border-0 shadow-sm rounded-3">
                   <div class="card-body">
                     <img class="img-fluid rounded-3"  src="{{tfa_verify.final_qc_image.url}}" alt="">
