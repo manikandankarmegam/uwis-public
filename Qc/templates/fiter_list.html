@@ -94,15 +94,17 @@
                     <tr>
                
                       <td class="align-middle text-center"> <a href="{% url 'fitter_photos' tfa.tfa.id  %}" class="text-info text-decoration-none">{{tfa.tfa.permanent_joint_id}}</a>  </td>
-                      <td class="align-middle text-center d-flex justify-content-center">
+                      <td class="align-middle text-center ">
                         <div class="
                          {% if tfa.tfa.status == 'qcpass' %}
-                          alert-success border-success 
-                         {% elif tfa.tfa.status == 'Untouched'  %}
-                         alert-warning border-warning 
+                          alert-info border-info 
+                         {% elif tfa.tfa.status == 'untouched'  %}
+                         alert-danger border-danger 
                          {% elif tfa.tfa.status == 'tightened'  %}
-                         alert-info border-info 
-                         {% endif %} alert p-0 px-1  m-0">{{tfa.tfa.status}}</div></td>
+                         alert-warning border-warning 
+                         {% elif tfa.tfa.status == 'completed'  %}
+                         alert-success border-success 
+                         {% endif %} alert p-1  m-0 badge">{{tfa.tfa.status}}</div></td>
                       <td class="align-middle text-center">{{tfa.tfa.sheet_no}}</td>
                     </tr>
                     {% endfor %}
@@ -141,9 +143,11 @@
       let htmlscanner = null;
   
       function onScanSuccess(decodeText, decodeResult) {
-    // Get the base URL dynamically
-    const baseUrl = `${window.location.protocol}//${window.location.host}/Qc/ufiter_list/?search=${decodeText}`;
-    window.location.href = baseUrl;
+          const targetUrl = `http://127.0.0.1:8000/Qc/ufiter_list/?search=${decodeText}`;
+          window.location.href = targetUrl;
+  
+          
+  
       }
   
       document.getElementById('scan-button').addEventListener('click', function() {
