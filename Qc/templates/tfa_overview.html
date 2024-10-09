@@ -270,12 +270,14 @@
                 {% for history in tfa_history %}
                 <div class="row">
                   <div class="col-lg-4 col-4">
-                    <p class="small  m-0"><span class=" {% if history.status == 'qcpass' %}
-                      alert-success border-success 
+                    <p class="small  m-0"><span class="  {% if history.status == 'qcpass' %}
+                      alert-info border-info 
                      {% elif history.status == 'untouched'  %}
-                     alert-warning border-warning 
+                     alert-danger border-danger 
                      {% elif history.status == 'tightened'  %}
-                     alert-info border-info 
+                     alert-warning border-warning 
+                     {% elif history.status == 'completed'  %}
+                     alert-success border-success 
                      {% endif %} alert p-1  m-0 badge">{{history.status  }} </span>  </p>
                   </div>
                   <div class="col-lg-4 col-4">
